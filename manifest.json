@@ -1,0 +1,21 @@
+{
+  "manifestVersion": 1,
+  "name": "Symbiotes Documentation",
+  "summary": "A symbiote to view symbiote documentation",
+  "version": "0.0.1",
+  "entryPoint": "/index.html",
+  "api": {
+    "version": "0.1",
+    "initTimeout": 1,
+    "subscriptions": {
+      "symbiote": {
+        "onStateChangeEvent": "onStateChangeEvent"
+      }
+    }
+  },
+  "controls": {
+    "tabs": false,
+    "navigation": true,
+    "reload": false
+  }
+}

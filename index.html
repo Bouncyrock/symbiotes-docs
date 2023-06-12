@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Symbiotes Documentation</title>
+    <link rel="stylesheet" href="ts_api_index_docs.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script src="icons.js"></script>
+    <script src="ts_api_index_color_themes.js"></script>
+</head>
+
+<body>
+    <h1>Symbiotes Documentation</h1>
+    <ol>
+        <li>
+            <a href="#alpha-disclaimer">Alpha Disclaimer</a>
+        </li>
+        <li>
+            <a href="#getting-started">Getting Started</a>
+            <ul>
+                <li>
+                    <a href="#installing">Installing a Symbiote</a>
+                </li>
+                <li>
+                    <a href="#dev-workflow">Development Workflow</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#manifest-docs">Manifest Docs</a>
+            <ul>
+                <li>
+                    <a href="#manifest-parser">Manifest Parser</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#api-docs">API Docs</a>
+            <ul>
+                <li>
+                    <a href="#reverse-domain-name">API reverse domain name</a>
+                </li>
+                <li>
+                    <a href="#rate-limiting">Rate limiting</a>
+                </li>
+                <li>
+                    <a href="#permissions">Permissions</a>
+                </li>
+                <li>
+                    <a href="#injection">Injection</a>
+                </li>
+                <li>
+                    <a href="#symbiote-lifetime">Symbiote lifetime</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#extras-docs">Extras</a>
+            <ul>
+                <li>
+                    <a href="#ts-theme">TS Theme</a>
+                </li>
+                <li>
+                    <a href="#ts-fonts">TS Fonts</a>
+                </li>
+                <li>
+                    <a href="#ts-icons">TS Icons</a>
+                </li>
+                <li>
+                    <a href="#dice-finder">Dice Finder</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#faq">FAQ</a>
+        </li>
+        <li>
+            <a href="#upgrade">Upgrade Guides</a>
+        </li>
+    </ol>
+
+    <h2 id="alpha-disclaimer">Alpha Disclaimer</h2>
+    <p>
+        This is not a feature complete release and <span class="emphasis">anything and everything</span> documented here may change during the alpha period of Symbiotes without guarantee of backwards compatibility. We don't expect any fundamental changes, but will reserve the option for <span class="emphasis">breaking changes</span> if we see the need for it. Once the alpha period is over we will provide guides for updating to newer versions and there will be a system for deprecating old versions with plenty of time to update, though depending on changing internal features the exact behavior of certain functions may change.
+    </p>
+
+    <div class="feedback-note">Throughout the documentation there are notes styled like this one indicating sections where we specifically want feedback. Of course we also welcome feedback elsewhere, but the marked ones are particularly important. If you have suggestions for new features or feedback on existing ones, please let us know what you tried to do that isn't possible currently. This of course also applies to feedback about the documentation itself. To submit feedback go to <a href="https://feedback.talespire.com/b/alpha-symbiotes-api">our feedback portal</a>. The linked board is specifically for feedback about the API & developer experience, for user facing issues (UI bugs, performance issues, feature requests, ...) go to the "feature-requests" or "bug-reports" board.</div>
+
+    <h2 id="getting-started">Getting Started</h2>
+    <p>
+        To understand how web view based Symbiotes work and create your own, check out the examples provided on our <a href="https://github.com/Bouncyrock/symbiotes-examples">GitHub repository</a>.
+        The very first step is to activate the feature in the settings: <img src="enable_symbiotes.png"></img><br> If you just want to use other people's Symbiotes you're now done and can install them into the Symbiotes directory by simply dragging their folder there.
+        If you want to make your own Symbiotes, you need to create a <a href="#manifest-docs">manifest</a> that describes the Symbiote you want to make. For some Symbiotes this may be sufficient, but for most, you will also need to create an HTML file to be loaded.<br>
+        Additionally, we provide templated creation within TaleSpire to set up a mostly blank Symbiote for you to work with. To use it, enable the development mode and then press "Create new Symbiote" in the bottom of the Symbiotes panel:
+    </p>
+    <img src="dev_mode.png"></img>
+    <img src="create_new.png"></img>
+    <p>
+        If you need additional help after reading through the documentation, check out the <code>#talespire-modding</code> channel on our <a href="https://discord.gg/talespire">Discord</a>.
+    </p>
+
+    <h3 id="installing">Installing a Symbiote</h3>
+    <p>
+        To install a Symbiote, open the Symbiote directory located at <code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code>. Instead of navigating there manually you can click the "Open Symbiotes Directory" button in either the Symbiote page in the game settings or the Symbiote panel itself. Simply add a folder in there for each Symbiote and as soon as the file "manifest.json" is added to that folder TaleSpire will try to load it. All folder and Symbiote creation and editing is detected live by TaleSpire and will cause an automatic reload on changes meaning TaleSpire does not need to be restarted for any of this.
+    </p>
+    <p>
+        On Linux the Windows folder structure is replicated by Proton (by default) next to the install folder. On the default Steam library folder it is located at <code>~/.steam/steam/steamapps/compatdata/720620/pfx/drive_c/</code> with the rest of the Windows folder structure being in there. If you have installed TaleSpire to another library location the compatdata folder will be in there.
+    </p>
+
+    <h3 id="dev-workflow">Development Workflow</h3>
+    <p>
+        While you can develop the basic structure of your Symbiote in any external browser, features that rely on data or interactions with TaleSpire cannot be tested outside of TaleSpire. When loading a Symbiote in TaleSpire you can connect to it with an external Chromium-based browser (like Chrome, Edge, Brave, etc), by loading <a href="localhost:8080">localhost:8080</a>. For this to work you must first enable Symbiotes debugging in the TaleSpire settings:
+    </p>
+    <img src="dev_mode.png"></img>
+    <p>
+        The embedded browser is Chromium-based, so you can target that as your platform if you want to just support your project running as a Symbiote in TaleSpire.<br>
+
+        Any changes you make to files within the Symbiote directory (excluding files/folders starting with a period: '.') will cause the Symbiote to automatically reload. This means you can have the code open in your favorite IDE and and have the Symbiote reload with each saved change.
+    </p>
+
+    <h2 id="manifest-docs">Manifest Docs</h2>
+    <p>
+        The list links to the various manifest versions. Note that while deprecated versions are still supported for now, we are phasing them out and you should <a href="#upgrade">update your existing Symbiotes</a> to a newer version and <span class="emphasis">not</span> create new ones with those versions.
+    </p>
+    <ul>
+        <li><a href="manifest_doc_v1.html">v1</a></li>
+    </ul>
+
+    <h3 id="manifest-parser">Manifest Parser</h3>
+    <p>
+        When a manifest (= any file called <code>manifest.json</code>) gets parsed it can either succeed, which adds the Symbiote to the list of all others, or it can fail due to various reasons. If parsing the manifest fails, the Symbiote will still be shown in the list, but opening it doesn't load the Symbiote, instead it loads an error page. Parsing can fail for a number of obvious reasons: Incorrect manifest version, required fields being missing, the JSON being corrupted and not parseable, etc.<br>
+        Additionally to all the ways a manifest could contain invalid data, parsing also fails if two installed Symbiotes have the same interop ID. This is true for both Symbiotes, not just one of them.
+    </p>
+
+    <h2 id="api-docs">API Docs</h2>
+    <p>
+        The list links to the various API versions. Note that while deprecated versions are still supported for now, we are phasing them out and you should <a href="#upgrade">update your existing Symbiotes</a> to a newer version and <span class="emphasis">not</span> create new ones with those versions. API updates that are exclusively additional (eg: a completely new API call) will not bump the version number, this will only be done on changes that potentially change the behavior of existing calls to be able to retain compatibility.
+    </p>
+    <ul>
+        <li><a href="api_doc_v0_1.md.html">v0.1</a></li>
+    </ul>
+
+    <h3 id="reverse-domain-name">API reverse domain name</h3>
+    By default the API functions are accessible under the <code>TS</code> object, which is an alias for <code>com.bouncyrock.talespire</code>. It may be that this short alias has name conflicts on an existing webpage not made with TaleSpire/Symbiotes in mind, which is why it can be disabled in the <a href="#manifest-docs">manifest</a>. All functions can be accessed by calling <code>com.bouncyrock.talespire.functionKind.theFunctionYouWantToCall</code> instead.
+
+    <h3 id="rate-limiting">Rate limiting</h3>
+    <p>
+        We reserve the right to block any API call if the Symbiote has sent too many in short succession to preserve performance for TaleSpire. Any blocked calls will return the <code>rateLimited</code> error.
+    </p>
+
+    <h3 id="permissions">Permissions</h3>
+    <p>
+        The API only allows access to information that is accessible through the game normally. This means for example that a Symbiote running on a player's client will only be able to query stats for a mini controlled by them, not for other minis. Similarly a slab cannot be put into the hand of a player, as they don't have permissions to build. There is a distinction between users who <i>can</i> be a GM (= they have permission to be GM) and users who <i>currently are</i> a GM. Most calls that require a certain permission need the user (= player) to be able to switch to GM mode (<code>canGM</code> is set to true), while they don't care about which mode the client is currently in.
+        <div class="note">Not all calls have their permissions fully set up during the Symbiotes Alpha.</div>
+    </p>
+
+    <h3 id="injection">Injection</h3>
+    <p>
+        Everything that TaleSpire is told to inject by the <a href="#manifest-docs">manifest</a> is concatenated into one file and then injected at once. This guarantees the order of injection to be stable and dependable. The API is always the first in the file, meaning all other injections specified in the extras array can depend on the API already existing (though it may not be done initializing yet!).
+        Everything in the extras array is injected in order of the occurrence in the array. The order should not matter for most cases, but for example if a .js injection edits one of the built-in extras like eg: Dice Finder, it needs to be injected after Dice Finder.
+    </p>
+    <p>
+        Scripts loaded by the HTML file itself are loaded according to normal browser behavior which can be before DOMContentLoaded and before API injection. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script">Deferring</a> or setting an <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event">event listener for onLoad</a> can be used to ensure they are loaded at the appropriate time. The <code>hasInitialized</code> event is fired as soon as the API has finished loading and the communication between TaleSpire and the embedded browser is running.
+    </p>
+    <p>
+        The entire injection procedure is repeated for every page load. This includes the user navigating away from the entry point by clicking a link or a programmatic page switch using eg: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">window.open</a>. Because of this it is often best to create Symbiotes as one-pagers that switch out content programmatically if necessary instead of navigating to other pages.
+    </p>
+
+    <h3 id="symbiote-lifetime">Symbiote lifetime</h3>
+    <h4>Symbiote Detection</h4>
+    <p>
+        TaleSpire scans the top-level directories under <code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code> looking for directories containing a manifest.json file. The manifest is then read, and the Symbiote is validated. The Symbiote is then available in the symbiotes panel. If the validation fails, then the entry in the panel will have a little warning marker indicating that fact. TaleSpire continues watching the Symbiotes directory for newly added or removed Symbiotes.
+    </p>
+    <h4 id="starting-symbiote">Starting Symbiote</h4>
+    <p>
+        When a Symbiote starts, TaleSpire loads the entryPoint specified in the <a href="#manifest-docs">manifest</a>. By default, any additional code <a href="#injection">injection</a> (such as for the TaleSpire API) begins once the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event">DOMContentLoaded</a> event is emitted by the embedded browser, guaranteeing the <code>hasInitialized</code> event triggers only once the entire DOM is available. If this is unimportant to you, you can override this by setting the <code>initializeEarly</code> option to true in the <a href="#manifest-docs">manifest</a>. Note that <code>initializeEarly</code> doesn't guarantee the <code>hasInitialized</code> event to trigger before DOMContentLoaded; it just makes it possible that it can happen depending on timing.
+    </p>
+    <h4>In-use lifetime</h4>
+    <p>
+        If your Symbiote is focused and the Symbiotes panel is closed, your Symbiote will be delivered an event via the <code>onVisibilityEvent</code> event source.<br>
+        If your Symbiote was focused, but then a different Symbiote becomes the focus, the behavior depends on the capabilities of your Symbiote. If the <code>runInBackground</code> capability is specified, then the Symbiote will be informed that it <code>willEnterBackground</code>, and the Symbiote will continue running. If the <code>runInBackground</code> capability is not specified, then the Symbiote is shut down until it becomes focused again. We recommend not using the <code>runInBackground</code> capability whenever possible, as it allows TaleSpire to free up resources for the player. Instead, we prefer saving to Symbiote storage after all notable data changes and reloading them on Symbiote startup.
+    </p>
+    <p>
+        Symbiotes survive board switches, but some API calls won't work during the switch. For example, <code>TS.players.getPlayersInThisBoard</code> doesn't make sense if the Symbiote is not in a board. This should only take a short time but should be handled by the Symbiote by listening for client leave/join events for your own client and suppressing API calls.
+    </p>
+    <p>
+        If dev-mode is enabled, TaleSpire watches the symbiote directory for changes and will live-reload the Symbiote when modified. The folders are watched for file changes to see updates to files and detect new Symbiotes being added (or existing ones removed). Note the exceptions to file watching mentioned in <a href="dev-workflow">Development Workflow</a>.
+    </p>
+    <h4>Shutdown Symbiote</h4>
+    <p>
+        On shutdown of a Symbiote, we attempt to deliver the <code>willShutdown</code> event from the event source <code>onStateChangeEvent</code>. This can give the Symbiote a short time to do any last-minute cleanup you want to do before the Symbiote is shut down. However, delivery of the shutdown event is made on a "best effort" and is not guaranteed. Therefore don't leave important tasks for this event. We reserve the right to shut down any Symbiote without event/warning for reasons such as performance or stability.
+    </p>
+
+    <h2 id="extras-docs">Extras</h2>
+    <p>
+        While all of the features of the API are documented above, there are some other miscellaneous extras we provide to make creating your own Symbiotes more convenient and make them look more at home in TaleSpire. They can be added by adding their respective name to the "extras" list in the <a href="#manifest-docs">manifest</a>.
+    </p>
+
+    <div id="theme-section-container" style="margin: 0; padding: 0;">
+        <h3 id="ts-theme">TS Theme</h3>
+        <p>
+            If the string <code>colorStyles</code> is added to extras, TaleSpire injects a number of CSS variables defining the TaleSpire color scheme, which we highly recommend if you're trying to create a Symbiote that is supposed to fit in with the rest of the UI. This provides easy access to the exact colors TaleSpire's UI uses and they'll be updated with TaleSpire to keep your Symbiote fitting in at no extra work for you. This also allows users to change the UI theme to for example switch to a high contrast theme and have all the Symbiotes adapt to that.<br>
+            The color descriptions provide info which colors should be used together - you can of course mix and match them in other ways, but please always check any combination with your favorite contrast checker tool. You should aim for a contrast of at least 4.5, though 7 or more is preferable as it helps with legibility, especially for visually impaired people. We don't always achieve this ourselves, but we'll try our best to improve on that front.
+        </p>
+        <p>
+            While you can use colors in "any way you want", do not completely misuse a color against its name or description, like using a background color in the foreground. Even if it might look fine now, if we update the color palette it may lead to bad looking or even unreadable Symbiotes. If there is a color missing for what you want to do it is better to create your own color than to "misuse" an existing theme color for something it is not intended for.
+        </p>
+        <p>
+            <div class="feedback-note">We want to have as few variables as possible, but the goal is that the entirety of a Symbiote's color palette is defined by these colors (if they are intending to replicate TaleSpire's theme that is), without <span class="emphasis">any</span> manually defined color codes. We are happy to receive <a href="https://feedback.talespire.com/b/alpha-symbiotes-api">feedback</a> about in which situations there may be a color missing.</div>
+            <ul>
+                <li id="--ts-color-primary">
+                    <code>--ts-color-primary</code>: The primary color for elements like text. Provides high contrast to <code>--ts-background-primary</code>
+                </li>
+                <li id="--ts-color-secondary">
+                    <code>--ts-color-secondary</code>: The secondary color for elements like text. Less contrast than the primary color and can be used for disabled elements or less prominent text like descriptions or captions.</code>
+                </li>
+                <li id="--ts-background-primary">
+                    <code>--ts-background-primary</code>: The primary color for the background. Provides high contrast to <code>--ts-color-primary</code>.
+                </li>
+                <li id="--ts-background-secondary">
+                    <code>--ts-background-secondary</code>: The secondary color for the background. Can be used for example for cards that should be visually distinct from the normal background, for alternating color on long lists or tables or for low contrast borders. If visual distinction is essential to be able to use the UI comfortably, consider giving any elements that use this background color on top of <code>--ts-background-primary</code> a border with color <code>--ts-accessibility-border</code> because the secondary and primary background colors don't provide good contrast with each other.
+                </li>
+                <li id="--ts-background-tertiary">
+                    <code>--ts-background-tertiary</code>: The primary color for the background. Even less contrast with <code>--ts-color-primary</code> than the other two background colors. Used for similar cases as <code>--ts-background-secondary</code>, as well as button backgrounds, but care should be put into contrast in conjunction with <code>--ts-color-secondary</code>. For button backgrounds, see also <code>--ts-button-background</code>.
+                </li>
+                <li id="--ts-accessibility-border">
+                    <code>--ts-accessibility-border</code>: Defines the border color for the high contrast theme for better accessibility. Is transparent (= invisible) in the default theme, but should be used on input elements to create a more accessible experience when needed. When a border is desired in the normal theme use other colors, but to not impede the usefulness of the high contrast theme, consider using one of the foreground colors as border for input elements to provide a high contrast and only using a background colors as border for non-interactive elements (eg: table borders).
+                </li>
+                <li id="--ts-accessibility-focus">
+                    <code>--ts-accessibility-focus</code>: Defines a focus color for the high contrast theme for better accessibility. This allows keyboard navigation in Symbiotes by providing a visible highlight around the currently focused element. Is transparent (= invisible) in the default theme, but should be set for all focusable elements (usually input elements). Focus should be set using the "outline" css property. See <a href="https://github.com/Bouncyrock/symbiotes-examples">examples</a> for guidance.
+                </li>
+                <li id="--ts-color-danger">
+                    <code>--ts-color-danger</code>: An accent color for depicting something potentially dangerous like deleting/clearing data or similar.
+                </li>
+                <li id="--ts-accent-primary">
+                    <code>--ts-accent-primary</code>: The primary TaleSpire accent color. Can be used for background, text and accents like borders. Be mindful of using it (and the accompanying <code>--ts-accent-hover</code>) as background color, because it doesn't provide great contrast with <code>--ts-color-primary</code>.
+                </li>
+                <li id="--ts-accent-hover">
+                    <code>--ts-accent-hover</code>: An on hover color for <code>--ts-accent-primary</code>. Used wherever there should be a highlight on mouse hover (or similar actions) and <code>--ts-accent-primary</code> is used. Similar considerations regarding contrast as with  <code>--ts-accent-primary</code>.
+                </li>
+                <li id="--ts-accent-background">
+                    <code>--ts-accent-background</code>: A variant of the accent color to serve better as a background. Can be used for example as background color for an element that already has the primary accent color as border. Provides more contrast to <code>--ts-color-primary</code> when used in the background than <code>--ts-accent-primary</code>.
+                </li>
+                <li id="--ts-button-background">
+                    <code>--ts-button-background</code>: The default button background color. Should be used for most buttons, but to provide contrast between important and less important actions in the UI, <code>--ts-background-tertiary</code> can be used for those lower priority elements instead. Does not provide good contrast to <code>--ts-color-secondary</code>.
+                </li>
+                <li id="--ts-button-hover">
+                    <code>--ts-button-hover</code>: An on hover color for <code>--ts-button-background</code>. Used wherever there should be a highlight on mouse hover (or similar actions) and <code>--ts-button-background</code> is used. Similar considerations regarding contrast as with  <code>--ts-button-background</code>
+                </li>
+                <li id="--ts-link">
+                    <code>--ts-link</code>: Text color for hyperlinks.
+                </li>
+                <li id="--ts-link-hover">
+                    <code>--ts-link-hover</code>: An on hover color for <code>--ts-link</code>. Used wherever there should be a highlight on mouse hover (or similar actions) and <code>--ts-link</code> is used.
+                </li>
+
+            </ul>
+        </p>
+    </div>
+    <h3 id="ts-fonts">TS Fonts</h3>
+    <p>
+        If the string <code>fonts</code> is added to extras, TaleSpire injects the TaleSpire fonts to be used in CSS. Available fonts:
+        <ul>
+            <li>Optimus Princeps: <code>font-family: OptimusPrinceps;</code><br><span style="font-family: OptimusPrinceps;">This is an example text with the font</span></li>
+        </ul>
+    </p>
+    <h3 id="ts-icons">TS Icons</h3>
+    <p>
+        If the string <code>icons</code> is added to extras, TaleSpire injects CSS classes for each UI icon and some control classes to adjust sizing and behavior.<br><br>
+
+        An icon can be inserted by providing an icon element and adding the respective class for the icon you want:<br>
+        <code>
+            &lt;i class="ts-icon-sword-crossed"&gt;&lt;/i&gt;
+        </code>
+        <br><br>
+        Additionally, the sizing of the icon can be set to one of the following by inserting their respective classes:
+        <ul>
+            <li><code>ts-icon-xsmall</code>: 16px</li>
+            <li><code>ts-icon-small</code>: 24px</li>
+            <li><code>ts-icon-medium</code>: 32px - if no size is specified, it will default to this size</li>
+            <li><code>ts-icon-large</code>: 64px</li>
+            <li><code>ts-icon-xlarge</code>: 128px</li>
+        </ul>
+        and a black border can be added by providing <code>ts-icon-border</code>. Keep in mind, that the icons are usually pure white, so without a border they will be invisible on a white background.<br>
+        An icon using all of these would look like this:
+        <code>
+            &lt;i class="ts-icon-book ts-icon-small ts-icon-border"&gt;&lt;/i&gt;
+        </code>
+        <i class="ts-icon-book ts-icon-small ts-icon-border"></i>
+    </p>
+    <p>
+        It's possible to invert the icon colors to have black icons (with white borders) by adding the <code>ts-icon-black</code> class.<br>
+
+        See here for a list of icons: <a href="icons.html">Available Icons</a>
+    </p>
+
+    <h3 id="dice-finder">Dice Finder</h3>
+    <p>
+        If the string <code>diceFinder</code> is added to extras, the dice finder functionality will be added to the Symbiote that's being loaded. The dice finder can identify whether text under the mouse cursor looks like a dice roll that TaleSpire can understand. This is meant to work robustly on as many websites as possible, but due to the vast amount of websites and different approaches it may not work on some. For it to work, it also needs to have the <a href="api-docs">API</a> injected.
+        <div class="feedback-note">We have tested the dice finder on a number of different websites to see if it behaves correctly, but it's likely that some websites have a different setup and as such the dice finder may break on them. If you encounter any problems with dice finder, please <a href="https://feedback.talespire.com/b/alpha-symbiotes-api">let us know</a> which website is being problematic so we can investigate it.</div>
+
+        Because the dice finder is meant to work on as many pages as possible, the depth of integration is limited. For example it will never be able to extract roll names from pages as that information is presented very differently for every page. This means that while the dice finder provides an easy baseline of support for pages that don't support TaleSpire out of the box, it will never be as good as support specifically made for a certain website.
+    </p>
+
+    <h2 id="faq">FAQ</h2>
+    <p>No Q's have been A-ed yet.</p>
+
+    <h2 id="upgrade">Upgrade Guides</h2>
+    <p>
+        There are no versions to upgrade to or from yet.
+    </p>
+</body>
+</html>

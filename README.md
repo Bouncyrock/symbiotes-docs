@@ -1,0 +1,1 @@
+Visit [symbiote-docs.talespire.com](https://symbiote-docs.talespire.com) to view the Symbiotes documentation directly in your browser. If you want to load it as a Symbiote itself, download this repository as a zip archive and extract it to the Symbiotes location. See "Installing a Symbiote" in the docs (index.html) for more detailed info on how to install a Symbiote.

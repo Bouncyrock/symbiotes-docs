@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manifest v1 Documentation</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="ts_api_index_docs.css">
+</head>
+
+<body>
+<h1>Manifest v1 Documentation</h1>
+<p>
+    Manifests are what are being loaded by TaleSpire first to be able to set a number of settings for the environment and know what to load. They are the only file that is required to be a specific name in a specific location, namely: <code>manifest.json</code> in the folder for each Symbiote. For example that would be <code>Symbiote_Location/Symbiotes/My_Symbiote_Name/manifest.json</code> (It's worth noting that the name of the folder the Symbiote is stored in doesn't need to be the same as the name of the Symbiote in the manifest, though using at least a similar name is advisable)
+</p>
+
+<h1>Entries</h1>
+
+<pre>
+{
+  "manifestVersion": 1, <label>Version of the manifest.</label>
+  "name": "mySymbioteName", <label>Name of the Symbiote. Max length: 80</label>
+  "entryPoint": "/index.html" <label>The Symbiote entry file. Either path to a <a href="#local-paths">HTML file</a> or a <a href="#remote-urls">website URL</a>.</label>
+  <div class="divider">
+    <span>
+        All following fields are optional. For more info on optional see <a href="#info-optional">here</a>
+    </span>
+  </div>
+  "summary": "string", <label>A short summary of the Symbiote. Max length: 250</label>
+  "descriptionFilePath": "string", <label>Path to a markdown formatted description file.</label>
+  "version": "1.0-beta2 Electric Boogaloo", <label>The version of the Symbiote. Free text field</label>
+  "license": "xyz", <label>Which - if any - license you want to publish your Symbiote under.</label>
+  "about": {
+    "website": "https://example.com" <label>A <a href="#remote-urls">website</a> for your Symbiote. eg: GitHub link, your portfolio, ...</label>
+    "authors": [ <label>A list of authors. Enter as few or as many as you like</label>
+      "Jane Doe", <label>Your name(s)! Look at you go!</label>
+      "John Doe"
+    ]
+  },
+  "api": { <label>Information on the <a href="index.html#api-docs">Symbiote API</a>. If left out no API is injected.</label>
+    "version": "string" <label>Which version of the API to include. Needed to inject anything. <a href="index.html#api-docs">Available versions</a>.</label>
+    "initializeEarly": boolean <label>Whether to wait for DOM loading to finish to trigger <a href="index.html#starting-symbiote">hasInitialized event</a>.</label>
+    "doNotUseNickname": boolean <label>Whether to use the "TS" alias for com.bouncyrock.talespire, defaults to false.</label>
+    "initTimeout": 10 <label>Seconds to trigger onStateChangeEvent "hasInitalized" even if API init did not finish.</label>
+    "subscriptions": { <label>Which events you want to subscribe to. API version necessary to have an effect.</label>
+      "kind": { <label>Which kind (type) of events you are interested in. See <a href="index.html#api-docs">API docs</a> for available subscriptions.</label>
+        "eventSource": "myEventHandlerFunction" <label>Which event you want to listen to with which function.</label>
+      }, <label>Any number of events/kinds can be subscribed to by adding more entries. See following examples:</label>
+      "dice" : {
+        "rollResults": "myFunctionNameForHandlingRollResults"
+      },
+      "symbiote": {
+        "onStateChangeEvent": "myHandlerFunction" <label>Contains (among others) the hasInitalized event.</label>
+      }
+    },
+  },
+  "controls": { <label>Which UI controls to display.</label>
+    "reload": boolean <label>Whether to show reload button (true/false)</label>
+    "navigation": boolean <label>Whether to show forwards/backwards button (true/false)</label>
+    "tabs": boolean <label>Whether to show tab bar within Symbiote (true/false). NOT IMPLEMENTED!</label>
+  },
+  "interop": {
+    "id": <label>The <a href="#info-uuid">ID</a> for communication. Needed to use "sync" calls in the API.</label>
+  },
+  "kind": "string", <label>The Symbiote kind. Possible values: "webView". Defaults to "webView".</label>
+  "icons": { <label>Symbiote icons for use in various places in UI. Sizes available: 64x64px, images must be ".png".</label>
+    "64x64": "string", <label>Path to the 64x64px size icon.</label>
+    "notification": "string" <label>Path to the icon used for notifications from the Symbiote.</label>
+  },
+  "environment": { <label>Contains a number of customizations for the Symbiote environment</label>
+    "webViewBackgroundColor": "hexcode" <label>Color hex code for the web view background to eliminate <a href="#loading-flicker">flickering</a>.</label>
+    "capabilities": [ <label>Array of capabilities that the Symbiote has.</label>
+      "string" <label>See <a href="info-capabilities">here</a> for possible entries.</label>
+    ],
+    "extras": [ <label>Array of extras that TaleSpire injects into the Symbiote.</label>
+      "string" <label>See <a href="info-extras">here</a> for possible entries.</label>
+    ]
+  }
+}
+</pre>
+
+<h2 id="local-paths">Local Paths</h2>
+<p>
+    All local paths have to start with a forward slash "/" indicating the root directory of the Symbiote. Sub-directories are possible, but not going outside of the root of the Symbiote to load any files outside of it. For example <code>my_index.html</code> and <code>/../my_index.html</code> are not valid, while <code>/my_index.html</code> and <code>/sub_folder_name/my_index.html</code> are.
+</p>
+
+<h2 id="remote-urls">Remote URLs</h2>
+<p>
+    All URLs used in the manifest need to be complete, including a scheme and a <a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">fully qualified domain name</a>. For example <code>example.com</code> and <code>www.example.com</code> are not valid URLs, <code>https://example.com</code> on the other hand is valid.
+</p>
+
+<h2 id="info-uuid">UUIDv4</h2>
+<p>
+    IDs throughout TaleSpire use the <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUIDv4</a> standard. They are, when generated correctly, for all practical purposes guaranteed to be unique IDs without needing a centralized registration authority to make sure they are unique. This means that as long as a UUIDv4 generator is used that satisfies the specification you can be sure that your ID is unique. Our <a href="index.html#getting-started">templated Symbiote creation</a> already adds a newly generated UUIDv4 as interop ID for you, but you can also use whichever online UUID generator, local tool, etc you prefer.
+</p>
+
+<h2>User facing information</h2>
+<p>
+    Optional fields like summary, descriptionFilePath and version are a great way to communicate basic information to the users of your Symbiote. While a good and descriptive name can be enough to convey what a simple Symbiote does and how it works, a short extra summary can help clarify the included features. Similarly for more complex Symbiotes a description file (pointed to by descriptionFilePath) can contain tutorials, a getting started section, FAQs, a more thorough explanation of all included features and how to use them, ...
+</p>
+<p>
+    The Symbiote version is a free text field that does not enforce any type of versioning schema. If you want, you can use semantic versioning, cool version names, count backwards, the choice is yours. Pick something that you enjoy working with and that you feel gives your users the best understanding about the version of your Symbiote.
+</p>
+
+<h2 id="loading-flicker">Web view background on load</h2>
+<p>
+    TaleSpire defaults the web view background color to white for compatibility with external websites, however this can lead to flickering when a Symbiote with dark background loads. With <code>webViewBackgroundColor</code> you tell TaleSpire explicitly which color to use instead of white. Colors are set by using their hex code (including the hash <code>#</code>) using either the 3 digit hex or 6 digit hex: <code>#123</code>, <code>#123456</code>. The body background color in your style sheets takes priority over this setting and will be visible over this once loaded.
+</p>
+
+<h2 id="info-optional">Meaning of "Optional"</h2>
+<p>
+    While the vast majority of fields are optional, this does not mean they are unnecessary. To use certain features in your Symbiote those fields have to be specified; For example without a "version" defined in the "api" section, the <a href="index.html#api-docs">Symbiotes API</a> will not be injected. Similarly, without the interop ID specified no <code>sync</code> messages can be sent via the API.
+</p>
+
+<h2 id="info-capabilities">Details to capabilities</h2>
+<p>
+    The capabilities array selects which capabilities a Symbiote has. The selection for each Symbiote should be as few as necessary for it to do what it is supposed to do.
+    Possible capabilities are:
+</p>
+<ul>
+    <li><code>playAudio</code>: Only with this specified the Symbiote will be able to play audio.</li>
+    <li><code>runInBackground</code>: With this specified the Symbiote will be able to run in the background, otherwise it will be shut down. Switching from one Symbiote to another counts as putting the previous Symbiote into the "background", just closing the side panel (without switching Symbiotes) does not.<br>
+    This should only be selected if the Symbiote should be able to react to events while not in focus or if it has to do something else explicitly in the background. As web view Symbiotes are running separately in an embedded browser it can become fairly RAM heavy which we alleviate by shutting background Symbiotes down. Setting all Symbiotes to run in background stops this and will balloon memory consumption quickly.<br>
+    If you want to be notified when the Symbiote is being shut down you can subscribe to <code>onStateChangeEvent</code> and listen for the <code>willShutdown</code> event. However, do not rely on anything critical to be done at shutdown as this is a "best effort" event and we cannot guarantee this to be called in time, depending on the circumstances of when and why the shutdown occurs.</li>
+</ul>
+
+<h2 id="info-extras">Details to extras</h2>
+Each entry in the extras array can be one of three types:
+<ul>
+    <li>One of a list of optional features that can be added to your Symbiote. See <a href="index.html#extras-docs">here</a> for available ones.</li>
+    <li>A <a href="#local-paths">local</a> JavaScript (.js) file that you created. This will be loaded by TaleSpire and injected alongside the API and other features. It is guaranteed that entries here are loaded after the API (though the API may not be initialized yet!) and in order of listing in the extras array. This is mostly useful for injecting custom behavior in pre-existing online websites. Local Symbiotes can load their own script files directly through HTML script tags.</li>
+    <li>A <a href="#local-paths">local</a> stylesheet (.css) file that you created. Similarly to the .js injection, this is mostly useful for customizing the style/design of pre-existing online websites.</li>
+</ul>
+
+<br><br>
+<h1>Examples</h1>
+<h2>Minimal Manifests</h2>
+In the following there's a few examples of the simplest possible manifests.
+
+<pre style="margin-bottom: 0">
+{
+    "manifestVersion": 1,
+    "name": "Website Viewer",
+    "entryPoint": "https://example.com"
+}
+</pre>
+<p style="margin-top: 0;">This manifest loads the website "example.com" without injecting any of the TaleSpire API or doing anything else.</p>
+<br>
+
+<pre style="margin-bottom: 0">
+{
+    "manifestVersion": 1,
+    "name": "Simple Local Symbiote",
+    "entryPoint": "/local.html"
+}
+</pre>
+<p style="margin-top: 0;">This manifest loads the HTML file "local.html" from disk without injecting any of the TaleSpire API or doing anything else.</p>
+<br>
+
+<pre style="margin-bottom: 0">
+{
+    "manifestVersion": 1,
+    "name": "Local Symbiote",
+    "summary": "A cool summary",
+    "entryPoint": "/my_index.html"
+    "api": {
+        "version": "0.1",
+        "initTimeout": 10,
+        "subscriptions": {
+            "dice": {
+                "onRollResults": "handleRollResult"
+            },
+            "symbiote": {
+                "onStateChangeEvent": "handleSymbioteStateChange"
+            }
+        }
+    },
+    "environment": {
+        "extras": [
+            "colorStyles"
+        ]
+    }
+}
+</pre>
+<p style="margin-top: 0;">This manifest loads the local HTML file "my_index.html", loads the API version 0.1 and calls the function "handleSymbioteStateChange" for various symbiote state changes, including the init event triggered once the API has initialized and communication with TaleSpire is set up.
+</p>
+<p>The Symbiote is subscribed to all events from the "onRollResults" event source. The function "handleRollResult" will be called every time a rollResults event is triggered.
+Additionally, the <a href="index.html#extras-docs">colorStyles extra</a> has been selected which injects a number of CSS color variables that provide the base colors of the TaleSpire theme to make it easier for the Symbiote to look at home in the TaleSpire UI.</p>
+
+<h2>Maximal Manifest</h2>
+There is not one "maximal" manifest, that contains "all" the features as some entries either don't make much sense together or are mutually exclusive. However this should illustrate how most of the entries work and should be used to be able to create your own manifest.
+
+<pre style="margin-bottom: 0">
+{
+    "manifestVersion": 1,
+    "name": "Super complex Symbiote",
+    "summary": "This is a very complex and feature rich Symbiote",
+    "descriptionFilePath": "your_readme.md",
+    "entryPoint": "/my_index.html"
+    "api": {
+        "version": "0.1",
+        "initTimeout": 10,
+        "doNotUseNickname": true,
+        "subscriptions": {
+            "dice": {
+                "onRollResults": "handleRollResult"
+            },
+            "symbiote": {
+                "onStateChangeEvent": "handleSymbioteStateChange"
+            },
+            "initiative": {
+                "onInitiativeEvent": "handleInitiativeUpdate"
+            },
+            "creatures": {
+                "onCreatureStateChange": "handleCreatureUpdate"
+            }
+        }
+    },
+    "controls": {
+        "reload": true
+    },
+    "icons": {
+        "64x64": "/cool_icon.png",
+        "notification": "/cool_notification_icon.png"
+    }
+    "environment": {
+        "capabilities": [
+            "playAudio",
+            "runInBackground"
+        ],
+        "extras": [
+            "colorStyles"
+        ]
+    }
+}
+</pre>
+</body>
+</html>
