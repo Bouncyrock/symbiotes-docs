@@ -191,7 +191,7 @@ none
 - invalidPlayerId
 **Description**
 
-Sends the text specified in `message` to the given `target` via chat. Target can be either a single player fragment or player ID (not client ID) or one of the following keywords: "gms", "board", "campaign" which send to all GMs, all players on the current board or all players online respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode.
+Sends the text specified in `message` to the given `target` via chat. Target can be either a single player fragment or player ID (not client ID) or one of the following keywords: "gms", "board", "campaign" which send to all GMs, all players on the current board or all players online respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. Received chat messages trigger the `chatMessageReceived` event from the [onChatEvent](#subscriptions/chat/onchatevent) event source.
 
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
@@ -211,7 +211,7 @@ none
 
 **Description**
 
-Sends chat messages to several players at once. Can either be provided with an array of player fragments or array of player IDs. Useful if you want to target several players with the same message, if you want to send the same message to all players you can instead use [chat.send](#chat/send) with the target "board" or "campaign". The target keywords used in [chat.send](#chat/send) don't work here.
+Sends chat messages to several players at once. Can either be provided with an array of player fragments or array of player IDs. Useful if you want to target several players with the same message, if you want to send the same message to all players you can instead use [chat.send](#chat/send) with the target "board" or "campaign". The target keywords used in [chat.send](#chat/send) don't work here. Received chat messages trigger the `chatMessageReceived` event from the [onChatEvent](#subscriptions/chat/onchatevent) event source.
 
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
@@ -262,7 +262,7 @@ none
 - insufficientRights
 **Description**
 
-Sends chat messages to several players at once as the specified creature. See [chat.sendAsCreature](#chat/sendascreature) for how to specify the creature to speak as. Message and target work the same as with the [chat.multiSend](#chat/send) function call.
+Sends chat messages to several players at once as the specified creature. See [chat.sendAsCreature](#chat/sendascreature) for how to specify the creature to speak as. Message and target work the same as with the [chat.multiSend](#chat/send) function call. Received chat messages trigger the `chatMessageReceived` event from the [onChatEvent](#subscriptions/chat/onchatevent) event source.
 
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
@@ -639,9 +639,11 @@ string
 - notInBoard
 **Description**
 
-Puts a dice roll specified by an array of roll descriptors into the tray ready for the player to roll. if hideResults is set to true, the result of the roll will not be shown and will also not be visible to players in the chat history. GMs will have an indicator of when a roll with hidden results has happened that they can click to see the results of this roll. This is meant to work in conjunction with [dice.sendDiceResult](#dice/senddiceresult) so Symbiotes can "override" the roll result, while retaining the GMs ability to cross check what was rolled and what was reported to be the result, because Symbiotes can report any result they like and as such could be used to cheat rolls.
+Puts a dice roll specified by an array of roll descriptors into the tray ready for the player to roll. If hideResults is set to true, the result of the roll will not be shown and will also not be visible to players in the chat history. GMs will have an indicator of when a roll with hidden results has happened that they can click to see the results of this roll. This is meant to work in conjunction with [dice.sendDiceResult](#dice/senddiceresult) so Symbiotes can "override" the roll result, while retaining the GMs ability to cross check what was rolled and what was reported to be the result, because Symbiotes can report any result they like and as such could be used to cheat rolls.
 
-Returns a rollId used to keep track of this specific roll in the future. Any subsequent roll of these dice will use this rollId, as well as the "rollCleared" event of [dice.rollResults](#dice/rollresults)
+Returns a rollId used to keep track of this specific roll in the future. Any subsequent roll of these dice will use this rollId, as well as the "rollCleared" event of [dice.rollResults](#dice/rollresults).
+
+Once the dice have been rolled their result can be read from the `rollResults` event from the [onRollResults](#subscriptions/dice/onrollresults) event source.
 
 <br><br>
 # initiative
@@ -846,7 +848,7 @@ string
 - toolInUse
 **Description**
 
-Starts the Symbiote picking tool which allows the user to click on something on the board and the information (id and kind) of that something to be sent to the Symbiote that started the picking. Tool can be dismissed by the user which results in a [pickingCanceled](#picking/onpickingevent) event. If another Symbiote has already started a picking operation that has not been completed or canceled by the user yet, this call will return the `toolInUse` error.
+Starts the Symbiote picking tool which allows the user to click on something on the board and the information (id and kind) of that something to be sent to the Symbiote that started the picking. Tool can be dismissed by the user which results in a `pickingCanceled` event from the [onPickingEvent](#subscriptions/picking/onpickingevent) event source. The picking result comes with the `pickingCompleted` event from the same event source. If another Symbiote has already started a picking operation that has not been completed or canceled by the user yet, this call will return the `toolInUse` error.
 
 <br><br>
 # players
@@ -967,7 +969,7 @@ string
 - toolInUse
 **Description**
 
-Selects a ruler to start measuring. Can pick any of the available ruler types by selecting its kind: "sphere", "line", "cone"
+Selects a ruler to start measuring. Can pick any of the available ruler types by selecting its kind: "sphere", "line", "cone". Will trigger a `rulerAdded` event from the [onRulerEvent](#subscriptions/rulers/onrulerevent) event source.
 
 <br><br>
 ## `getLocalRuler`
@@ -1158,9 +1160,9 @@ none
 Sends a notification to the own client's chat/history pane. The notification is clickable to focus/open the Symbiote that has sent it. If the Symbiote has been shut down since sending - either because it's not set to run in background or because it was manually closed by the user - it will be opened and restarted.
 
 The notification has a title and body and can be formatted similar to [chat](#chat) messages with rich text using Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
-Additionally, you can optionally define extra data that is not rendered, but sent to the Symbiote via the [symbiote.onNotificationEvent](#symbiote/onnotificationevent) upon clicking the notification allowing to pass some meta data about the clicked notification to the Symbiote to be for example able to tell apart clicks on different notifications.
+Additionally, you can optionally define extra data that is not rendered, but sent to the Symbiote via the `notificationActivated` event from the [onNotificationEvent](#subscriptions/symbiote/onnotificationevent) event source upon clicking the notification, allowing to pass some meta data about the clicked notification to the Symbiote for example to be able to tell apart clicks on different notifications.
 
-The Symbiote needs to have an interop ID defined in its manifest for this to be accessible
+The Symbiote needs to have an interop ID defined in its manifest for this to be accessible.
 
 <br><br>
 # sync
@@ -1186,7 +1188,7 @@ none
 - symbioteManifestMissingInteropId
 **Description**
 
-Sends the text specified in `message` to the given `target` via the realtime backend. Target can be either a single client fragment or client ID (not player ID) or one of the following keywords: "board", "gms" which sends to all players on the board, or all GMs respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. To be able to use this function the Symbiote needs to have an interop ID set in the manifest. The message size is limited to 1kB of data.
+Sends the text specified in `message` to the given `target` via the realtime backend. Target can be either a single client fragment or client ID (not player ID) or one of the following keywords: "board", "gms" which sends to all players on the board, or all GMs respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. To be able to use this function the Symbiote needs to have an interop ID set in the manifest. The message size is limited to 1kB of data. Received sync messages trigger the `syncMessageReceived` event from the [onSyncMessage](#subscriptions/sync/syncmessagereceived) event source.
 
 <br><br>
 ## `multiSend`

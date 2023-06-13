@@ -38,7 +38,7 @@
   "api": { <label>Information on the <a href="index.html#api-docs">Symbiote API</a>. If left out no API is injected.</label>
     "version": "string" <label>Which version of the API to include. Needed to inject anything. <a href="index.html#api-docs">Available versions</a>.</label>
     "initializeEarly": boolean <label>Whether to wait for DOM loading to finish to trigger <a href="index.html#starting-symbiote">hasInitialized event</a>.</label>
-    "doNotUseNickname": boolean <label>Whether to use the "TS" alias for com.bouncyrock.talespire, defaults to false.</label>
+    "doNotUseNickname": boolean <label>If true, excludes the "TS" alias for com.bouncyrock.talespire, defaults to false.</label>
     "initTimeout": 10 <label>Seconds to trigger onStateChangeEvent "hasInitalized" even if API init did not finish.</label>
     "subscriptions": { <label>Which events you want to subscribe to. API version necessary to have an effect.</label>
       "kind": { <label>Which kind (type) of events you are interested in. See <a href="index.html#api-docs">API docs</a> for available subscriptions.</label>
