@@ -1188,7 +1188,7 @@ none
 - symbioteManifestMissingInteropId
 **Description**
 
-Sends the text specified in `message` to the given `target` via the realtime backend. Target can be either a single client fragment or client ID (not player ID) or one of the following keywords: "board", "gms" which sends to all players on the board, or all GMs respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. To be able to use this function the Symbiote needs to have an interop ID set in the manifest. The message size is limited to 1kB of data. Received sync messages trigger the `syncMessageReceived` event from the [onSyncMessage](#subscriptions/sync/syncmessagereceived) event source.
+Sends the text specified in `message` to the given `target` via the realtime backend. Target can be either a single client fragment or client ID (not player ID) or one of the following keywords: "board", "gms" which sends to all players on the board, or all GMs respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. To be able to use this function the Symbiote needs to have an interop ID set in the manifest. The message size is limited to 1kB of data. Received sync messages trigger the `syncMessageReceived` event from the [onSyncMessage](#subscriptions/sync/onsyncmessage) event source.
 
 <br><br>
 ## `multiSend`
