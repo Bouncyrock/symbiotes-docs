@@ -1,10 +1,474 @@
 <title>Symbiote API 0.1</title>
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="ts_api_docs.css">
-# com.bouncyrock.talespire.v0_1
+   **API 0.1**
+<a href="#" class="tocTop">Back to Top</a>
+<a href="#calls" class="level1">Calls</a>
+<br>
+<a href="#calls/boards" class="level2">boards</a>
+<br>
+<a href="#calls/boards/getboardsinthiscampaign" class="level3">getBoardsInThisCampaign</a>
+<br>
+<a href="#calls/boards/getmoreinfo" class="level3">getMoreInfo</a>
+<br>
+<a href="#calls/boards/whereami" class="level3">whereAmI</a>
+<br>
+<a href="#calls/bookmarks" class="level2">bookmarks</a>
+<br>
+<a href="#calls/bookmarks/getbookmarksinthisboard" class="level3">getBookmarksInThisBoard</a>
+<br>
+<a href="#calls/bookmarks/getbookmarksinthiscampaign" class="level3">getBookmarksInThisCampaign</a>
+<br>
+<a href="#calls/bookmarks/gotobookmark" class="level3">gotoBookmark</a>
+<br>
+<a href="#calls/bookmarks/sendtobookmark" class="level3">sendToBookmark</a>
+<br>
+<a href="#calls/campaigns" class="level2">campaigns</a>
+<br>
+<a href="#calls/campaigns/getmoreinfoaboutcurrentcampaign" class="level3">getMoreInfoAboutCurrentCampaign</a>
+<br>
+<a href="#calls/campaigns/whereami" class="level3">whereAmI</a>
+<br>
+<a href="#calls/chat" class="level2">chat</a>
+<br>
+<a href="#calls/chat/multisend" class="level3">multiSend</a>
+<br>
+<a href="#calls/chat/multisendascreature" class="level3">multiSendAsCreature</a>
+<br>
+<a href="#calls/chat/send" class="level3">send</a>
+<br>
+<a href="#calls/chat/sendascreature" class="level3">sendAsCreature</a>
+<br>
+<a href="#calls/clients" class="level2">clients</a>
+<br>
+<a href="#calls/clients/getclientsinthisboard" class="level3">getClientsInThisBoard</a>
+<br>
+<a href="#calls/clients/getmoreinfo" class="level3">getMoreInfo</a>
+<br>
+<a href="#calls/clients/isme" class="level3">isMe</a>
+<br>
+<a href="#calls/clients/whoami" class="level3">whoAmI</a>
+<br>
+<a href="#calls/contentpacks" class="level2">contentPacks</a>
+<br>
+<a href="#calls/contentpacks/createthumbnailelementforboardobject" class="level3">createThumbnailElementForBoardObject</a>
+<br>
+<a href="#calls/contentpacks/findboardobjectinpacks" class="level3">findBoardObjectInPacks</a>
+<br>
+<a href="#calls/contentpacks/getcontentpacks" class="level3">getContentPacks</a>
+<br>
+<a href="#calls/contentpacks/getmoreinfo" class="level3">getMoreInfo</a>
+<br>
+<a href="#calls/creatures" class="level2">creatures</a>
+<br>
+<a href="#calls/creatures/createblueprint" class="level3">createBlueprint</a>
+<br>
+<a href="#calls/creatures/getcreaturestatnamesforthiscampaign" class="level3">getCreatureStatNamesForThisCampaign</a>
+<br>
+<a href="#calls/creatures/getcreaturesownedbyplayer" class="level3">getCreaturesOwnedByPlayer</a>
+<br>
+<a href="#calls/creatures/getmoreinfo" class="level3">getMoreInfo</a>
+<br>
+<a href="#calls/creatures/getselectedcreatures" class="level3">getSelectedCreatures</a>
+<br>
+<a href="#calls/creatures/getuniquecreaturesinthiscampaign" class="level3">getUniqueCreaturesInThisCampaign</a>
+<br>
+<a href="#calls/debug" class="level2">debug</a>
+<br>
+<a href="#calls/debug/log" class="level3">log</a>
+<br>
+<a href="#calls/dice" class="level2">dice</a>
+<br>
+<a href="#calls/dice/evaluatediceresultsgroup" class="level3">evaluateDiceResultsGroup</a>
+<br>
+<a href="#calls/dice/isvalidrollstring" class="level3">isValidRollString</a>
+<br>
+<a href="#calls/dice/makerolldescriptors" class="level3">makeRollDescriptors</a>
+<br>
+<a href="#calls/dice/putdiceintray" class="level3">putDiceInTray</a>
+<br>
+<a href="#calls/dice/senddiceresult" class="level3">sendDiceResult</a>
+<br>
+<a href="#calls/initiative" class="level2">initiative</a>
+<br>
+<a href="#calls/initiative/getqueue" class="level3">getQueue</a>
+<br>
+<a href="#calls/localstorage" class="level2">localStorage</a>
+<br>
+<a href="#calls/localstorage/campaign" class="level3">campaign</a>
+<br>
+<a href="#calls/localstorage/campaign/deleteblob" class="level4">deleteBlob</a>
+<br>
+<a href="#calls/localstorage/campaign/getblob" class="level4">getBlob</a>
+<br>
+<a href="#calls/localstorage/campaign/setblob" class="level4">setBlob</a>
+<br>
+<a href="#calls/localstorage/global" class="level3">global</a>
+<br>
+<a href="#calls/localstorage/global/deleteblob" class="level4">deleteBlob</a>
+<br>
+<a href="#calls/localstorage/global/getblob" class="level4">getBlob</a>
+<br>
+<a href="#calls/localstorage/global/setblob" class="level4">setBlob</a>
+<br>
+<a href="#calls/parties" class="level2">parties</a>
+<br>
+<a href="#calls/parties/getcreaturesinparty" class="level3">getCreaturesInParty</a>
+<br>
+<a href="#calls/parties/getparties" class="level3">getParties</a>
+<br>
+<a href="#calls/picking" class="level2">picking</a>
+<br>
+<a href="#calls/picking/startpicking" class="level3">startPicking</a>
+<br>
+<a href="#calls/players" class="level2">players</a>
+<br>
+<a href="#calls/players/getmoreinfo" class="level3">getMoreInfo</a>
+<br>
+<a href="#calls/players/getplayersinthisboard" class="level3">getPlayersInThisBoard</a>
+<br>
+<a href="#calls/players/getplayersinthiscampaign" class="level3">getPlayersInThisCampaign</a>
+<br>
+<a href="#calls/players/isme" class="level3">isMe</a>
+<br>
+<a href="#calls/players/whoami" class="level3">whoAmI</a>
+<br>
+<a href="#calls/rulers" class="level2">rulers</a>
+<br>
+<a href="#calls/rulers/getlocalruler" class="level3">getLocalRuler</a>
+<br>
+<a href="#calls/rulers/getmoreinfo" class="level3">getMoreInfo</a>
+<br>
+<a href="#calls/rulers/getrulers" class="level3">getRulers</a>
+<br>
+<a href="#calls/rulers/startruler" class="level3">startRuler</a>
+<br>
+<a href="#calls/slabs" class="level2">slabs</a>
+<br>
+<a href="#calls/slabs/getdatasize" class="level3">getDataSize</a>
+<br>
+<a href="#calls/slabs/getmaxslabsizeinbytes" class="level3">getMaxSlabSizeInBytes</a>
+<br>
+<a href="#calls/slabs/getslabinactiveselection" class="level3">getSlabInActiveSelection</a>
+<br>
+<a href="#calls/slabs/pack" class="level3">pack</a>
+<br>
+<a href="#calls/slabs/sendslabtohand" class="level3">sendSlabToHand</a>
+<br>
+<a href="#calls/slabs/unpack" class="level3">unpack</a>
+<br>
+<a href="#calls/symbiote" class="level2">symbiote</a>
+<br>
+<a href="#calls/symbiote/getifthissymbioteisvisible" class="level3">getIfThisSymbioteIsVisible</a>
+<br>
+<a href="#calls/symbiote/sendnotification" class="level3">sendNotification</a>
+<br>
+<a href="#calls/sync" class="level2">sync</a>
+<br>
+<a href="#calls/sync/getclientsconnected" class="level3">getClientsConnected</a>
+<br>
+<a href="#calls/sync/multisend" class="level3">multiSend</a>
+<br>
+<a href="#calls/sync/send" class="level3">send</a>
+<br>
+<a href="#calls/system" class="level2">system</a>
+<br>
+<a href="#calls/system/clipboard" class="level3">clipboard</a>
+<br>
+<a href="#calls/system/clipboard/settext" class="level4">setText</a>
+<br>
+<a href="#calls/units" class="level2">units</a>
+<br>
+<a href="#calls/units/getdistanceunitsforthiscampaign" class="level3">getDistanceUnitsForThisCampaign</a>
+<br>
+<a href="#calls/urls" class="level2">urls</a>
+<br>
+<a href="#calls/urls/createurlprefixforthissymbiote" class="level3">createUrlPrefixForThisSymbiote</a>
+<br>
+<a href="#calls/urls/submit" class="level3">submit</a>
+<br>
+<br>
+<a href="#subscriptions" class="level1">Subscriptions</a>
+<br>
+<a href="#subscriptions/campaigns" class="level2">campaigns</a>
+<br>
+<a href="#subscriptions/campaigns/current" class="level3">current</a>
+<br>
+<a href="#subscriptions/campaigns/current/onboardevent" class="level4">onBoardEvent</a>
+<br>
+<a href="#subscriptions/campaigns/current/oninfochanged" class="level4">onInfoChanged</a>
+<br>
+<a href="#subscriptions/campaigns/current/onsettingschanged" class="level4">onSettingsChanged</a>
+<br>
+<a href="#subscriptions/chat" class="level2">chat</a>
+<br>
+<a href="#subscriptions/chat/onchatmessage" class="level3">onChatMessage</a>
+<br>
+<a href="#subscriptions/clients" class="level2">clients</a>
+<br>
+<a href="#subscriptions/clients/onclientevent" class="level3">onClientEvent</a>
+<br>
+<a href="#subscriptions/contentpacks" class="level2">contentPacks</a>
+<br>
+<a href="#subscriptions/contentpacks/oncontentpackchange" class="level3">onContentPackChange</a>
+<br>
+<a href="#subscriptions/creatures" class="level2">creatures</a>
+<br>
+<a href="#subscriptions/creatures/oncreaturestatechange" class="level3">onCreatureStateChange</a>
+<br>
+<a href="#subscriptions/dice" class="level2">dice</a>
+<br>
+<a href="#subscriptions/dice/onrollresults" class="level3">onRollResults</a>
+<br>
+<a href="#subscriptions/initiative" class="level2">initiative</a>
+<br>
+<a href="#subscriptions/initiative/oninitiativeevent" class="level3">onInitiativeEvent</a>
+<br>
+<a href="#subscriptions/picking" class="level2">picking</a>
+<br>
+<a href="#subscriptions/picking/onpickingevent" class="level3">onPickingEvent</a>
+<br>
+<a href="#subscriptions/players" class="level2">players</a>
+<br>
+<a href="#subscriptions/players/onboardplayerevent" class="level3">onBoardPlayerEvent</a>
+<br>
+<a href="#subscriptions/players/oncampaignplayerevent" class="level3">onCampaignPlayerEvent</a>
+<br>
+<a href="#subscriptions/rulers" class="level2">rulers</a>
+<br>
+<a href="#subscriptions/rulers/onrulerevent" class="level3">onRulerEvent</a>
+<br>
+<a href="#subscriptions/slabs" class="level2">slabs</a>
+<br>
+<a href="#subscriptions/slabs/onslabcopied" class="level3">onSlabCopied</a>
+<br>
+<a href="#subscriptions/symbiote" class="level2">symbiote</a>
+<br>
+<a href="#subscriptions/symbiote/onnotificationevent" class="level3">onNotificationEvent</a>
+<br>
+<a href="#subscriptions/symbiote/onstatechangeevent" class="level3">onStateChangeEvent</a>
+<br>
+<a href="#subscriptions/symbiote/onvisibilityevent" class="level3">onVisibilityEvent</a>
+<br>
+<a href="#subscriptions/sync" class="level2">sync</a>
+<br>
+<a href="#subscriptions/sync/onclientevent" class="level3">onClientEvent</a>
+<br>
+<a href="#subscriptions/sync/onsyncmessage" class="level3">onSyncMessage</a>
+<br>
+<a href="#subscriptions/talespire" class="level2">talespire</a>
+<br>
+<a href="#subscriptions/urls" class="level2">urls</a>
+<br>
+<a href="#subscriptions/urls/onurlmessage" class="level3">onUrlMessage</a>
+<br>
+<br>
+<a href="#types" class="level1">Types</a>
+<br>
+<a href="#types/atlasresolution" class="level2">atlasResolution</a>
+<br>
+<a href="#types/boardadded" class="level2">boardAdded</a>
+<br>
+<a href="#types/boardfragment" class="level2">boardFragment</a>
+<br>
+<a href="#types/boardinfo" class="level2">boardInfo</a>
+<br>
+<a href="#types/boardinfochanged" class="level2">boardInfoChanged</a>
+<br>
+<a href="#types/boardobjectfindresult" class="level2">boardObjectFindResult</a>
+<br>
+<a href="#types/boardobjectkind" class="level2">boardObjectKind</a>
+<br>
+<a href="#types/boardremoved" class="level2">boardRemoved</a>
+<br>
+<a href="#types/bookmark" class="level2">bookmark</a>
+<br>
+<a href="#types/bounds" class="level2">bounds</a>
+<br>
+<a href="#types/campaignfragment" class="level2">campaignFragment</a>
+<br>
+<a href="#types/campaigninfo" class="level2">campaignInfo</a>
+<br>
+<a href="#types/campaigninfochanged" class="level2">campaignInfoChanged</a>
+<br>
+<a href="#types/chatmessagereceived" class="level2">chatMessageReceived</a>
+<br>
+<a href="#types/chatsendaskind" class="level2">chatSendAsKind</a>
+<br>
+<a href="#types/clientconnected" class="level2">clientConnected</a>
+<br>
+<a href="#types/clientdisconnected" class="level2">clientDisconnected</a>
+<br>
+<a href="#types/clientfragment" class="level2">clientFragment</a>
+<br>
+<a href="#types/clientinfo" class="level2">clientInfo</a>
+<br>
+<a href="#types/clientjoinedboard" class="level2">clientJoinedBoard</a>
+<br>
+<a href="#types/clientleftboard" class="level2">clientLeftBoard</a>
+<br>
+<a href="#types/clientmode" class="level2">clientMode</a>
+<br>
+<a href="#types/clientmodechanged" class="level2">clientModeChanged</a>
+<br>
+<a href="#types/conerulerinfo" class="level2">coneRulerInfo</a>
+<br>
+<a href="#types/contentpackadded" class="level2">contentPackAdded</a>
+<br>
+<a href="#types/contentpackcreatureelement" class="level2">contentPackCreatureElement</a>
+<br>
+<a href="#types/contentpackfragment" class="level2">contentPackFragment</a>
+<br>
+<a href="#types/contentpackiconelement" class="level2">contentPackIconElement</a>
+<br>
+<a href="#types/contentpackiconsatlaselement" class="level2">contentPackIconsAtlasElement</a>
+<br>
+<a href="#types/contentpackinfo" class="level2">contentPackInfo</a>
+<br>
+<a href="#types/contentpackloaderdata" class="level2">contentPackLoaderData</a>
+<br>
+<a href="#types/contentpackmusicelement" class="level2">contentPackMusicElement</a>
+<br>
+<a href="#types/contentpackplaceableelement" class="level2">contentPackPlaceableElement</a>
+<br>
+<a href="#types/contentpackremoved" class="level2">contentPackRemoved</a>
+<br>
+<a href="#types/creatureactivemorphchanged" class="level2">creatureActiveMorphChanged</a>
+<br>
+<a href="#types/creatureactivepersistentemoteschanged" class="level2">creatureActivePersistentEmotesChanged</a>
+<br>
+<a href="#types/creatureadded" class="level2">creatureAdded</a>
+<br>
+<a href="#types/creatureexplicitlyhiddenstatechanged" class="level2">creatureExplicitlyHiddenStateChanged</a>
+<br>
+<a href="#types/creatureflyingstatechanged" class="level2">creatureFlyingStateChanged</a>
+<br>
+<a href="#types/creaturefragment" class="level2">creatureFragment</a>
+<br>
+<a href="#types/creaturehpchanged" class="level2">creatureHpChanged</a>
+<br>
+<a href="#types/creatureinfo" class="level2">creatureInfo</a>
+<br>
+<a href="#types/creatureisuniquechanged" class="level2">creatureIsUniqueChanged</a>
+<br>
+<a href="#types/creaturelinkchanged" class="level2">creatureLinkChanged</a>
+<br>
+<a href="#types/creaturelocationchanged" class="level2">creatureLocationChanged</a>
+<br>
+<a href="#types/creaturemorphschanged" class="level2">creatureMorphsChanged</a>
+<br>
+<a href="#types/creaturenamechanged" class="level2">creatureNameChanged</a>
+<br>
+<a href="#types/creatureownerschanged" class="level2">creatureOwnersChanged</a>
+<br>
+<a href="#types/creatureremoved" class="level2">creatureRemoved</a>
+<br>
+<a href="#types/creaturestat" class="level2">creatureStat</a>
+<br>
+<a href="#types/creaturestatschanged" class="level2">creatureStatsChanged</a>
+<br>
+<a href="#types/creaturetorchstatechanged" class="level2">creatureTorchStateChanged</a>
+<br>
+<a href="#types/distanceunit" class="level2">distanceUnit</a>
+<br>
+<a href="#types/distanceunitschanged" class="level2">distanceUnitsChanged</a>
+<br>
+<a href="#types/eulerrotation" class="level2">eulerRotation</a>
+<br>
+<a href="#types/hasbecomehidden" class="level2">hasBecomeHidden</a>
+<br>
+<a href="#types/hasbecomevisible" class="level2">hasBecomeVisible</a>
+<br>
+<a href="#types/hasenteredforeground" class="level2">hasEnteredForeground</a>
+<br>
+<a href="#types/hasinitialized" class="level2">hasInitialized</a>
+<br>
+<a href="#types/initiativequeue" class="level2">initiativeQueue</a>
+<br>
+<a href="#types/initiativeturnitem" class="level2">initiativeTurnItem</a>
+<br>
+<a href="#types/initiativeturnitemkind" class="level2">initiativeTurnItemKind</a>
+<br>
+<a href="#types/initiativeupdated" class="level2">initiativeUpdated</a>
+<br>
+<a href="#types/linerulerinfo" class="level2">lineRulerInfo</a>
+<br>
+<a href="#types/morph" class="level2">morph</a>
+<br>
+<a href="#types/notificationactivated" class="level2">notificationActivated</a>
+<br>
+<a href="#types/partyfragment" class="level2">partyFragment</a>
+<br>
+<a href="#types/pickedthingkind" class="level2">pickedThingKind</a>
+<br>
+<a href="#types/pickingcanceled" class="level2">pickingCanceled</a>
+<br>
+<a href="#types/pickingcompleted" class="level2">pickingCompleted</a>
+<br>
+<a href="#types/playerfragment" class="level2">playerFragment</a>
+<br>
+<a href="#types/playerinfo" class="level2">playerInfo</a>
+<br>
+<a href="#types/playerjoinedboard" class="level2">playerJoinedBoard</a>
+<br>
+<a href="#types/playerjoinedcampaign" class="level2">playerJoinedCampaign</a>
+<br>
+<a href="#types/playerleftboard" class="level2">playerLeftBoard</a>
+<br>
+<a href="#types/playerleftcampaign" class="level2">playerLeftCampaign</a>
+<br>
+<a href="#types/playerrights" class="level2">playerRights</a>
+<br>
+<a href="#types/playerrightschanged" class="level2">playerRightsChanged</a>
+<br>
+<a href="#types/position" class="level2">position</a>
+<br>
+<a href="#types/rect" class="level2">rect</a>
+<br>
+<a href="#types/rolldescriptor" class="level2">rollDescriptor</a>
+<br>
+<a href="#types/rollremoved" class="level2">rollRemoved</a>
+<br>
+<a href="#types/rollresult" class="level2">rollResult</a>
+<br>
+<a href="#types/rollresults" class="level2">rollResults</a>
+<br>
+<a href="#types/rollresultsgroup" class="level2">rollResultsGroup</a>
+<br>
+<a href="#types/rollresultsoperation" class="level2">rollResultsOperation</a>
+<br>
+<a href="#types/rollvalue" class="level2">rollValue</a>
+<br>
+<a href="#types/ruleradded" class="level2">rulerAdded</a>
+<br>
+<a href="#types/rulerfragment" class="level2">rulerFragment</a>
+<br>
+<a href="#types/rulerkind" class="level2">rulerKind</a>
+<br>
+<a href="#types/rulerremoved" class="level2">rulerRemoved</a>
+<br>
+<a href="#types/rulerresult" class="level2">rulerResult</a>
+<br>
+<a href="#types/slabcopied" class="level2">slabCopied</a>
+<br>
+<a href="#types/slabcopiedstatus" class="level2">slabCopiedStatus</a>
+<br>
+<a href="#types/sphererulerinfo" class="level2">sphereRulerInfo</a>
+<br>
+<a href="#types/statnameschanged" class="level2">statNamesChanged</a>
+<br>
+<a href="#types/syncmessagereceived" class="level2">syncMessageReceived</a>
+<br>
+<a href="#types/urlmessagereceived" class="level2">urlMessageReceived</a>
+<br>
+<a href="#types/willenterbackground" class="level2">willEnterBackground</a>
+<br>
+<a href="#types/willshutdown" class="level2">willShutdown</a>
+<br>
+# Calls
 
-# boards
+## boards
 
-## `whereAmI`
+### `whereAmI`
 
 **Parameters**
 
@@ -19,7 +483,7 @@ none
 Returns the board fragment of the currently loaded board.
 
 <br><br>
-## `getBoardsInThisCampaign`
+### `getBoardsInThisCampaign`
 
 **Parameters**
 
@@ -37,7 +501,7 @@ Array[[boardFragment](#types/boardfragment)]
 Returns a list of board fragments of all the boards in the currently active campaign.
 
 <br><br>
-## `getMoreInfo`
+### `getMoreInfo`
 
 **Parameters**
 
@@ -54,9 +518,9 @@ Array[[boardInfo](#types/boardinfo)]
 Returns more info on the specified board.
 
 <br><br>
-# bookmarks
+## bookmarks
 
-## `getBookmarksInThisCampaign`
+### `getBookmarksInThisCampaign`
 
 **Parameters**
 
@@ -74,7 +538,7 @@ Array[[bookmark](#types/bookmark)]
 Returns a list of all bookmarks in the currently active campaign.
 
 <br><br>
-## `getBookmarksInThisBoard`
+### `getBookmarksInThisBoard`
 
 **Parameters**
 
@@ -92,7 +556,7 @@ Array[[bookmark](#types/bookmark)]
 Returns a list of all bookmarks in the currently loaded board.
 
 <br><br>
-## `gotoBookmark`
+### `gotoBookmark`
 
 **Parameters**
 
@@ -114,7 +578,7 @@ none
 Sends the own clients' camera to the specified bookmark, identically to how it would work when searching for the bookmark in the boards list and clicking on it there or how a `talespire://goto/bookmark/` links behaves.
 
 <br><br>
-## `sendToBookmark`
+### `sendToBookmark`
 
 **Parameters**
 
@@ -138,9 +602,9 @@ none
 Sends the specified list of clients (can also only be one) to the specified bookmark, identically to how it would work when searching for the bookmark in the boards list and clicking on it there or how a `talespire://goto/bookmark/` links behaves.
 
 <br><br>
-# campaigns
+## campaigns
 
-## `whereAmI`
+### `whereAmI`
 
 **Parameters**
 
@@ -155,7 +619,7 @@ none
 Returns info about the campaign that the current user client (ie: The one running this Symbiote) is in.
 
 <br><br>
-## `getMoreInfoAboutCurrentCampaign`
+### `getMoreInfoAboutCurrentCampaign`
 
 **Parameters**
 
@@ -170,9 +634,9 @@ none
 Returns more info on the specified campaign.
 
 <br><br>
-# chat
+## chat
 
-## `send`
+### `send`
 
 **Parameters**
 
@@ -196,7 +660,7 @@ Sends the text specified in `message` to the given `target` via chat. Target can
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
 <br><br>
-## `multiSend`
+### `multiSend`
 
 **Parameters**
 
@@ -216,7 +680,7 @@ Sends chat messages to several players at once. Can either be provided with an a
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
 <br><br>
-## `sendAsCreature`
+### `sendAsCreature`
 
 **Parameters**
 
@@ -242,7 +706,7 @@ Sends a chat message as the specified creature. Creatures can either be specifie
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
 <br><br>
-## `multiSendAsCreature`
+### `multiSendAsCreature`
 
 **Parameters**
 
@@ -267,9 +731,9 @@ Sends chat messages to several players at once as the specified creature. See [c
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
 <br><br>
-# clients
+## clients
 
-## `whoAmI`
+### `whoAmI`
 
 **Parameters**
 
@@ -284,7 +748,7 @@ none
 Returns the client fragment of the own client (= The client that this Symbiote is running in).
 
 <br><br>
-## `getClientsInThisBoard`
+### `getClientsInThisBoard`
 
 **Parameters**
 
@@ -299,7 +763,7 @@ Array[[clientFragment](#types/clientfragment)]
 Returns a list of all clients currently connected to this board.
 
 <br><br>
-## `isMe`
+### `isMe`
 
 **Parameters**
 
@@ -316,7 +780,7 @@ boolean
 Returns true if the specified client ID (or client fragment) is the same client as the one running the Symbiote (= whether the client is your own client). Returns false otherwise.
 
 <br><br>
-## `getMoreInfo`
+### `getMoreInfo`
 
 **Parameters**
 
@@ -333,9 +797,9 @@ Array[[clientInfo](#types/clientinfo)]
 Returns more info on the specified client.
 
 <br><br>
-# contentPacks
+## contentPacks
 
-## `getContentPacks`
+### `getContentPacks`
 
 **Parameters**
 
@@ -350,7 +814,7 @@ Array[[contentPackFragment](#types/contentpackfragment)]
 Returns a list of all currently loaded content packs as fragments. Content packs can be loaded in and out at runtime (see [contentPacks.onContentPackChange](#contentpacks/oncontentpackchange)) as a preparation for asset modding support, currently the official asset packs are all loaded at the start.
 
 <br><br>
-## `getMoreInfo`
+### `getMoreInfo`
 
 **Parameters**
 
@@ -367,7 +831,7 @@ Array[[contentPackInfo](#types/contentpackinfo)]
 Returns the all content pack elements (all tiles, props, minis, music, ...) for the specified content pack(s). This contains all the content pack elements alongside their metadata like tags, sizes, icon positions in the atlas, etc.
 
 <br><br>
-## `findBoardObjectInPacks`
+### `findBoardObjectInPacks`
 
 **Parameters**
 
@@ -387,7 +851,7 @@ contentPacksInfos can be queried by calling [contentPacks.getMoreInfo](#contentp
 This function will only search through content packs that are provided, which means that you can search through only a subset of content packs by passing it an array of content packs that don't include all content packs. If the specified board object is not found in any of the provided packs, it will return a notFound error.
 
 <br><br>
-## `createThumbnailElementForBoardObject`
+### `createThumbnailElementForBoardObject`
 
 **Parameters**
 
@@ -406,9 +870,9 @@ Creates a DOM element showing the library thumbnail for the specified board obje
 The return element is a DOM element that can be added into the DOM with various JS functions, for example: [appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) or [prepend](https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend).
 
 <br><br>
-# creatures
+## creatures
 
-## `getUniqueCreaturesInThisCampaign`
+### `getUniqueCreaturesInThisCampaign`
 
 **Parameters**
 
@@ -426,7 +890,7 @@ Array[[creatureFragment](#types/creaturefragment)]
 Returns a list of all unique creatures (as fragments) in the currently active campaign.
 
 <br><br>
-## `getCreaturesOwnedByPlayer`
+### `getCreaturesOwnedByPlayer`
 
 **Parameters**
 
@@ -447,7 +911,7 @@ Array[[creatureFragment](#types/creaturefragment)]
 Returns a list of all unique creatures (as fragments) owned by a specific player. Player can be specified either as id or as a player fragment.
 
 <br><br>
-## `getSelectedCreatures`
+### `getSelectedCreatures`
 
 **Parameters**
 
@@ -462,7 +926,7 @@ Array[[creatureFragment](#types/creaturefragment)]
 Returns a list of all currently selected creatures. This can either be an array of length 1 if just one creature is selected (or 0 if none), or an arbitrary length of up to 50 when groups of minis are selected with the lasso.
 
 <br><br>
-## `getMoreInfo`
+### `getMoreInfo`
 
 **Parameters**
 
@@ -479,7 +943,7 @@ Array[[creatureInfo](#types/creatureinfo)]
 Returns more info on the specified mini. This includes states like knockdown, their stats, names, morphs, etc. GMs (including players who can GM, but are in player mode currently) can see all the info on all the minis, players will only see data they themselves can find out through the TaleSpire UI, meaning most data is only visible on minis they own.
 
 <br><br>
-## `getCreatureStatNamesForThisCampaign`
+### `getCreatureStatNamesForThisCampaign`
 
 **Parameters**
 
@@ -494,7 +958,7 @@ Array[string]
 Returns an array of length 8 with the stat names as set in the campaign settings.
 
 <br><br>
-## `createBlueprint`
+### `createBlueprint`
 
 **Parameters**
 
@@ -511,9 +975,9 @@ string
 Returns a `talespire://` URL creature blueprint created from the specified creature info. This can either be the creature info for an existing creature on the board or an edited (or completely newly created) creature info object. The ID of creature info is not used, so does not need to be populated when creating a creature info object from scratch.
 
 <br><br>
-# debug
+## debug
 
-## `log`
+### `log`
 
 **Parameters**
 
@@ -532,9 +996,9 @@ Writes the given string into a Symbiote-specific `log.txt` file located in a `.d
 Symbiote logs are kept like the Game logs are: Starting the Symbiote checks whether a `log.txt` already exists and if so moves it to `log-prev.txt`. The first call to `debug.log` then creates a new `log.txt` file and for the rest of the Symbiote's execution it will keep writing to the newly created file.
 
 <br><br>
-# dice
+## dice
 
-## `isValidRollString`
+### `isValidRollString`
 
 **Parameters**
 
@@ -552,7 +1016,7 @@ Returns true if the given string is a valid dice roll string, false if not. A ro
 Examples: `3d12`, `2d20+3`, `d8+5d6+2d4+2/d20+7`
 
 <br><br>
-## `makeRollDescriptors`
+### `makeRollDescriptors`
 
 **Parameters**
 
@@ -569,7 +1033,7 @@ Array[[rollDescriptor](#types/rolldescriptor)]
 Takes a dice roll string and returns an array of intermediate descriptor objects for use in [dice.putDiceInTray](#dice/putdiceintray). Each array entry corresponds to one dice group (separated by a forward slash `/`) See [dice.isValidRollString](#dice/isvalidrollstring) for more info on what a roll string is.
 
 <br><br>
-## `evaluateDiceResultsGroup`
+### `evaluateDiceResultsGroup`
 
 **Parameters**
 
@@ -590,7 +1054,7 @@ int
 Evaluates a results group from the dice results according to their operators. Uses the same logic as TaleSpire itself to evaluate the results group, meaning it will always stay consistent with the native dice results, but still allows you handling the results of individual groups differently to for example implement a "keep highest group" function.
 
 <br><br>
-## `sendDiceResult`
+### `sendDiceResult`
 
 **Parameters**
 
@@ -617,7 +1081,7 @@ string
 Sends a dice result for the TaleSpire UI to display. resultGroups is structured identically to a native dice roll result like could be returned from the [dice.rollResults](#dice/rollresults) event source. Can optionally specify a rollId that can correspond to a dice roll within TaleSpire, like one that was created by [dice.putDiceInTray](#dice/putdiceintray). If not specified it is treated as a "new" dice roll and has no association to any dice on the board. All dice results that were sent using this function have an indicator in the UI that show this dice result was sent by a Symbiote which allows GMs to differentiate between known good rolls done from within TaleSpire and results that a player could have tampered with (like for example by always sending a dice result that has a specific value instead of a random result).
 
 <br><br>
-## `putDiceInTray`
+### `putDiceInTray`
 
 **Parameters**
 
@@ -646,9 +1110,9 @@ Returns a rollId used to keep track of this specific roll in the future. Any sub
 Once the dice have been rolled their result can be read from the `rollResults` event from the [onRollResults](#subscriptions/dice/onrollresults) event source.
 
 <br><br>
-# initiative
+## initiative
 
-## `getQueue`
+### `getQueue`
 
 **Parameters**
 
@@ -665,11 +1129,11 @@ Returns the contents of the turn queue as a list. Each entry in the list contain
 The turn queue is still accessible with this call even if the client is currently not in initiative mode, as of right now there are no API calls for determining which game mode (exploration/initiative/cutscene) the client is in.
 
 <br><br>
-# localStorage
+## localStorage
 
-## global
+### global
 
-### `setBlob`
+#### `setBlob`
 
 **Parameters**
 
@@ -692,7 +1156,7 @@ Stores the given string of data in a file in the Symbiote's directory. The text 
 Even global data is still scoped with the Symbiote, meaning a Symbiote can only ever read or write its own data and has no access to the data of other Symbiotes.
 
 <br><br>
-### `getBlob`
+#### `getBlob`
 
 **Parameters**
 
@@ -710,7 +1174,7 @@ string
 Retrieves the locally stored global data for this Symbiote. Returns the same string of data as has been set with [localStorage.global.setBlob](#localstorage/global/setblob). If several instances of TaleSpire are running on the same machine race conditions between them can happen. See [localStorage.global.setBlob](#localstorage/global/setblob) for more info on that.
 
 <br><br>
-### `deleteBlob`
+#### `deleteBlob`
 
 **Parameters**
 
@@ -728,9 +1192,9 @@ none
 Deletes the locally stored global data for this Symbiote. Does not affect campaign scoped data, to delete that, see [localStorage.campaign.deleteBlob](#localstorage/campaign/deleteblob)
 
 <br><br>
-## campaign
+### campaign
 
-### `setBlob`
+#### `setBlob`
 
 **Parameters**
 
@@ -755,7 +1219,7 @@ Campaign data is additionally scoped with the Symbiote, meaning a Symbiote can o
 
 
 <br><br>
-### `getBlob`
+#### `getBlob`
 
 **Parameters**
 
@@ -774,7 +1238,7 @@ string
 Retrieves the locally stored data attached to the currently active campaign for this Symbiote. Returns the same string of data as has been set with [localStorage.campaign.setBlob](#localstorage/campaign/setblob). If several instances of TaleSpire are running on the same machine race conditions between them can happen. See [localStorage.campaign.setBlob](#localstorage/campaign/setblob) for more info on that.
 
 <br><br>
-### `deleteBlob`
+#### `deleteBlob`
 
 **Parameters**
 
@@ -793,9 +1257,9 @@ none
 Deletes the locally stored data attached to the currently active campaign for this Symbiote. Does not affect global Symbiote data, to delete that, see [localStorage.global.deleteBlob](#localstorage/global/deleteblob)
 
 <br><br>
-# parties
+## parties
 
-## `getParties`
+### `getParties`
 
 **Parameters**
 
@@ -810,7 +1274,7 @@ Array[[partyFragment](#types/partyfragment)]
 Returns the IDs for all existing parties. For now only one party is supported by TaleSpire, this function will have more utility once the party system gets overhauled.
 
 <br><br>
-## `getCreaturesInParty`
+### `getCreaturesInParty`
 
 **Parameters**
 
@@ -830,9 +1294,9 @@ Array[string]
 Returns all creatures (as array of creature IDs) that belong to any player (including GMs) of the specified party.
 
 <br><br>
-# picking
+## picking
 
-## `startPicking`
+### `startPicking`
 
 **Parameters**
 
@@ -851,9 +1315,9 @@ string
 Starts the Symbiote picking tool which allows the user to click on something on the board and the information (id and kind) of that something to be sent to the Symbiote that started the picking. Tool can be dismissed by the user which results in a `pickingCanceled` event from the [onPickingEvent](#subscriptions/picking/onpickingevent) event source. The picking result comes with the `pickingCompleted` event from the same event source. If another Symbiote has already started a picking operation that has not been completed or canceled by the user yet, this call will return the `toolInUse` error.
 
 <br><br>
-# players
+## players
 
-## `whoAmI`
+### `whoAmI`
 
 **Parameters**
 
@@ -868,7 +1332,7 @@ none
 Returns the player fragment of the own player (= The player that is running the Symbiote).
 
 <br><br>
-## `isMe`
+### `isMe`
 
 **Parameters**
 
@@ -885,7 +1349,7 @@ boolean
 Returns true if the specified player ID (or player fragment) is the same player as the one running the Symbiote (= whether the player is yourself). Returns false otherwise.
 
 <br><br>
-## `getPlayersInThisCampaign`
+### `getPlayersInThisCampaign`
 
 **Parameters**
 
@@ -901,7 +1365,7 @@ Returns a list of all players who are members of this campaign. This includes pl
 
 
 <br><br>
-## `getPlayersInThisBoard`
+### `getPlayersInThisBoard`
 
 **Parameters**
 
@@ -916,7 +1380,7 @@ Array[[playerFragment](#types/playerfragment)]
 Returns a list of all players currently connected to this board.
 
 <br><br>
-## `getMoreInfo`
+### `getMoreInfo`
 
 **Parameters**
 
@@ -933,9 +1397,9 @@ Array[[playerInfo](#types/playerinfo)]
 Returns more info on the specified player. The clientsIds list in the response shows info on the clients with which the respective player is connected, but only for the same board as the own client running the Symbiote is in.
 
 <br><br>
-# rulers
+## rulers
 
-## `getRulers`
+### `getRulers`
 
 **Parameters**
 
@@ -950,7 +1414,7 @@ Array[[rulerFragment](#types/rulerfragment)]
 Returns all rulers currently active on the board or an empty array if there is none. This does not include AoE markers. For querying just your own rulers, see [rulers.getLocalRulers](#rulers/getlocalrulers).
 
 <br><br>
-## `startRuler`
+### `startRuler`
 
 **Parameters**
 
@@ -972,7 +1436,7 @@ string
 Selects a ruler to start measuring. Can pick any of the available ruler types by selecting its kind: "sphere", "line", "cone". Will trigger a `rulerAdded` event from the [onRulerEvent](#subscriptions/rulers/onrulerevent) event source.
 
 <br><br>
-## `getLocalRuler`
+### `getLocalRuler`
 
 **Parameters**
 
@@ -990,7 +1454,7 @@ none
 Returns the ruler set by the own client or rulerNotFound if there is no active one. This does not include AoE markers. For querying all rulers, including ones from other clients, see [rulers.getRulers](#rulers/getrulers).
 
 <br><br>
-## `getMoreInfo`
+### `getMoreInfo`
 
 **Parameters**
 
@@ -1007,9 +1471,9 @@ Array[[lineRulerInfo](#types/linerulerinfo) or [sphereRulerInfo](#types/sphereru
 Returns more info on the specified ruler.
 
 <br><br>
-# slabs
+## slabs
 
-## `unpack`
+### `unpack`
 
 **Parameters**
 
@@ -1026,7 +1490,7 @@ object
 Takes the copied slab string and unpacks it to a binary representation using JavaScript [Array Buffers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer). Extracting their data can be done manually one byte at a time, but using [Data Views](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) can simplify a lot of the process.
 
 <br><br>
-## `pack`
+### `pack`
 
 **Parameters**
 
@@ -1044,7 +1508,7 @@ string
 Takes a JavaScript [Array Buffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) and packs it: First it gets compressed with gzip and then base64 encoded to get the final slab string. `allowOversized` does not need to be specified and defaults to false, which will cause the function to return an error if the slab data is larger than the `maxSlabSize` (which can be queried by [slabs.getMaxSlabSize](#slabs/getmaxslabsize)). This can be deactivated by setting this argument to true, which results in the slab string to be created regardless. TaleSpire will still not accept slabs larger than the limit, but this can be used for example for intermediate representations for other external slab tools to use.
 
 <br><br>
-## `getDataSize`
+### `getDataSize`
 
 **Parameters**
 
@@ -1061,7 +1525,7 @@ int
 Returns the data size of the slab string after base64 decoding. This is the size that is checked against the slab size limit. To get the size limit, see [slabs.getMaxSlabSize](#slabs/getmaxslabsize).
 
 <br><br>
-## `sendSlabToHand`
+### `sendSlabToHand`
 
 **Parameters**
 
@@ -1085,7 +1549,7 @@ none
 Sends the provided slab string to the hand ready to be placed by the user.
 
 <br><br>
-## `getSlabInActiveSelection`
+### `getSlabInActiveSelection`
 
 **Parameters**
 
@@ -1106,7 +1570,7 @@ string
 Returns a slab created from the currently active volume selection box.
 
 <br><br>
-## `getMaxSlabSizeInBytes`
+### `getMaxSlabSizeInBytes`
 
 **Parameters**
 
@@ -1121,9 +1585,9 @@ int
 This returns the size in bytes that a slab can be at maximum. This size is before base64 encoding it, but after compressing it with gzip. The limit is fixed and won't change during runtime, but using this function allows Symbiotes to adapt to potentially changing limits through updates.
 
 <br><br>
-# symbiote
+## symbiote
 
-## `getIfThisSymbioteIsVisible`
+### `getIfThisSymbioteIsVisible`
 
 **Parameters**
 
@@ -1138,7 +1602,7 @@ boolean
 Returns whether the Symbiote is currently visible or not. This includes the Symbiotes panel being collapsed and a Symbiote being put in the background (if it has this capability set in the manifest) when another Symbiote is loaded.
 
 <br><br>
-## `sendNotification`
+### `sendNotification`
 
 **Parameters**
 
@@ -1165,9 +1629,9 @@ Additionally, you can optionally define extra data that is not rendered, but sen
 The Symbiote needs to have an interop ID defined in its manifest for this to be accessible.
 
 <br><br>
-# sync
+## sync
 
-## `send`
+### `send`
 
 **Parameters**
 
@@ -1191,7 +1655,7 @@ none
 Sends the text specified in `message` to the given `target` via the realtime backend. Target can be either a single client fragment or client ID (not player ID) or one of the following keywords: "board", "gms" which sends to all players on the board, or all GMs respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. To be able to use this function the Symbiote needs to have an interop ID set in the manifest. The message size is limited to 1kB of data. Received sync messages trigger the `syncMessageReceived` event from the [onSyncMessage](#subscriptions/sync/onsyncmessage) event source.
 
 <br><br>
-## `multiSend`
+### `multiSend`
 
 **Parameters**
 
@@ -1214,7 +1678,7 @@ none
 Sends messages via the realtime backend to several clients at once. Can either be provided with an array of client fragments or array of client IDs. Useful if you want to target several clients with the same message, if you want to send the same message to all players you can instead use [sync.send](#sync/send) with the target "board". The target keywords available with [sync.send](#sync/send) don't work here. The message size is limited to 1kB of data.
 
 <br><br>
-## `getClientsConnected`
+### `getClientsConnected`
 
 **Parameters**
 
@@ -1233,11 +1697,11 @@ Array[[clientFragment](#types/clientfragment)]
 Returns a list of all clients that has the Symbiote with the same interop ID as the one that called the function loaded. Does not include clients that have the Symbiote installed but not open.
 
 <br><br>
-# system
+## system
 
-## clipboard
+### clipboard
 
-### `setText`
+#### `setText`
 
 **Parameters**
 
@@ -1254,9 +1718,9 @@ none
 Puts the specified text into the system clipboard for the user to paste.
 
 <br><br>
-# units
+## units
 
-## `getDistanceUnitsForThisCampaign`
+### `getDistanceUnitsForThisCampaign`
 
 **Parameters**
 
@@ -1271,9 +1735,9 @@ none
 Returns the distance units for rulers that have been set for the campaign.
 
 <br><br>
-# urls
+## urls
 
-## `submit`
+### `submit`
 
 **Parameters**
 
@@ -1296,7 +1760,7 @@ Passes a `talespire://` URL to TaleSpire. Behaves mostly identical to simply cli
 This has the advantage of being a direct connection, so is more efficient with less potential for delays. It also reliably targets the correct client if several are open at once which going through the UrlRelay does not. Additionally it is not limited to opening one link per user interaction in web view Symbiotes, because of Chrome's link opening/pop-up prevention policies.
 
 <br><br>
-## `createUrlPrefixForThisSymbiote`
+### `createUrlPrefixForThisSymbiote`
 
 **Parameters**
 
@@ -1320,6 +1784,10 @@ The URL prefix is stable (=unchanging) for as long as the interop ID remains the
 <br><br>
 
 # Subscriptions
+
+The subscription system is organized into kinds and event sources. Events are part of event sources and will be delivered to the handler function defined by the event source subscription in the [manifest](index.html#manifest-docs).
+
+
 
 ## urls
 
@@ -1360,7 +1828,7 @@ The `rulerAdded` event is triggered when a new ruler measurement is started by a
 ## chat
 
 
-### `onChatEvent`
+### `onChatMessage`
 
 **Events**
 
@@ -1691,19 +2159,33 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 
 # Types
 
+Types can be:
+- JavaScript objects containing primitive types or other custom types documented here
+- "Enums". Since JavaScript does not have a concept of enums like other languages do, they are handled as string types with a set of accepted values.
+
+
+
 ## `boardAdded`
- Name  |                 Type
--------|---------------------------------------
- board | [boardFragment](#types/boardfragment)
+
+<pre class="json-obj">
+{
+    board: <a href="#types/boardfragment">boardFragment</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onBoardEvent](#onBoardEvent)
 
 ## `boardFragment`
- Name |  Type
-------|--------
- id   | string
- name | string
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string
+}
+</pre>
+
 *Used By*
 
 * call: [boards.getBoardsInThisCampaign](#boards/getBoardsInThisCampaign)
@@ -1713,28 +2195,40 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [boardAdded](#types/boardadded)
 
 ## `boardRemoved`
-  Name   |  Type
----------|--------
- boardId | string
+
+<pre class="json-obj">
+{
+    boardId: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onBoardEvent](#onBoardEvent)
 
 ## `boardInfoChanged`
- Name |             Type
-------|-------------------------------
- info | [boardInfo](#types/boardinfo)
+
+<pre class="json-obj">
+{
+    info: <a href="#types/boardinfo">boardInfo</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onBoardEvent](#onBoardEvent)
 
 ## `boardInfo`
-    Name     |  Type
--------------|--------
- id          | string
- campaignId  | string
- name        | string
- description | string
+
+<pre class="json-obj">
+{
+    id: string,
+    campaignId: string,
+    name: string,
+    description: string
+}
+</pre>
+
 *Used By*
 
 * call: [boards.getMoreInfo](#boards/getMoreInfo)
@@ -1742,18 +2236,26 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [boardInfoChanged](#types/boardinfochanged)
 
 ## `playerJoinedCampaign`
-  Name  |                  Type
---------|-----------------------------------------
- player | [playerFragment](#types/playerfragment)
+
+<pre class="json-obj">
+{
+    player: <a href="#types/playerfragment">playerFragment</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCampaignPlayerEvent](#onCampaignPlayerEvent)
 
 ## `playerFragment`
- Name |  Type
-------|--------
- id   | string
- name | string
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string
+}
+</pre>
+
 *Used By*
 
 * call: [players.getPlayersInThisBoard](#players/getPlayersInThisBoard)
@@ -1775,28 +2277,40 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [playerRightsChanged](#types/playerrightschanged)
 
 ## `playerLeftCampaign`
-   Name   |  Type
-----------|--------
- playerId | string
+
+<pre class="json-obj">
+{
+    playerId: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCampaignPlayerEvent](#onCampaignPlayerEvent)
 
 ## `playerRightsChanged`
-  Name  |                  Type
---------|-----------------------------------------
- player | [playerFragment](#types/playerfragment)
- rights | [playerRights](#types/playerrights)
+
+<pre class="json-obj">
+{
+    player: <a href="#types/playerfragment">playerFragment</a>,
+    rights: <a href="#types/playerrights">playerRights</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCampaignPlayerEvent](#onCampaignPlayerEvent)
 
 ## `playerRights`
-  Name   |  Type
----------|---------
- isOwner | boolean
- canPlay | boolean
- canGm   | boolean
+
+<pre class="json-obj">
+{
+    isOwner: boolean,
+    canPlay: boolean,
+    canGm: boolean
+}
+</pre>
+
 *Used By*
 
 * type: [playerInfo](#types/playerinfo)
@@ -1804,37 +2318,53 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [playerRightsChanged](#types/playerrightschanged)
 
 ## `playerJoinedBoard`
-  Name  |                  Type
---------|-----------------------------------------
- player | [playerFragment](#types/playerfragment)
+
+<pre class="json-obj">
+{
+    player: <a href="#types/playerfragment">playerFragment</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onBoardPlayerEvent](#onBoardPlayerEvent)
 
 ## `playerLeftBoard`
-  Name  |                  Type
---------|-----------------------------------------
- player | [playerFragment](#types/playerfragment)
+
+<pre class="json-obj">
+{
+    player: <a href="#types/playerfragment">playerFragment</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onBoardPlayerEvent](#onBoardPlayerEvent)
 
 ## `campaignFragment`
- Name |  Type
-------|--------
- id   | string
- name | string
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string
+}
+</pre>
+
 *Used By*
 
 * call: [campaigns.whereAmI](#campaigns/whereAmI)
 
 ## `campaignInfo`
-      Name      |  Type
-----------------|--------
- id             | string
- name           | string
- description    | string
- defaultBoardId | string
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string,
+    description: string,
+    defaultBoardId: string
+}
+</pre>
+
 *Used By*
 
 * call: [campaigns.getMoreInfoAboutCurrentCampaign](#campaigns/getMoreInfoAboutCurrentCampaign)
@@ -1842,18 +2372,26 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [campaignInfoChanged](#types/campaigninfochanged)
 
 ## `campaignInfoChanged`
- Name |                Type
-------|-------------------------------------
- info | [campaignInfo](#types/campaigninfo)
+
+<pre class="json-obj">
+{
+    info: <a href="#types/campaigninfo">campaignInfo</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onInfoChanged](#onInfoChanged)
 
 ## `clientFragment`
-  Name  |                  Type
---------|-----------------------------------------
- id     | string
- player | [playerFragment](#types/playerfragment)
+
+<pre class="json-obj">
+{
+    id: string,
+    player: <a href="#types/playerfragment">playerFragment</a>
+}
+</pre>
+
 *Used By*
 
 * call: [clients.getClientsInThisBoard](#clients/getClientsInThisBoard)
@@ -1875,21 +2413,26 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [syncMessageReceived](#types/syncmessagereceived)
 
 ## `clientInfo`
-    Name    |                  Type
-------------|-----------------------------------------
- id         | string
- clientMode | [clientMode](#types/clientmode)
- player     | [playerFragment](#types/playerfragment)
+
+<pre class="json-obj">
+{
+    id: string,
+    clientMode: <a href="#types/clientmode">clientMode</a>,
+    player: <a href="#types/playerfragment">playerFragment</a>
+}
+</pre>
+
 *Used By*
 
 * call: [clients.getMoreInfo](#clients/getMoreInfo)
 
 ## `clientMode`
-   Name    | Value
------------|-------
- spectator | 1
- player    | 2
- gm        | 3
+
+One of the following string values:
+* "spectator"
+* "player"
+* "gm"
+
 *Used By*
 
 * type: [clientInfo](#types/clientinfo)
@@ -1897,38 +2440,54 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [clientModeChanged](#types/clientmodechanged)
 
 ## `playerInfo`
-    Name    |                Type
-------------|-------------------------------------
- id         | string
- name       | string
- clientsIds | Array[string]
- rights     | [playerRights](#types/playerrights)
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string,
+    clientsIds: Array[string],
+    rights: <a href="#types/playerrights">playerRights</a>
+}
+</pre>
+
 *Used By*
 
 * call: [players.getMoreInfo](#players/getMoreInfo)
 
 ## `syncMessageReceived`
-    Name    |                  Type
-------------|-----------------------------------------
- str        | string
- fromClient | [clientFragment](#types/clientfragment)
+
+<pre class="json-obj">
+{
+    str: string,
+    fromClient: <a href="#types/clientfragment">clientFragment</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onSyncMessage](#onSyncMessage)
 
 ## `urlMessageReceived`
- Name |  Type
-------|--------
- str  | string
+
+<pre class="json-obj">
+{
+    str: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onUrlMessage](#onUrlMessage)
 
 ## `rollDescriptor`
- Name |  Type
-------|--------
- name | string
- roll | string
+
+<pre class="json-obj">
+{
+    name: string,
+    roll: string
+}
+</pre>
+
 *Used By*
 
 * call: [dice.makeRollDescriptors](#dice/makeRollDescriptors)
@@ -1936,22 +2495,30 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * call: [dice.putDiceInTray](#dice/putDiceInTray)
 
 ## `rollResults`
-     Name      |                        Type
----------------|----------------------------------------------------
- rollId        | string
- clientId      | string
- resultsGroups | Array[[rollResultsGroup](#types/rollresultsgroup)]
- gmOnly        | boolean
- quiet         | boolean
+
+<pre class="json-obj">
+{
+    rollId: string,
+    clientId: string,
+    resultsGroups: Array[<a href="#types/rollresultsgroup">rollResultsGroup</a>],
+    gmOnly: boolean,
+    quiet: boolean
+}
+</pre>
+
 *Used By*
 
 * subscription: [onRollResults](#onRollResults)
 
 ## `rollResultsGroup`
-  Name  |                                                          Type
---------|-------------------------------------------------------------------------------------------------------------------------
- name   | string
- result | [rollResultsOperation](#types/rollresultsoperation) or [rollResult](#types/rollresult) or [rollValue](#types/rollvalue)
+
+<pre class="json-obj">
+{
+    name: string,
+    result: <a href="#types/rollresultsoperation">rollResultsOperation</a> or <a href="#types/rollresult">rollResult</a> or <a href="#types/rollvalue">rollValue</a>
+}
+</pre>
+
 *Used By*
 
 * call: [dice.evaluateDiceResultsGroup](#dice/evaluateDiceResultsGroup)
@@ -1961,94 +2528,134 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [rollResults](#types/rollresults)
 
 ## `rollResultsOperation`
-   Name   |                                                              Type
-----------|--------------------------------------------------------------------------------------------------------------------------------
- operator | string
- operands | Array[[rollResultsOperation](#types/rollresultsoperation) or [rollResult](#types/rollresult) or [rollValue](#types/rollvalue)]
+
+<pre class="json-obj">
+{
+    operator: string,
+    operands: Array[<a href="#types/rollresultsoperation">rollResultsOperation</a> or <a href="#types/rollresult">rollResult</a> or <a href="#types/rollvalue">rollValue</a>]
+}
+</pre>
+
 *Used By*
 
 * type: [rollResultsGroup](#types/rollresultsgroup)
 
 ## `rollResult`
-  Name   |    Type
----------|------------
- kind    | string
- results | Array[int]
+
+<pre class="json-obj">
+{
+    kind: string,
+    results: Array[int]
+}
+</pre>
+
+"kind" describes which kind of dice was rolled. Can be the name of any of the dice available to TaleSpire, the built-in dice are: "d4", "d6", "d8", "d10", "d12", "d20", "d100".
+
+
 *Used By*
 
 * type: [rollResultsGroup](#types/rollresultsgroup)
 
 ## `rollValue`
- Name  | Type
--------|------
- value | int
+
+<pre class="json-obj">
+{
+    value: int
+}
+</pre>
+
 *Used By*
 
 * type: [rollResultsGroup](#types/rollresultsgroup)
 
 ## `rollRemoved`
-  Name  |  Type
---------|--------
- rollId | string
+
+<pre class="json-obj">
+{
+    rollId: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onRollResults](#onRollResults)
 
 ## `slabCopied`
-   Name   |                    Type
-----------|---------------------------------------------
- slab     | string
- status   | [slabCopiedStatus](#types/slabcopiedstatus)
- dataSize | int
+
+<pre class="json-obj">
+{
+    slab: string,
+    status: <a href="#types/slabcopiedstatus">slabCopiedStatus</a>,
+    dataSize: int
+}
+</pre>
+
 *Used By*
 
 * subscription: [onSlabCopied](#onSlabCopied)
 
 ## `slabCopiedStatus`
-   Name    | Value
------------|-------
- success   | 4
- oversized | 5
+
+One of the following string values:
+* "success"
+* "oversized"
+
 *Used By*
 
 * type: [slabCopied](#types/slabcopied)
 
 ## `contentPackAdded`
-     Name      |  Type
----------------|--------
- contentPackId | string
- optionalName  | string
+
+<pre class="json-obj">
+{
+    contentPackId: string,
+    optionalName: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onContentPackChange](#onContentPackChange)
 
 ## `contentPackRemoved`
-     Name      |  Type
----------------|--------
- contentPackId | string
+
+<pre class="json-obj">
+{
+    contentPackId: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onContentPackChange](#onContentPackChange)
 
 ## `contentPackFragment`
-     Name     |  Type
---------------|--------
- id           | string
- optionalName | string
+
+<pre class="json-obj">
+{
+    id: string,
+    optionalName: string
+}
+</pre>
+
 *Used By*
 
 * call: [contentPacks.getContentPacks](#contentPacks/getContentPacks)
 
 ## `contentPackInfo`
-     Name     |                                    Type
---------------|----------------------------------------------------------------------------
- id           | string
- optionalName | string
- tiles        | Array[[contentPackPlaceableElement](#types/contentpackplaceableelement)]
- props        | Array[[contentPackPlaceableElement](#types/contentpackplaceableelement)]
- creatures    | Array[[contentPackCreatureElement](#types/contentpackcreatureelement)]
- music        | Array[[contentPackMusicElement](#types/contentpackmusicelement)]
- iconsAtlases | Array[[contentPackIconsAtlasElement](#types/contentpackiconsatlaselement)]
+
+<pre class="json-obj">
+{
+    id: string,
+    optionalName: string,
+    tiles: Array[<a href="#types/contentpackplaceableelement">contentPackPlaceableElement</a>],
+    props: Array[<a href="#types/contentpackplaceableelement">contentPackPlaceableElement</a>],
+    creatures: Array[<a href="#types/contentpackcreatureelement">contentPackCreatureElement</a>],
+    music: Array[<a href="#types/contentpackmusicelement">contentPackMusicElement</a>],
+    iconsAtlases: Array[<a href="#types/contentpackiconsatlaselement">contentPackIconsAtlasElement</a>]
+}
+</pre>
+
 *Used By*
 
 * call: [contentPacks.findBoardObjectInPacks](#contentPacks/findBoardObjectInPacks)
@@ -2058,17 +2665,21 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [boardObjectFindResult](#types/boardobjectfindresult)
 
 ## `contentPackPlaceableElement`
-        Name         |                             Type
----------------------|--------------------------------------------------------------
- id                  | string
- name                | string
- isDeprecated        | boolean
- groupTag            | string
- tags                | Array[string]
- assets              | Array[[contentPackLoaderData](#types/contentpackloaderdata)]
- isInteractable      | boolean
- colliderBoundsBound | [bounds](#types/bounds)
- icon                | [contentPackIconElement](#types/contentpackiconelement)
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string,
+    isDeprecated: boolean,
+    groupTag: string,
+    tags: Array[string],
+    assets: Array[<a href="#types/contentpackloaderdata">contentPackLoaderData</a>],
+    isInteractable: boolean,
+    colliderBoundsBound: <a href="#types/bounds">bounds</a>,
+    icon: <a href="#types/contentpackiconelement">contentPackIconElement</a>
+}
+</pre>
+
 *Used By*
 
 * type: [boardObjectFindResult](#types/boardobjectfindresult)
@@ -2076,17 +2687,21 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [contentPackInfo](#types/contentpackinfo)
 
 ## `contentPackCreatureElement`
-     Name     |                          Type
---------------|---------------------------------------------------------
- id           | string
- name         | string
- isDeprecated | boolean
- groupTag     | string
- tags         | Array[string]
- miniAsset    | [contentPackLoaderData](#types/contentpackloaderdata)
- baseAsset    | [contentPackLoaderData](#types/contentpackloaderdata)
- defaultScale | number
- icon         | [contentPackIconElement](#types/contentpackiconelement)
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string,
+    isDeprecated: boolean,
+    groupTag: string,
+    tags: Array[string],
+    miniAsset: <a href="#types/contentpackloaderdata">contentPackLoaderData</a>,
+    baseAsset: <a href="#types/contentpackloaderdata">contentPackLoaderData</a>,
+    defaultScale: number,
+    icon: <a href="#types/contentpackiconelement">contentPackIconElement</a>
+}
+</pre>
+
 *Used By*
 
 * type: [boardObjectFindResult](#types/boardobjectfindresult)
@@ -2094,27 +2709,39 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [contentPackInfo](#types/contentpackinfo)
 
 ## `contentPackMusicElement`
- Name  |                         Type
--------|-------------------------------------------------------
- asset | [contentPackLoaderData](#types/contentpackloaderdata)
+
+<pre class="json-obj">
+{
+    asset: <a href="#types/contentpackloaderdata">contentPackLoaderData</a>
+}
+</pre>
+
 *Used By*
 
 * type: [contentPackInfo](#types/contentpackinfo)
 
 ## `contentPackIconsAtlasElement`
-    Name    |                   Type
-------------|-------------------------------------------
- path       | string
- resolution | [atlasResolution](#types/atlasresolution)
+
+<pre class="json-obj">
+{
+    path: string,
+    resolution: <a href="#types/atlasresolution">atlasResolution</a>
+}
+</pre>
+
 *Used By*
 
 * type: [contentPackInfo](#types/contentpackinfo)
 
 ## `contentPackLoaderData`
-   Name    |  Type
------------|--------
- bundleId  | string
- assetName | string
+
+<pre class="json-obj">
+{
+    bundleId: string,
+    assetName: string
+}
+</pre>
+
 *Used By*
 
 * type: [contentPackCreatureElement](#types/contentpackcreatureelement)
@@ -2124,21 +2751,29 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [contentPackPlaceableElement](#types/contentpackplaceableelement)
 
 ## `bounds`
-  Name  |            Type
---------|-----------------------------
- center | [position](#types/position)
- width  | float
- height | float
- depth  | float
+
+<pre class="json-obj">
+{
+    center: <a href="#types/position">position</a>,
+    width: float,
+    height: float,
+    depth: float
+}
+</pre>
+
 *Used By*
 
 * type: [contentPackPlaceableElement](#types/contentpackplaceableelement)
 
 ## `contentPackIconElement`
-    Name    |        Type
-------------|---------------------
- atlasIndex | int
- region     | [rect](#types/rect)
+
+<pre class="json-obj">
+{
+    atlasIndex: int,
+    region: <a href="#types/rect">rect</a>
+}
+</pre>
+
 *Used By*
 
 * type: [contentPackCreatureElement](#types/contentpackcreatureelement)
@@ -2146,32 +2781,47 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [contentPackPlaceableElement](#types/contentpackplaceableelement)
 
 ## `atlasResolution`
-  Name  | Type
---------|------
- width  | int
- height | int
+
+<pre class="json-obj">
+{
+    width: int,
+    height: int
+}
+</pre>
+
 *Used By*
 
 * type: [contentPackIconsAtlasElement](#types/contentpackiconsatlaselement)
 
 ## `rect`
-  Name  | Type
---------|-------
- x      | float
- y      | float
- width  | float
- height | float
+
+<pre class="json-obj">
+{
+    x: float,
+    y: float,
+    width: float,
+    height: float
+}
+</pre>
+
 *Used By*
 
 * type: [contentPackIconElement](#types/contentpackiconelement)
 
 ## `position`
- Name  |  Type
--------|--------
- locId | number
- x     | float
- y     | float
- z     | float
+
+<pre class="json-obj">
+{
+    locId: number,
+    x: float,
+    y: float,
+    z: float
+}
+</pre>
+
+"locId" contains the sub-board ID for the thing the position is from. Positions that are on different sub-boards cannot be compared directly, as their coordinate origin may differ.
+
+
 *Used By*
 
 * type: [bookmark](#types/bookmark)
@@ -2189,9 +2839,13 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [sphereRulerInfo](#types/sphererulerinfo)
 
 ## `creatureFragment`
- Name |  Type
-------|--------
- id   | string
+
+<pre class="json-obj">
+{
+    id: string
+}
+</pre>
+
 *Used By*
 
 * call: [creatures.getCreaturesOwnedByPlayer](#creatures/getCreaturesOwnedByPlayer)
@@ -2203,25 +2857,29 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [creatureAdded](#types/creatureadded)
 
 ## `creatureInfo`
-            Name             |                    Type
------------------------------|--------------------------------------------
- id                          | string
- isUnique                    | boolean
- name                        | string
- nameSet                     | boolean
- link                        | string
- position                    | [position](#types/position)
- rotation                    | [eulerRotation](#types/eulerrotation)
- boardId                     | string
- morphs                      | Array[[morph](#types/morph)]
- activeMorphIndex            | int
- hp                          | [creatureStat](#types/creaturestat)
- stats                       | Array[[creatureStat](#types/creaturestat)]
- torchIsOn                   | boolean
- isExplicitlyHidden          | boolean
- isFlying                    | boolean
- idsOfActivePersistentEmotes | Array[string]
- ownerIds                    | Array[string]
+
+<pre class="json-obj">
+{
+    id: string,
+    isUnique: boolean,
+    name: string,
+    nameSet: boolean,
+    link: string,
+    position: <a href="#types/position">position</a>,
+    rotation: <a href="#types/eulerrotation">eulerRotation</a>,
+    boardId: string,
+    morphs: Array[<a href="#types/morph">morph</a>],
+    activeMorphIndex: int,
+    hp: <a href="#types/creaturestat">creatureStat</a>,
+    stats: Array[<a href="#types/creaturestat">creatureStat</a>],
+    torchIsOn: boolean,
+    isExplicitlyHidden: boolean,
+    isFlying: boolean,
+    idsOfActivePersistentEmotes: Array[string],
+    ownerIds: Array[string]
+}
+</pre>
+
 *Used By*
 
 * call: [creatures.createBlueprint](#creatures/createBlueprint)
@@ -2229,11 +2887,15 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * call: [creatures.getMoreInfo](#creatures/getMoreInfo)
 
 ## `eulerRotation`
- Name | Type
-------|-------
- x    | float
- y    | float
- z    | float
+
+<pre class="json-obj">
+{
+    x: float,
+    y: float,
+    z: float
+}
+</pre>
+
 *Used By*
 
 * type: [creatureInfo](#types/creatureinfo)
@@ -2241,10 +2903,14 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [creatureLocationChanged](#types/creaturelocationchanged)
 
 ## `morph`
-     Name     |  Type
---------------|--------
- boardAssetId | string
- scale        | float
+
+<pre class="json-obj">
+{
+    boardAssetId: string,
+    scale: float
+}
+</pre>
+
 *Used By*
 
 * type: [creatureInfo](#types/creatureinfo)
@@ -2252,11 +2918,15 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [creatureMorphsChanged](#types/creaturemorphschanged)
 
 ## `creatureStat`
- Name  |  Type
--------|--------
- name  | string
- value | float
- max   | float
+
+<pre class="json-obj">
+{
+    name: string,
+    value: float,
+    max: float
+}
+</pre>
+
 *Used By*
 
 * type: [creatureHpChanged](#types/creaturehpchanged)
@@ -2266,154 +2936,222 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [creatureStatsChanged](#types/creaturestatschanged)
 
 ## `creatureIsUniqueChanged`
-   Name   |  Type
-----------|---------
- id       | string
- isUnique | boolean
+
+<pre class="json-obj">
+{
+    id: string,
+    isUnique: boolean
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureNameChanged`
-  Name   |  Type
----------|---------
- id      | string
- name    | string
- nameSet | boolean
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string,
+    nameSet: boolean
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureLinkChanged`
- Name |  Type
-------|--------
- id   | string
- link | string
+
+<pre class="json-obj">
+{
+    id: string,
+    link: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureLocationChanged`
-   Name   |                 Type
-----------|---------------------------------------
- id       | string
- boardId  | string
- position | [position](#types/position)
- rotation | [eulerRotation](#types/eulerrotation)
+
+<pre class="json-obj">
+{
+    id: string,
+    boardId: string,
+    position: <a href="#types/position">position</a>,
+    rotation: <a href="#types/eulerrotation">eulerRotation</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureMorphsChanged`
-  Name  |             Type
---------|------------------------------
- id     | string
- morphs | Array[[morph](#types/morph)]
+
+<pre class="json-obj">
+{
+    id: string,
+    morphs: Array[<a href="#types/morph">morph</a>]
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureActiveMorphChanged`
-       Name       |  Type
-------------------|--------
- id               | string
- activeMorphIndex | int
+
+<pre class="json-obj">
+{
+    id: string,
+    activeMorphIndex: int
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureHpChanged`
- Name |                Type
-------|-------------------------------------
- id   | string
- hp   | [creatureStat](#types/creaturestat)
+
+<pre class="json-obj">
+{
+    id: string,
+    hp: <a href="#types/creaturestat">creatureStat</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureStatsChanged`
- Name  |                    Type
--------|--------------------------------------------
- id    | string
- stats | Array[[creatureStat](#types/creaturestat)]
+
+<pre class="json-obj">
+{
+    id: string,
+    stats: Array[<a href="#types/creaturestat">creatureStat</a>]
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureTorchStateChanged`
-   Name    |  Type
------------|---------
- id        | string
- torchIsOn | boolean
+
+<pre class="json-obj">
+{
+    id: string,
+    torchIsOn: boolean
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureExplicitlyHiddenStateChanged`
-        Name        |  Type
---------------------|---------
- id                 | string
- isExplicitlyHidden | boolean
+
+<pre class="json-obj">
+{
+    id: string,
+    isExplicitlyHidden: boolean
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureFlyingStateChanged`
-   Name   |  Type
-----------|---------
- id       | string
- isFlying | boolean
+
+<pre class="json-obj">
+{
+    id: string,
+    isFlying: boolean
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureActivePersistentEmotesChanged`
-            Name             |     Type
------------------------------|---------------
- id                          | string
- idsOfActivePersistentEmotes | Array[string]
+
+<pre class="json-obj">
+{
+    id: string,
+    idsOfActivePersistentEmotes: Array[string]
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureOwnersChanged`
-   Name   |     Type
-----------|---------------
- id       | string
- ownerIds | Array[string]
+
+<pre class="json-obj">
+{
+    id: string,
+    ownerIds: Array[string]
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureAdded`
-   Name   |                    Type
-----------|---------------------------------------------
- creature | [creatureFragment](#types/creaturefragment)
+
+<pre class="json-obj">
+{
+    creature: <a href="#types/creaturefragment">creatureFragment</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `creatureRemoved`
- Name |  Type
-------|--------
- id   | string
+
+<pre class="json-obj">
+{
+    id: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onCreatureStateChange](#onCreatureStateChange)
 
 ## `initiativeUpdated`
- Name  |                   Type
--------|-------------------------------------------
- queue | [initiativeQueue](#types/initiativequeue)
+
+<pre class="json-obj">
+{
+    queue: <a href="#types/initiativequeue">initiativeQueue</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onInitiativeEvent](#onInitiativeEvent)
 
 ## `initiativeQueue`
-      Name       |                          Type
------------------|--------------------------------------------------------
- items           | Array[[initiativeTurnItem](#types/initiativeturnitem)]
- activeItemIndex | int
+
+<pre class="json-obj">
+{
+    items: Array[<a href="#types/initiativeturnitem">initiativeTurnItem</a>],
+    activeItemIndex: int
+}
+</pre>
+
 *Used By*
 
 * call: [initiative.getQueue](#initiative/getQueue)
@@ -2421,63 +3159,88 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [initiativeUpdated](#types/initiativeupdated)
 
 ## `initiativeTurnItem`
- Name |                          Type
-------|---------------------------------------------------------
- id   | string
- name | string
- kind | [initiativeTurnItemKind](#types/initiativeturnitemkind)
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string,
+    kind: <a href="#types/initiativeturnitemkind">initiativeTurnItemKind</a>
+}
+</pre>
+
 *Used By*
 
 * type: [initiativeQueue](#types/initiativequeue)
 
 ## `initiativeTurnItemKind`
-   Name   | Value
-----------|-------
- creature | 6
+
+One of the following string values:
+* "creature"
+
 *Used By*
 
 * type: [initiativeTurnItem](#types/initiativeturnitem)
 
 ## `partyFragment`
- Name |  Type
-------|--------
- id   | string
+
+<pre class="json-obj">
+{
+    id: string
+}
+</pre>
+
 *Used By*
 
 * call: [parties.getParties](#parties/getParties)
 
 ## `clientJoinedBoard`
-  Name  |                  Type
---------|-----------------------------------------
- client | [clientFragment](#types/clientfragment)
+
+<pre class="json-obj">
+{
+    client: <a href="#types/clientfragment">clientFragment</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onClientEvent](#onClientEvent)
 
 ## `clientLeftBoard`
-  Name  |                  Type
---------|-----------------------------------------
- client | [clientFragment](#types/clientfragment)
+
+<pre class="json-obj">
+{
+    client: <a href="#types/clientfragment">clientFragment</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onClientEvent](#onClientEvent)
 
 ## `clientModeChanged`
-    Name    |                  Type
-------------|-----------------------------------------
- client     | [clientFragment](#types/clientfragment)
- clientMode | [clientMode](#types/clientmode)
+
+<pre class="json-obj">
+{
+    client: <a href="#types/clientfragment">clientFragment</a>,
+    clientMode: <a href="#types/clientmode">clientMode</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onClientEvent](#onClientEvent)
 
 ## `bookmark`
-   Name   |            Type
-----------|-----------------------------
- id       | string
- name     | string
- position | [position](#types/position)
- boardId  | string
+
+<pre class="json-obj">
+{
+    id: string,
+    name: string,
+    position: <a href="#types/position">position</a>,
+    boardId: string
+}
+</pre>
+
 *Used By*
 
 * call: [bookmarks.getBookmarksInThisBoard](#bookmarks/getBookmarksInThisBoard)
@@ -2485,10 +3248,14 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * call: [bookmarks.getBookmarksInThisCampaign](#bookmarks/getBookmarksInThisCampaign)
 
 ## `distanceUnit`
-     Name      |  Type
----------------|--------
- name          | string
- numberPerTile | float
+
+<pre class="json-obj">
+{
+    name: string,
+    numberPerTile: float
+}
+</pre>
+
 *Used By*
 
 * call: [units.getDistanceUnitsForThisCampaign](#units/getDistanceUnitsForThisCampaign)
@@ -2496,11 +3263,15 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [distanceUnitsChanged](#types/distanceunitschanged)
 
 ## `lineRulerInfo`
-    Name     |                Type
--------------|------------------------------------
- id          | string
- beingEdited | boolean
- positions   | Array[[position](#types/position)]
+
+<pre class="json-obj">
+{
+    id: string,
+    beingEdited: boolean,
+    positions: Array[<a href="#types/position">position</a>]
+}
+</pre>
+
 *Used By*
 
 * call: [rulers.getMoreInfo](#rulers/getMoreInfo)
@@ -2508,12 +3279,16 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [rulerResult](#types/rulerresult)
 
 ## `sphereRulerInfo`
-     Name      |            Type
----------------|-----------------------------
- id            | string
- beingEdited   | boolean
- startPosition | [position](#types/position)
- endPosition   | [position](#types/position)
+
+<pre class="json-obj">
+{
+    id: string,
+    beingEdited: boolean,
+    startPosition: <a href="#types/position">position</a>,
+    endPosition: <a href="#types/position">position</a>
+}
+</pre>
+
 *Used By*
 
 * call: [rulers.getMoreInfo](#rulers/getMoreInfo)
@@ -2521,13 +3296,17 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [rulerResult](#types/rulerresult)
 
 ## `coneRulerInfo`
-     Name      |            Type
----------------|-----------------------------
- id            | string
- beingEdited   | boolean
- startPosition | [position](#types/position)
- endPosition   | [position](#types/position)
- angle         | float
+
+<pre class="json-obj">
+{
+    id: string,
+    beingEdited: boolean,
+    startPosition: <a href="#types/position">position</a>,
+    endPosition: <a href="#types/position">position</a>,
+    angle: float
+}
+</pre>
+
 *Used By*
 
 * call: [rulers.getMoreInfo](#rulers/getMoreInfo)
@@ -2535,65 +3314,87 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * type: [rulerResult](#types/rulerresult)
 
 ## `distanceUnitsChanged`
- Name  |                Type
--------|-------------------------------------
- units | [distanceUnit](#types/distanceunit)
+
+<pre class="json-obj">
+{
+    units: <a href="#types/distanceunit">distanceUnit</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onSettingsChanged](#onSettingsChanged)
 
 ## `statNamesChanged`
-   Name    |     Type
------------|---------------
- statNames | Array[string]
+
+<pre class="json-obj">
+{
+    statNames: Array[string]
+}
+</pre>
+
 *Used By*
 
 * subscription: [onSettingsChanged](#onSettingsChanged)
 
 ## `pickingCanceled`
- Name |  Type
-------|--------
- id   | string
+
+<pre class="json-obj">
+{
+    id: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onPickingEvent](#onPickingEvent)
 
 ## `pickingCompleted`
-     Name     |                   Type
---------------|-------------------------------------------
- id           | string
- kindOfPicked | [pickedThingKind](#types/pickedthingkind)
- idOfPicked   | string
+
+<pre class="json-obj">
+{
+    id: string,
+    kindOfPicked: <a href="#types/pickedthingkind">pickedThingKind</a>,
+    idOfPicked: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onPickingEvent](#onPickingEvent)
 
 ## `pickedThingKind`
-   Name   | Value
-----------|-------
- unknown  | 7
- tile     | 8
- prop     | 9
- creature | 6
+
+One of the following string values:
+* "unknown"
+* "tile"
+* "prop"
+* "creature"
+
 *Used By*
 
 * type: [pickingCompleted](#types/pickingcompleted)
 
 ## `rulerKind`
-  Name  | Value
---------|-------
- sphere | 10
- cone   | 11
- line   | 12
+
+One of the following string values:
+* "sphere"
+* "cone"
+* "line"
+
 *Used By*
 
 * call: [rulers.startRuler](#rulers/startRuler)
 
 ## `rulerFragment`
-  Name  |                  Type
---------|-----------------------------------------
- id     | string
- client | [clientFragment](#types/clientfragment)
+
+<pre class="json-obj">
+{
+    id: string,
+    client: <a href="#types/clientfragment">clientFragment</a>
+}
+</pre>
+
 *Used By*
 
 * call: [rulers.getLocalRuler](#rulers/getLocalRuler)
@@ -2601,25 +3402,37 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 * call: [rulers.getRulers](#rulers/getRulers)
 
 ## `rulerAdded`
-  Name   |  Type
----------|--------
- rulerId | string
+
+<pre class="json-obj">
+{
+    rulerId: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onRulerEvent](#onRulerEvent)
 
 ## `rulerRemoved`
-  Name   |  Type
----------|--------
- rulerId | string
+
+<pre class="json-obj">
+{
+    rulerId: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onRulerEvent](#onRulerEvent)
 
 ## `rulerResult`
- Name  |                                                            Type
--------|-----------------------------------------------------------------------------------------------------------------------------
- ruler | [lineRulerInfo](#types/linerulerinfo) or [sphereRulerInfo](#types/sphererulerinfo) or [coneRulerInfo](#types/conerulerinfo)
+
+<pre class="json-obj">
+{
+    ruler: <a href="#types/linerulerinfo">lineRulerInfo</a> or <a href="#types/sphererulerinfo">sphereRulerInfo</a> or <a href="#types/conerulerinfo">coneRulerInfo</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onRulerEvent](#onRulerEvent)
@@ -2627,86 +3440,132 @@ The `pickingCanceled` event is triggered when the user cancels the picking opera
 ## `hasBecomeVisible`
 *Type has no fields*
 
+*Used By*
+
+* subscription: [onVisibilityEvent](#onVisibilityEvent)
+
 ## `hasBecomeHidden`
 *Type has no fields*
+
+*Used By*
+
+* subscription: [onVisibilityEvent](#onVisibilityEvent)
 
 ## `willEnterBackground`
 *Type has no fields*
 
+*Used By*
+
+* subscription: [onStateChangeEvent](#onStateChangeEvent)
+
 ## `hasEnteredForeground`
 *Type has no fields*
+
+*Used By*
+
+* subscription: [onStateChangeEvent](#onStateChangeEvent)
 
 ## `hasInitialized`
 *Type has no fields*
 
+*Used By*
+
+* subscription: [onStateChangeEvent](#onStateChangeEvent)
+
 ## `willShutdown`
 *Type has no fields*
 
+*Used By*
+
+* subscription: [onStateChangeEvent](#onStateChangeEvent)
+
 ## `boardObjectFindResult`
-      Name       |                                                                 Type
------------------|--------------------------------------------------------------------------------------------------------------------------------------
- contentPackInfo | [contentPackInfo](#types/contentpackinfo)
- kind            | [boardObjectKind](#types/boardobjectkind)
- boardObject     | [contentPackPlaceableElement](#types/contentpackplaceableelement) or [contentPackCreatureElement](#types/contentpackcreatureelement)
+
+<pre class="json-obj">
+{
+    contentPackInfo: <a href="#types/contentpackinfo">contentPackInfo</a>,
+    kind: <a href="#types/boardobjectkind">boardObjectKind</a>,
+    boardObject: <a href="#types/contentpackplaceableelement">contentPackPlaceableElement</a> or <a href="#types/contentpackcreatureelement">contentPackCreatureElement</a>
+}
+</pre>
+
 *Used By*
 
 * call: [contentPacks.findBoardObjectInPacks](#contentPacks/findBoardObjectInPacks)
 
 ## `boardObjectKind`
-   Name   | Value
-----------|-------
- tile     | 8
- prop     | 9
- creature | 6
+
+One of the following string values:
+* "tile"
+* "prop"
+* "creature"
+
 *Used By*
 
 * type: [boardObjectFindResult](#types/boardobjectfindresult)
 
 ## `chatMessageReceived`
-      Name       |                  Type
------------------|-----------------------------------------
- senderPlayerId  | string
- sentAs          | [chatSendAsKind](#types/chatsendaskind)
- sentAsId        | string
- sentAsName      | string
- sentFromBoardId | string
- body            | string
+
+<pre class="json-obj">
+{
+    senderPlayerId: string,
+    sentAs: <a href="#types/chatsendaskind">chatSendAsKind</a>,
+    sentAsId: string,
+    sentAsName: string,
+    sentFromBoardId: string,
+    body: string
+}
+</pre>
+
 *Used By*
 
-* subscription: [onChatEvent](#onChatEvent)
+* subscription: [onChatMessage](#onChatMessage)
 
 ## `chatSendAsKind`
-   Name   | Value
-----------|-------
- creature | 6
- player   | 2
- unknown  | 7
+
+One of the following string values:
+* "creature"
+* "player"
+* "unknown"
+
 *Used By*
 
 * type: [chatMessageReceived](#types/chatmessagereceived)
 
 ## `notificationActivated`
- Name |  Type
-------|--------
- data | string
+
+<pre class="json-obj">
+{
+    data: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onNotificationEvent](#onNotificationEvent)
 
 ## `clientConnected`
-  Name  |                  Type
---------|-----------------------------------------
- client | [clientFragment](#types/clientfragment)
+
+<pre class="json-obj">
+{
+    client: <a href="#types/clientfragment">clientFragment</a>
+}
+</pre>
+
 *Used By*
 
 * subscription: [onClientEvent](#onClientEvent)
 
 ## `clientDisconnected`
-   Name   |  Type
-----------|--------
- clientId | string
+
+<pre class="json-obj">
+{
+    clientId: string
+}
+</pre>
+
 *Used By*
 
 * subscription: [onClientEvent](#onClientEvent)
-<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long', scrollThreshold:1};</script>
+<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'none', scrollThreshold:1};</script>
 <!-- Markdeep: --><script src="markdeep.min.js?" charset="utf-8"></script>

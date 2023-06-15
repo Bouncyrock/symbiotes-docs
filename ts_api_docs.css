@@ -142,6 +142,12 @@ a:link:hover, a:visited:hover {
 .md .level3, .md h3 {
     margin-left: 2rem;
 }
+.md .level4, .md h3 {
+    margin-left: 3rem;
+}
+.md .level5, .md h3 {
+    margin-left: 4rem;
+}
 
 .md div.title, .md div.subtitle, .md h1, .md h2, .md h3, .md h4, .md h5, .md h6 {
     font-family: Arial, Helvetica, "sans serif";
@@ -161,6 +167,7 @@ a:link:hover, a:visited:hover {
 
 .md div.afterTitles {
     margin-top: 20px;
+    margin-bottom: 20px;
     margin-left: -20px;
     margin-right: -20px;
     height: 0px;
@@ -219,10 +226,17 @@ a:link:hover, a:visited:hover {
     font-weight: 300;
 }
 
-.md pre.listing {
+.md pre.listing, .md pre.json-obj {
     font-size: 100%;
     resize: none;
     width: unset;
+}
+
+.md pre.json-obj {
+    background-color: #363636;
+    border-radius: 8px;
+    margin-left: 1em;
+    padding: 1em;
 }
 
 .md pre.listing code {
@@ -252,6 +266,10 @@ a:link:hover, a:visited:hover {
 
     .md h2 > code, .md h3 > code {
         font-size: 0.92em;
+    }
+
+    .md pre.json-obj {
+        margin-left: 0;
     }
 }
 
@@ -295,16 +313,18 @@ a:link:hover, a:visited:hover {
         padding: 0.1em 0.7em 0.2em 0.7em;
         background-color: #363636;
         border-radius: 4px;
+        box-shadow: 0px 0px 5px 1px var(--ts-background-primary);
     }
 
     body.scrolled .md .tocTop:hover {
         background-color: var(--ts-background-primary);
+        box-shadow: none;
     }
 
     body.scrolled .md .tocTop {
         opacity: 1;
         visibility: visible;
-        bottom: 2%;
+        bottom: 3%;
     }
 
     .md div.afterTitles {

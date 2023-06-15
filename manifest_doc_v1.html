@@ -55,11 +55,11 @@
     "id": <label>The <a href="#info-uuid">ID</a> for communication. Needed to use "sync" calls in the API.</label>
   },
   "kind": "string", <label>The Symbiote kind. Possible values: "webView". Defaults to "webView".</label>
-  "icons": { <label>Symbiote icons for use in various places in UI. Sizes available: 64x64px, images must be ".png".</label>
+  "icons": { <label>Symbiote icons for use in various places in UI. See <a href="#info-icons">here</a> for more information.</label>
     "64x64": "string", <label>Path to the 64x64px size icon.</label>
     "notification": "string" <label>Path to the icon used for notifications from the Symbiote.</label>
   },
-  "environment": { <label>Contains a number of customizations for the Symbiote environment</label>
+  "environment": { <label>Contains a number of customizations for the Symbiote environment.</label>
     "webViewBackgroundColor": "hexcode" <label>Color hex code for the web view background to eliminate <a href="#loading-flicker">flickering</a>.</label>
     "capabilities": [ <label>Array of capabilities that the Symbiote has.</label>
       "string" <label>See <a href="info-capabilities">here</a> for possible entries.</label>
@@ -108,6 +108,14 @@
 </p>
 <p>
     Event handlers cannot be stored in a scoped variable like <code>let foo = function() { ... }</code>, as that is not visible to the API invoking the handler and delivery of the event will fail.
+</p>
+
+<h2 id="info-icons">Icons</h2>
+<p>
+    You can define different icons for different sizes, however, right now the only size available is 64x64px. Icons must be PNG.
+</p>
+<p>
+    The notification icon is an exception to the other icons as it needs to be 24x24px in size and monochrome (but still has to be a PNG).
 </p>
 
 <h2 id="loading-flicker">Web view background on load</h2>
