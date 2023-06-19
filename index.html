@@ -12,7 +12,7 @@
     <h1>Symbiotes Documentation</h1>
     <ol>
         <li>
-            <a href="#alpha-disclaimer">Alpha Disclaimer</a>
+            <a href="#beta-disclaimer">Beta Disclaimer</a>
         </li>
         <li>
             <a href="#getting-started">Getting Started</a>
@@ -78,12 +78,12 @@
         </li>
     </ol>
 
-    <h2 id="alpha-disclaimer">Alpha Disclaimer</h2>
+    <h2 id="beta-disclaimer">Beta Disclaimer</h2>
     <p>
-        This is not a feature complete release and <span class="emphasis">anything and everything</span> documented here may change during the alpha period of Symbiotes without guarantee of backwards compatibility. We don't expect any fundamental changes, but will reserve the option for <span class="emphasis">breaking changes</span> if we see the need for it. Once the alpha period is over we will provide guides for updating to newer versions and there will be a system for deprecating old versions with plenty of time to update, though depending on changing internal features the exact behavior of certain functions may change.
+        This is not a feature complete release and <span class="emphasis">anything and everything</span> documented here may change during the beta period of Symbiotes without guarantee of backwards compatibility. We don't expect any fundamental changes, but will reserve the option for <span class="emphasis">breaking changes</span> if we see the need for it. Once the beta period is over we will provide guides for updating to newer versions and there will be a system for deprecating old versions with plenty of time to update, though depending on changing internal features the exact behavior of certain functions may change.
     </p>
 
-    <div class="feedback-note">Throughout the documentation there are notes styled like this one indicating sections where we specifically want feedback. Of course we also welcome feedback elsewhere, but the marked ones are particularly important. If you have suggestions for new features or feedback on existing ones, please let us know what you tried to do that isn't possible currently. This of course also applies to feedback about the documentation itself. To submit feedback go to <a href="https://feedback.talespire.com/b/alpha-symbiotes-api">our feedback portal</a>. The linked board is specifically for feedback about the API & developer experience, for user facing issues (UI bugs, performance issues, feature requests, ...) go to the "feature-requests" or "bug-reports" board.</div>
+    <div class="feedback-note">Throughout the documentation there are notes styled like this one indicating sections where we specifically want feedback. Of course we also welcome feedback elsewhere, but the marked ones are particularly important. If you have suggestions for new features or feedback on existing ones, please let us know what you tried to do that isn't possible currently. This of course also applies to feedback about the documentation itself. To submit feedback go to <a href="https://feedback.talespire.com/b/symbiotes-beta-bug-reports">our feedback portal</a>. The linked board is specifically for feedback about the API & developer experience, for user facing issues (UI bugs, performance issues, feature requests, ...) go to the "feature-requests" or "bug-reports" board.</div>
 
     <h2 id="getting-started">Getting Started</h2>
     <p>
@@ -150,7 +150,7 @@
     <h3 id="permissions">Permissions</h3>
     <p>
         The API only allows access to information that is accessible through the game normally. This means for example that a Symbiote running on a player's client will only be able to query stats for a mini controlled by them, not for other minis. Similarly a slab cannot be put into the hand of a player, as they don't have permissions to build. There is a distinction between users who <i>can</i> be a GM (= they have permission to be GM) and users who <i>currently are</i> a GM. Most calls that require a certain permission need the user (= player) to be able to switch to GM mode (<code>canGM</code> is set to true), while they don't care about which mode the client is currently in.
-        <div class="note">Not all calls have their permissions fully set up during the Symbiotes Alpha.</div>
+        <div class="note">Not all calls have their permissions fully set up during the Symbiotes beta.</div>
     </p>
 
     <h3 id="injection">Injection</h3>
@@ -206,7 +206,7 @@
             While you can use colors in "any way you want", do not completely misuse a color against its name or description, like using a background color in the foreground. Even if it might look fine now, if we update the color palette it may lead to bad looking or even unreadable Symbiotes. If there is a color missing for what you want to do it is better to create your own color than to "misuse" an existing theme color for something it is not intended for.
         </p>
         <p>
-            <div class="feedback-note">We want to have as few variables as possible, but the goal is that the entirety of a Symbiote's color palette is defined by these colors (if they are intending to replicate TaleSpire's theme that is), without <span class="emphasis">any</span> manually defined color codes. We are happy to receive <a href="https://feedback.talespire.com/b/alpha-symbiotes-api">feedback</a> about in which situations there may be a color missing.</div>
+            <div class="feedback-note">We want to have as few variables as possible, but the goal is that the entirety of a Symbiote's color palette is defined by these colors (if they are intending to replicate TaleSpire's theme that is), without <span class="emphasis">any</span> manually defined color codes. We are happy to receive <a href="https://feedback.talespire.com/b/symbiotes-beta-bug-reports">feedback</a> about in which situations there may be a color missing.</div>
             <ul>
                 <li id="--ts-color-primary">
                     <code>--ts-color-primary</code>: The primary color for elements like text. Provides high contrast to <code>--ts-background-primary</code>
@@ -297,7 +297,7 @@
     <h3 id="dice-finder">Dice Finder</h3>
     <p>
         If the string <code>diceFinder</code> is added to extras, the dice finder functionality will be added to the Symbiote that's being loaded. The dice finder can identify whether text under the mouse cursor looks like a dice roll that TaleSpire can understand. This is meant to work robustly on as many websites as possible, but due to the vast amount of websites and different approaches it may not work on some. For it to work, it also needs to have the <a href="#api-docs">API</a> injected.
-        <div class="feedback-note">We have tested the dice finder on a number of different websites to see if it behaves correctly, but it's likely that some websites have a different setup and as such the dice finder may break on them. If you encounter any problems with dice finder, please <a href="https://feedback.talespire.com/b/alpha-symbiotes-api">let us know</a> which website is being problematic so we can investigate it.</div>
+        <div class="feedback-note">We have tested the dice finder on a number of different websites to see if it behaves correctly, but it's likely that some websites have a different setup and as such the dice finder may break on them. If you encounter any problems with dice finder, please <a href="https://feedback.talespire.com/b/symbiotes-beta-bug-reportsi">let us know</a> which website is being problematic so we can investigate it.</div>
 
         Because the dice finder is meant to work on as many pages as possible, the depth of integration is limited. For example it will never be able to extract roll names from pages as that information is presented very differently for every page. This means that while the dice finder provides an easy baseline of support for pages that don't support TaleSpire out of the box, it will never be as good as support specifically made for a certain website.
     </p>
