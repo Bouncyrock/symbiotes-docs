@@ -167,7 +167,6 @@ a:link:hover, a:visited:hover {
 
 .md div.afterTitles {
     margin-top: 20px;
-    margin-bottom: 20px;
     margin-left: -20px;
     margin-right: -20px;
     height: 0px;
@@ -226,17 +225,10 @@ a:link:hover, a:visited:hover {
     font-weight: 300;
 }
 
-.md pre.listing, .md pre.json-obj {
+.md pre.listing {
     font-size: 100%;
     resize: none;
     width: unset;
-}
-
-.md pre.json-obj {
-    background-color: #363636;
-    border-radius: 8px;
-    margin-left: 1em;
-    padding: 1em;
 }
 
 .md pre.listing code {
@@ -266,10 +258,6 @@ a:link:hover, a:visited:hover {
 
     .md h2 > code, .md h3 > code {
         font-size: 0.92em;
-    }
-
-    .md pre.json-obj {
-        margin-left: 0;
     }
 }
 
@@ -306,25 +294,23 @@ a:link:hover, a:visited:hover {
         display: block;
         visibility: hidden;
         position: fixed;
-        bottom: -4%;
-        right: 2%;
+        bottom: -3em;
+        right: 1em;
         opacity: 0;
         transition: all 0.15s ease-in-out !important;
         padding: 0.1em 0.7em 0.2em 0.7em;
         background-color: #363636;
         border-radius: 4px;
-        box-shadow: 0px 0px 5px 1px var(--ts-background-primary);
     }
 
     body.scrolled .md .tocTop:hover {
         background-color: var(--ts-background-primary);
-        box-shadow: none;
     }
 
     body.scrolled .md .tocTop {
         opacity: 1;
         visibility: visible;
-        bottom: 3%;
+        bottom: 1em;
     }
 
     .md div.afterTitles {

@@ -100,10 +100,10 @@
 
     <h3 id="installing">Installing a Symbiote</h3>
     <p>
-        To install a Symbiote, open the Symbiote directory located at <code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code>. Instead of navigating there manually you can click the "Open Symbiotes Directory" button in either the Symbiote page in the game settings or the Symbiote panel itself. Simply add a folder in there for each Symbiote and as soon as the file "manifest.json" is added to that folder TaleSpire will try to load it. All folder and Symbiote creation and editing is detected live by TaleSpire and will cause an automatic reload on changes meaning TaleSpire does not need to be restarted for any of this.
+        To install a Symbiote, open the Symbiote directory located at <code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code>. Instead of navigating there manually you can click the "Open Symbiotes Directory" button in either the modding page in the game settings or the Symbiote panel itself. Simply add a folder in there for each Symbiote and as soon as the file "manifest.json" is added to that folder TaleSpire will try to load it. All folder and Symbiote creation and editing is detected live by TaleSpire and will cause an automatic reload on changes meaning TaleSpire does not need to be restarted for any of this.
     </p>
     <p>
-        On Linux the Windows folder structure is replicated by Proton (by default) next to the install folder. On the default Steam library folder it is located at <code>~/.steam/steam/steamapps/compatdata/720620/pfx/drive_c/</code> with the rest of the Windows folder structure being in there. If you have installed TaleSpire to another library location the compatdata folder will be in there.
+        On Linux the Windows folder structure is replicated by Proton (by default) next to the install folder. On the default Steam library folder it is located at <code>~/.steam/steam/steamapps/compatdata/720620/pfx/drive_c/</code> with the rest of the Windows folder structure being in there. If you have installed TaleSpire to another library location the <code>compatdata</code> folder will be in there.
     </p>
 
     <h3 id="dev-workflow">Development Workflow</h3>
@@ -140,7 +140,7 @@
     </ul>
 
     <h3 id="reverse-domain-name">API reverse domain name</h3>
-    By default the API functions are accessible under the <code>TS</code> object, which is an alias for <code>com.bouncyrock.talespire</code>. It may be that this short alias has name conflicts on an existing webpage not made with TaleSpire/Symbiotes in mind, which is why it can be disabled in the <a href="#manifest-docs">manifest</a>. All functions can be accessed by calling <code>com.bouncyrock.talespire.functionKind.theFunctionYouWantToCall</code> instead.
+    By default the API functions are accessible under the <code>TS</code> object, which is an alias for <code>com.bouncyrock.talespire</code>. It may be that this short alias has name conflicts on an existing webpage not made with TaleSpire/Symbiotes in mind, which is why it can be disabled in the <a href="#manifest-docs">manifest</a>. All functions can be accessed by calling <code>com.bouncyrock.talespire.functionCategory.theFunctionYouWantToCall</code> instead.
 
     <h3 id="rate-limiting">Rate limiting</h3>
     <p>
@@ -201,6 +201,7 @@
             If the string <code>colorStyles</code> is added to extras, TaleSpire injects a number of CSS variables defining the TaleSpire color scheme, which we highly recommend if you're trying to create a Symbiote that is supposed to fit in with the rest of the UI. This provides easy access to the exact colors TaleSpire's UI uses and they'll be updated with TaleSpire to keep your Symbiote fitting in at no extra work for you. This also allows users to change the UI theme to for example switch to a high contrast theme and have all the Symbiotes adapt to that.<br>
             The color descriptions provide info which colors should be used together - you can of course mix and match them in other ways, but please always check any combination with your favorite contrast checker tool. You should aim for a contrast of at least 4.5, though 7 or more is preferable as it helps with legibility, especially for visually impaired people. We don't always achieve this ourselves, but we'll try our best to improve on that front.
         </p>
+        <div class="note">The theme switching UI is not completed yet and will be released at a later time. This means Symbiotes will only load with the default theme for now. If you want to test the high contrast theme you can edit the CSS vars to point to that theme in the browser dev console manually.</div>
         <p>
             While you can use colors in "any way you want", do not completely misuse a color against its name or description, like using a background color in the foreground. Even if it might look fine now, if we update the color palette it may lead to bad looking or even unreadable Symbiotes. If there is a color missing for what you want to do it is better to create your own color than to "misuse" an existing theme color for something it is not intended for.
         </p>

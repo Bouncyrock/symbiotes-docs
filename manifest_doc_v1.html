@@ -37,19 +37,19 @@
   },
   "api": { <label>Information on the <a href="index.html#api-docs">Symbiote API</a>. If left out no API is injected.</label>
     "version": "string" <label>Which version of the API to include. Needed to inject anything. <a href="index.html#api-docs">Available versions</a>.</label>
-    "initializeEarly": boolean <label>Whether to wait for DOM loading to finish to trigger <a href="index.html#starting-symbiote">hasInitialized event</a>.</label>
-    "doNotUseNickname": boolean <label>If true, excludes the "TS" alias for com.bouncyrock.talespire, defaults to false.</label>
+    "initializeEarly": bool <label>If true, <a href="index.html#starting-symbiote">hasInitialized event</a> won't wait for DOM load to finish, defaults to false.</label>
+    "doNotUseNickname": bool <label>If true, excludes the "TS" alias for com.bouncyrock.talespire, defaults to false.</label>
     "initTimeout": 10 <label>Seconds to trigger onStateChangeEvent "hasInitalized" even if API init did not finish.</label>
     "subscriptions": { <label>Which events you want to subscribe to. API version necessary to have an effect.</label>
-      "kind": { <label>Which kind (type) of events you are interested in. See <a href="index.html#api-docs">API docs</a> for available subscriptions.</label>
+      "category": { <label>Which category of events you are interested in. See <a href="index.html#api-docs">API docs</a> for available subscriptions.</label>
         "eventSource": "myEventHandlerFunction" <label>Which event you want to listen to with which function.</label>
       } <label>Any number of event sources can be subscribed to by adding more entries. See <a href="#info-subscriptions">here</a> for more info.</label>
     },
   },
   "controls": { <label>Which UI controls to display.</label>
-    "reload": boolean <label>Whether to show reload button (true/false)</label>
-    "navigation": boolean <label>Whether to show forwards/backwards button (true/false)</label>
-    "tabs": boolean <label>Whether to show tab bar within Symbiote (true/false). NOT IMPLEMENTED!</label>
+    "reload": bool <label>Whether to show reload button (true/false)</label>
+    "navigation": bool <label>Whether to show forwards/backwards button (true/false)</label>
+    "tabs": bool <label>Whether to show tab bar within Symbiote (true/false). NOT IMPLEMENTED!</label>
   },
   "interop": {
     "id": <label>The <a href="#info-uuid">ID</a> for communication. Needed to use "sync" calls in the API.</label>
@@ -62,10 +62,10 @@
   "environment": { <label>Contains a number of customizations for the Symbiote environment.</label>
     "webViewBackgroundColor": "hexcode" <label>Color hex code for the web view background to eliminate <a href="#loading-flicker">flickering</a>.</label>
     "capabilities": [ <label>Array of capabilities that the Symbiote has.</label>
-      "string" <label>See <a href="info-capabilities">here</a> for possible entries.</label>
+      "string" <label>See <a href="#info-capabilities">here</a> for possible entries.</label>
     ],
     "extras": [ <label>Array of extras that TaleSpire injects into the Symbiote.</label>
-      "string" <label>See <a href="info-extras">here</a> for possible entries.</label>
+      "string" <label>See <a href="#info-extras">here</a> for possible entries.</label>
     ]
   }
 }
@@ -96,7 +96,7 @@
 
 <h2 id="info-subscriptions">Subscriptions</h2>
 <p>
-    Events are categorized into different kinds and event sources. The event source is what a Symbiote subscribes to - the event itself gets delivered by the event source to the specified handler function. The separation into kinds allows for more convenient organization. To give a practical example based on the <code><a href="api_doc_v0_1.md.html#subscriptions/symbiote/onvisibilityevent">onVisibilityEvent</a></code> event source from API version 0.1: <code>symbiote</code> is the subscription "kind", while <code>onVisibilityEvent</code> is the "event source". This event source provides the two events <code>hasBecomeVisible</code> and <code>hasBecomeHidden</code>. If you subscribe to <code>onVisibilityEvent</code> your event handler will receive all events from that source, but not from any other event sources. For example even though it's also part of the <code>symbiote</code> kind, you need to subscribe to <code>onStateChangeEvent</code> separately if you want its events.
+    Events are organized into different categories and event sources. The event source is what a Symbiote subscribes to - the event itself gets delivered by the event source to the specified handler function. To give a practical example based on the <code><a href="api_doc_v0_1.md.html#subscriptions/symbiote/onvisibilityevent">onVisibilityEvent</a></code> event source from API version 0.1: <code>symbiote</code> is the subscription "category", while <code>onVisibilityEvent</code> is the "event source". This event source provides the two events <code>hasBecomeVisible</code> and <code>hasBecomeHidden</code>. If you subscribe to <code>onVisibilityEvent</code> your event handler will receive all events from that source, but not from any other event sources. For example even though it's also part of the <code>symbiote</code> category, you need to subscribe to <code>onStateChangeEvent</code> separately if you want its events.
 </p>
 <p>
     All events return their data in the following structure:
@@ -104,13 +104,13 @@
     kind: &lt;kind&gt;,
     payload: &lt;data&gt;
 }</pre>
-    Where "kind" is the actual event, for our example either <code>hasBecomeVisible</code> or <code>hasBecomeHidden</code>, allowing the event handler to know which event it was that was triggered and "payload" is the actual data - whether it is a single value, an object or an array - that is documented in the <a href="index.html#api-docs"></a>
+    Where "kind" is the actual event, for our example either <code>hasBecomeVisible</code> or <code>hasBecomeHidden</code>, allowing the event handler to know which event it was that was triggered and "payload" is the actual data that is documented in the <a href="index.html#api-docs"></a>.
 </p>
 <p>
     Event handlers cannot be stored in a scoped variable like <code>let foo = function() { ... }</code>, as that is not visible to the API invoking the handler and delivery of the event will fail.
 </p>
 
-<h2 id="info-icons">Icons</h2>
+<h2 id="info-icons">Symbiote Icons</h2>
 <p>
     You can define different icons for different sizes, however, right now the only size available is 64x64px. Icons must be PNG.
 </p>
@@ -211,7 +211,7 @@ There is not one "maximal" manifest, that contains "all" the features as some en
     "manifestVersion": 1,
     "name": "Super complex Symbiote",
     "summary": "This is a very complex and feature rich Symbiote",
-    "descriptionFilePath": "your_readme.md",
+    "descriptionFilePath": "/your_readme.md",
     "entryPoint": "/my_index.html"
     "api": {
         "version": "0.1",
