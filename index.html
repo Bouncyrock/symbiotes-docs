@@ -158,8 +158,12 @@
 
     <h3 id="injection">Injection</h3>
     <p>
-        Everything that TaleSpire is told to inject by the <a href="#manifest-docs">manifest</a> is concatenated into one file and then injected at once. This guarantees the order of injection to be stable and dependable. The API is always the first in the file, meaning all other injections specified in the extras array can depend on the API already existing (though it may not be done initializing yet!).
-        Everything in the extras array is injected in order of the occurrence in the array. The order should not matter for most cases, but for example if a .js injection edits one of the built-in extras like eg: Dice Finder, it needs to be injected after Dice Finder.
+        If an API version is specified in the <a href="#manifest-docs">manifest</a>, it is injected by TaleSpire. After this, each extra specified in the extras array in the <a href="#manifest-docs">manifest</a> is injected individually in order of the array. Finally, if the API was injected the API initialization starts. This guarantees that:
+        <ul>
+            <li>you can rely on the API existing (but not initialized) in your injected code,</li>
+            <li>you can rely on your injected code to be able to listen to and receive the <code>hasInitialized</code> event, and</li>
+            <li>you can rely on injections later in the extras array being able to see and edit previous injections like for example: Adding extra regexes to the Dice Finder extra by injecting a .js file after injecting dice finder.</li>
+        </ul>
     </p>
     <p>
         Scripts loaded by the HTML file itself are loaded according to normal browser behavior which can be before DOMContentLoaded and before API injection. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script">Deferring</a> or setting an <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event">event listener for onLoad</a> can be used to ensure they are loaded at the appropriate time. The <code>hasInitialized</code> event is fired as soon as the API has finished loading and the communication between TaleSpire and the embedded browser is running.
