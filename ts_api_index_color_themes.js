@@ -10,7 +10,7 @@ function createColorPreview() {
     themeSelector.id = "theme-selector";
     themeSelector.setAttribute("onchange", "updateColorPreview(event)");
     let container = document.getElementById("theme-section-container");
-    container.insertBefore(themeSelector, themeSection.nextSibling);
+    container.prepend(themeSelector);
 
     //todo: this code currently doesn't clean up after itself in case of theme updates
     let colors = document.querySelectorAll("li[id^=--ts-]");

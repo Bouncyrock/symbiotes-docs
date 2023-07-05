@@ -197,6 +197,18 @@ a.deprecated::after {
     font-style: normal;
 }
 
+.question::before {
+    content: "Q:";
+    margin-right: 0.5em;
+    font-weight: bold;
+}
+
+.answer::before {
+    content: "A: ";
+    margin-right: 0.5em;
+    font-weight: bold;
+}
+
 .color-preview {
     max-width: fit-content;
     padding: 0.2em 0.8em 0.2em 0.8em;
@@ -276,15 +288,52 @@ select {
     transition: ease-in-out 0.1s;
 }
 
-select:hover {
+select:hover, button:hover {
     background-color: var(--ts-background-primary);
     transition: ease-in-out 0.2s;
 }
 
-select:focus-visible {
+select:focus-visible, button:focus-visible {
     outline: 3px solid var(--ts-accessibility-focus);
     outline-offset: -1px;
     background-color: var(--ts-background-primary);
+}
+
+summary {
+    width: fit-content;
+    background-color: var(--ts-background-tertiary);
+    color: var(--ts-color-primary);
+    font-size: 1em;
+    cursor: pointer;
+    user-select: none;
+    padding: 0.5em 1em 0.5em 1em;
+
+    border: 1px solid var(--ts-border-accessibility);
+    border-radius: 4px;
+    transition: 0.2s ease-in-out;
+}
+
+summary:hover {
+    color: var(--ts-accent-primary);
+    transition: 0.1s ease-in-out;
+}
+
+details[open] > summary {
+    border-radius: 4px 4px 0 0;
+    transition: 0.1s ease-in-out;
+}
+
+div.collapse-content {
+    transition: 0.1s ease-in-out;
+
+    padding: 0.3em 1em 0.3em 1em;
+
+    border: 1px solid var(--ts-background-tertiary);
+    border-radius: 0 8px 8px 8px;
+}
+
+details[open] > div.collapse-content {
+    transition: 0.2s ease-in-out;
 }
 
 img {
@@ -293,6 +342,7 @@ img {
     margin-right: auto;
     margin-bottom: 1em;
     max-width: 80%;
+    max-height: 80vh;
 }
 
 /*vuplex dropdown styling*/
