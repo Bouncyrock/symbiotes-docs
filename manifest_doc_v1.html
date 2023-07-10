@@ -29,30 +29,29 @@
   "version": "1.0-alpha2 Electric Boogaloo", <label>The version of the Symbiote. Free text field</label>
   "license": "xyz", <label>Which - if any - license you want to publish your Symbiote under.</label>
   "about": {
-    "website": "https://example.com" <label>A <a href="#remote-urls">website</a> for your Symbiote. eg: GitHub link, your portfolio, ...</label>
+    "website": "https://example.com", <label>A <a href="#remote-urls">website</a> for your Symbiote. eg: GitHub link, your portfolio, ...</label>
     "authors": [ <label>A list of authors. Enter as few or as many as you like</label>
       "Jane Doe", <label>Your name(s)! Look at you go!</label>
       "John Doe"
     ]
   },
   "api": { <label>Information on the <a href="index.html#api-docs">Symbiote API</a>. If left out no API is injected.</label>
-    "version": "string" <label>Which version of the API to include. Needed to inject anything. <a href="index.html#api-docs">Available versions</a>.</label>
-    "initializeEarly": bool <label>If true, <a href="index.html#starting-symbiote">hasInitialized event</a> won't wait for DOM load to finish, defaults to false.</label>
-    "doNotUseNickname": bool <label>If true, excludes the "TS" alias for com.bouncyrock.talespire, defaults to false.</label>
-    "initTimeout": 10 <label>Seconds to trigger onStateChangeEvent "hasInitalized" even if API init did not finish.</label>
+    "version": "string", <label>Which version of the API to include. Needed to inject anything. <a href="index.html#api-docs">Available versions</a>.</label>
+    "initializeEarly": bool, <label>If true, <a href="index.html#starting-symbiote">hasInitialized event</a> won't wait for DOM load to finish, defaults to false.</label>
+    "doNotUseNickname": bool, <label>If true, excludes the "TS" alias for com.bouncyrock.talespire, defaults to false.</label>
+    "initTimeout": 10, <label>Seconds to trigger onStateChangeEvent "hasInitalized" even if API init did not finish.</label>
     "subscriptions": { <label>Which events you want to subscribe to. API version necessary to have an effect.</label>
       "category": { <label>Which category of events you are interested in. See <a href="index.html#api-docs">API docs</a> for available subscriptions.</label>
         "eventSource": "myEventHandlerFunction" <label>Which event you want to listen to with which function.</label>
       } <label>Any number of event sources can be subscribed to by adding more entries. See <a href="#info-subscriptions">here</a> for more info.</label>
     },
+    "interop": {
+        "id": <label>The <a href="#info-uuid">ID</a> for communication. Needed to use "sync" calls in the API.</label>
+    }
   },
   "controls": { <label>Which UI controls to display.</label>
-    "reload": bool <label>Whether to show reload button (true/false)</label>
-    "navigation": bool <label>Whether to show forwards/backwards button (true/false)</label>
-    "tabs": bool <label>Whether to show tab bar within Symbiote (true/false). NOT IMPLEMENTED!</label>
-  },
-  "interop": {
-    "id": <label>The <a href="#info-uuid">ID</a> for communication. Needed to use "sync" calls in the API.</label>
+    "reload": bool, <label>Whether to show reload button (true/false)</label>
+    "navigation": bool <label>Whether to show forwards/backwards button (true/false)</label><!--"tabs": bool <label>Whether to show tab bar within Symbiote (true/false). NOT IMPLEMENTED!</label>-->
   },
   "kind": "string", <label>The Symbiote kind. Possible values: "webView". Defaults to "webView".</label>
   "icons": { <label>Symbiote icons for use in various places in UI. See <a href="#info-icons">here</a> for more information.</label>
@@ -60,7 +59,7 @@
     "notification": "string" <label>Path to the icon used for notifications from the Symbiote.</label>
   },
   "environment": { <label>Contains a number of customizations for the Symbiote environment.</label>
-    "webViewBackgroundColor": "hexcode" <label>Color hex code for the web view background to eliminate <a href="#loading-flicker">flickering</a>.</label>
+    "webViewBackgroundColor": "hexcode", <label>Color hex code for the web view background to eliminate <a href="#loading-flicker">flickering</a>.</label>
     "capabilities": [ <label>Array of capabilities that the Symbiote has.</label>
       "string" <label>See <a href="#info-capabilities">here</a> for possible entries.</label>
     ],
