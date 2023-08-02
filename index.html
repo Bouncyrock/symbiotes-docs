@@ -362,13 +362,13 @@
     </p>
 
     <h3 class="question"> Can I make a Symbiote that shows different UI for players and GMs?</h3>
-    <p class="answer">Yes! You can either query `TS.players` to see whether the player running the Symbiote has GM permission (`canGM` is set to true), or `TS.clients` to see if the game client is currently in GM view or player view (regardless of the permission the player has) - whatever you need</p>
+    <p class="answer">Yes! You can either query <code>TS.players</code> to see whether the player running the Symbiote has GM permission (<code>canGM</code> is set to true), or <code>TS.clients</code> to see if the game client is currently in GM view or player view (regardless of the permission the player has) - whatever you need</p>
 
     <h3 class="question">Can two Symbiotes talk to each other?</h3>
     <p class="answer">
         There's two cases here:
         <ol>
-            <li>The same Symbiote across two different clients (= two players having the same Symbiote open) - Yes, these can communicate. They just need to have an interop ID set and then they can use `TS.sync` calls</li>
+            <li>The same Symbiote across two different clients (= two players having the same Symbiote open) - Yes, these can communicate. They just need to have an interop ID set and then they can use <code>TS.sync</code> calls</li>
             <li>Two different Symbiotes on the same machine - No they cannot communicate directly. The Symbiotes API doesn't allow for direct communication between two Symbiotes with different interop IDs (and there mustn't be two Symbiotes with the same interop ID on the same client). If you have a use case for this do let us know about it!</li>
         </ol>
     </p>

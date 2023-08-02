@@ -60,6 +60,7 @@
   },
   "environment": { <label>Contains a number of customizations for the Symbiote environment.</label>
     "webViewBackgroundColor": "hexcode", <label>Color hex code for the web view background to eliminate <a href="#loading-flicker">flickering</a>.</label>
+    "loadTargetBehavior": "string", <label>How <a href="#link-new-tab-behavior">opening links</a> in new tabs should behave. Defaults to "currentTab".</label>
     "capabilities": [ <label>Array of capabilities that the Symbiote has.</label>
       "string" <label>See <a href="#info-capabilities">here</a> for possible entries.</label>
     ],
@@ -78,6 +79,11 @@
 <h2 id="remote-urls">Remote URLs</h2>
 <p>
     All URLs used in the manifest need to be complete, including a scheme and a <a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">fully qualified domain name</a>. For example <code>example.com</code> and <code>www.example.com</code> are not valid URLs, <code>https://example.com</code> on the other hand is valid.
+</p>
+
+<h2 id="info-optional">Meaning of "Optional"</h2>
+<p>
+    While the vast majority of fields are optional, this does not mean they are unnecessary. To use certain features in your Symbiote those fields have to be specified; For example without a "version" defined in the "api" section, the <a href="index.html#api-docs">Symbiotes API</a> will not be injected. Similarly, without the interop ID specified no <code>sync</code> messages can be sent via the API.
 </p>
 
 <h2 id="info-uuid">UUIDv4</h2>
@@ -122,9 +128,18 @@
     TaleSpire defaults the web view background color to white for compatibility with external websites, however this can lead to flickering when a Symbiote with dark background loads. With <code>webViewBackgroundColor</code> you tell TaleSpire explicitly which color to use instead of white. Colors are set by using their hex code (including the hash <code>#</code>) using either the 3 digit hex or 6 digit hex: <code>#123</code>, <code>#123456</code>. The body background color in your style sheets takes priority over this setting and will be visible over this once loaded.
 </p>
 
-<h2 id="info-optional">Meaning of "Optional"</h2>
+
+<h2 id="link-new-tab-behavior">Behavior on loading pages</h2>
 <p>
-    While the vast majority of fields are optional, this does not mean they are unnecessary. To use certain features in your Symbiote those fields have to be specified; For example without a "version" defined in the "api" section, the <a href="index.html#api-docs">Symbiotes API</a> will not be injected. Similarly, without the interop ID specified no <code>sync</code> messages can be sent via the API.
+    Opening links or loading a page using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open#target">window.open()</a> can be set to open in a new browser tab using the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target">_blank target</a>. By default all pages that are loaded are loaded by the currently active tab (<code>_blank</code> behaves as if it was <code>_self</code>). With the <code>loadTargetBehavior</code> field you can choose between different behaviors by setting it to one of the following strings:
+</p>
+<ul>
+    <li><code>none</code>: Opened links with target <code>_blank</code> get suppressed and not loaded at all.</li>
+    <li><code>currentTab</code>: Opened links with target <code>_blank</code> get opened in the currently active tab instead (behaves like <code>_self</code>). This is the default behavior.</li>
+    <li><code>popup</code>: Opened links with target <code>_blank</code> get opened in a popup.</li>
+</ul>
+<p>
+    The <code>popup</code> behavior may be necessary in case websites need to open something in a different tab than the original one to for example have a separate login page due to third party authentication like Google login.
 </p>
 
 <h2 id="info-capabilities">Details to capabilities</h2>
@@ -177,7 +192,7 @@ In the following there's a few examples of the simplest possible manifests.
     "manifestVersion": 1,
     "name": "Local Symbiote",
     "summary": "A cool summary",
-    "entryPoint": "/my_index.html"
+    "entryPoint": "/my_index.html",
     "api": {
         "version": "0.1",
         "initTimeout": 10,
@@ -211,7 +226,7 @@ There is not one "maximal" manifest, that contains "all" the features as some en
     "name": "Super complex Symbiote",
     "summary": "This is a very complex and feature rich Symbiote",
     "descriptionFilePath": "/your_readme.md",
-    "entryPoint": "/my_index.html"
+    "entryPoint": "/my_index.html",
     "api": {
         "version": "0.1",
         "initTimeout": 10,
@@ -237,7 +252,7 @@ There is not one "maximal" manifest, that contains "all" the features as some en
     "icons": {
         "64x64": "/cool_icon.png",
         "notification": "/cool_notification_icon.png"
-    }
+    },
     "environment": {
         "capabilities": [
             "playAudio",
