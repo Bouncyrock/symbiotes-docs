@@ -77,6 +77,17 @@ body#md {
     transition: padding 0.2s ease-in-out;
 }
 
+#back-home {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    background-color: var(--ts-background-secondary);
+    border-bottom: 1px solid var(--ts-color-secondary);
+    text-align: center;
+}
+
 /*body.scrolled .deprecated-disclaimer {
     padding: 0;
     transition: padding 0.2s ease-in-out;
@@ -129,11 +140,12 @@ a:link:hover, a:visited:hover {
     display: none;
 }
 
-.md .longTOC .level1 {
-    font-weight: 300;
-    padding-top: 0;
-    margin-top: 10px;
-    margin-bottom: -30px;
+.md .target {
+    scroll-margin-top: 40px;
+}
+
+.md .level1 {
+    font-size: 1.5em;
 }
 
 .md .level2, .md h2 {
@@ -155,7 +167,8 @@ a:link:hover, a:visited:hover {
 }
 
 .md div.title {
-    font-size: 43px;
+    margin-top: 40px;
+    font-size: 3em;
     text-align: left;
     margin-bottom: 0px;
 }
@@ -166,9 +179,7 @@ a:link:hover, a:visited:hover {
 }
 
 .md div.afterTitles {
-    margin-top: 20px;
-    margin-left: -20px;
-    margin-right: -20px;
+    margin: 20px -20px 10px -20px;
     height: 0px;
     border-bottom: 2px solid #000;
     box-shadow: 0px 1px 2px rgba(0,0,0,0.5);

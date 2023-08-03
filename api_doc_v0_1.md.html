@@ -655,7 +655,7 @@ none
 - invalidPlayerId
 **Description**
 
-Sends the text specified in `message` to the given `target` via chat. Target can be either a single player fragment or player ID (not client ID) or one of the following keywords: "gms", "board", "campaign" which send to all GMs, all players on the current board or all players online respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. Received chat messages trigger the `chatMessageReceived` event from the [onChatEvent](#subscriptions/chat/onchatevent) event source.
+Sends the text specified in `message` to the given `target` via chat. Target can be either a single player fragment or player ID (not client ID) or one of the following keywords: "gms", "board", "campaign" which send to all GMs, all players on the current board or all players online respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. Received chat messages trigger the `chatMessageReceived` event from the [onChatMessage](#subscriptions/chat/onchatmessage) event source.
 
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
@@ -675,7 +675,7 @@ none
 
 **Description**
 
-Sends chat messages to several players at once. Can either be provided with an array of player fragments or array of player IDs. Useful if you want to target several players with the same message, if you want to send the same message to all players you can instead use [chat.send](#chat/send) with the target "board" or "campaign". The target keywords used in [chat.send](#chat/send) don't work here. Received chat messages trigger the `chatMessageReceived` event from the [onChatEvent](#subscriptions/chat/onchatevent) event source.
+Sends chat messages to several players at once. Can either be provided with an array of player fragments or array of player IDs. Useful if you want to target several players with the same message, if you want to send the same message to all players you can instead use [chat.send](#calls/chat/send) with the target "board" or "campaign". The target keywords used in [chat.send](#calls/chat/send) don't work here. Received chat messages trigger the `chatMessageReceived` event from the [onChatMessage](#subscriptions/chat/onchatmessage) event source.
 
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
@@ -701,7 +701,7 @@ none
 - insufficientRights
 **Description**
 
-Sends a chat message as the specified creature. Creatures can either be specified by their ID, or by their fragment object which is returned by any of the functions returning creatures, like getCreaturesInParty or getSelectedCreatures. Message and target work the same as with the [chat.send](#chat/send) function call.
+Sends a chat message as the specified creature. Creatures can either be specified by their ID, or by their fragment object which is returned by any of the functions returning creatures, like getCreaturesInParty or getSelectedCreatures. Message and target work the same as with the [chat.send](#calls/chat/send) function call.
 
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
@@ -726,7 +726,7 @@ none
 - insufficientRights
 **Description**
 
-Sends chat messages to several players at once as the specified creature. See [chat.sendAsCreature](#chat/sendascreature) for how to specify the creature to speak as. Message and target work the same as with the [chat.multiSend](#chat/send) function call. Received chat messages trigger the `chatMessageReceived` event from the [onChatEvent](#subscriptions/chat/onchatevent) event source.
+Sends chat messages to several players at once as the specified creature. See [chat.sendAsCreature](#calls/chat/sendascreature) for how to specify the creature to speak as. Message and target work the same as with the [chat.multiSend](#calls/chat/multisend) function call. Received chat messages trigger the `chatMessageReceived` event from the [onChatMessage](#subscriptions/chat/onchatmessage) event source.
 
 Chat allows for rich text formatting within the feature set of Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
 
@@ -811,7 +811,7 @@ Array[[contentPackFragment](#types/contentpackfragment)]
 
 **Description**
 
-Returns a list of all currently loaded content packs as fragments. Content packs can be loaded in and out at runtime (see [contentPacks.onContentPackChange](#contentpacks/oncontentpackchange)) as a preparation for asset modding support, currently the official asset packs are all loaded at the start.
+Returns a list of all currently loaded content packs as fragments. Content packs can be loaded in and out at runtime (see [contentPacks.onContentPackChange](#subscriptions/contentpacks/oncontentpackchange)) as a preparation for asset modding support, currently the official asset packs are all loaded at the start.
 
 <br><br>
 ### `getMoreInfo`
@@ -846,8 +846,8 @@ Returns the all content pack elements (all tiles, props, minis, music, ...) for 
 
 **Description**
 
-Takes a board object fragment or ID, as well as a list of contentPacksInfos to find the specified board object in the packs. A board object is a tile, prop or mini and the ID or fragment can for example be found by parsing a slab received from [slabs.getSlabInActiveSelection](slabs/getslabinactiveselection).
-contentPacksInfos can be queried by calling [contentPacks.getMoreInfo](#contentpacks/getmoreinfo).
+Takes a board object fragment or ID, as well as a list of contentPacksInfos to find the specified board object in the packs. A board object is a tile, prop or mini and the ID or fragment can for example be found by parsing a slab received from [slabs.getSlabInActiveSelection](#calls/slabs/getslabinactiveselection).
+contentPacksInfos can be queried by calling [contentPacks.getMoreInfo](#calls/contentpacks/getmoreinfo).
 This function will only search through content packs that are provided, which means that you can search through only a subset of content packs by passing it an array of content packs that don't include all content packs. If the specified board object is not found in any of the provided packs, it will return a notFound error.
 
 <br><br>
@@ -866,7 +866,7 @@ object
 
 **Description**
 
-Creates a DOM element showing the library thumbnail for the specified board object (= tile, prop or mini). Optionally allows a size to be set, defaults to 128x128px. The board object info can be found in the content packs returned by [contentPacks.getMoreInfo](#contentpacks/getmoreinfo), though a helper function for searching through content packs is also provided: [contentPacks.findBoardObjectInPacks](#contentpacks/findboardobjectinpacks).
+Creates a DOM element showing the library thumbnail for the specified board object (= tile, prop or mini). Optionally allows a size to be set, defaults to 128x128px. The board object info can be found in the content packs returned by [contentPacks.getMoreInfo](#calls/contentpacks/getmoreinfo), though a helper function for searching through content packs is also provided: [contentPacks.findBoardObjectInPacks](#calls/contentpacks/findboardobjectinpacks).
 The return element is a DOM element that can be added into the DOM with various JS functions, for example: [appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild) or [prepend](https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend).
 
 <br><br>
@@ -1030,7 +1030,7 @@ Array[[rollDescriptor](#types/rolldescriptor)]
 
 **Description**
 
-Takes a dice roll string and returns an array of intermediate descriptor objects for use in [dice.putDiceInTray](#dice/putdiceintray). Each array entry corresponds to one dice group (separated by a forward slash `/`) See [dice.isValidRollString](#dice/isvalidrollstring) for more info on what a roll string is.
+Takes a dice roll string and returns an array of intermediate descriptor objects for use in [dice.putDiceInTray](#calls/dice/putdiceintray). Each array entry corresponds to one dice group (separated by a forward slash `/`) See [dice.isValidRollString](#calls/dice/isvalidrollstring) for more info on what a roll string is.
 
 <br><br>
 ### `evaluateDiceResultsGroup`
@@ -1078,7 +1078,7 @@ string
 - invalidRollId
 **Description**
 
-Sends a dice result for the TaleSpire UI to display. resultGroups is structured identically to a native dice roll result like could be returned from the [dice.rollResults](#dice/rollresults) event source. Can optionally specify a rollId that can correspond to a dice roll within TaleSpire, like one that was created by [dice.putDiceInTray](#dice/putdiceintray). If not specified it is treated as a "new" dice roll and has no association to any dice on the board. All dice results that were sent using this function have an indicator in the UI that show this dice result was sent by a Symbiote which allows GMs to differentiate between known good rolls done from within TaleSpire and results that a player could have tampered with (like for example by always sending a dice result that has a specific value instead of a random result).
+Sends a dice result for the TaleSpire UI to display. resultGroups is structured identically to a native dice roll result like could be returned from the [dice.onRollResults](#subscriptions/dice/onrollresults) event source. Can optionally specify a rollId that can correspond to a dice roll within TaleSpire, like one that was created by [dice.putDiceInTray](#calls/dice/putdiceintray). If not specified it is treated as a "new" dice roll and has no association to any dice on the board. All dice results that were sent using this function have an indicator in the UI that show this dice result was sent by a Symbiote which allows GMs to differentiate between known good rolls done from within TaleSpire and results that a player could have tampered with (like for example by always sending a dice result that has a specific value instead of a random result).
 
 <br><br>
 ### `putDiceInTray`
@@ -1103,11 +1103,11 @@ string
 - notInBoard
 **Description**
 
-Puts a dice roll specified by an array of roll descriptors into the tray ready for the player to roll. If hideResults is set to true, the result of the roll will not be shown and will also not be visible to players in the chat history. GMs will have an indicator of when a roll with hidden results has happened that they can click to see the results of this roll. This is meant to work in conjunction with [dice.sendDiceResult](#dice/senddiceresult) so Symbiotes can "override" the roll result, while retaining the GMs ability to cross check what was rolled and what was reported to be the result, because Symbiotes can report any result they like and as such could be used to cheat rolls.
+Puts a dice roll specified by an array of roll descriptors into the tray ready for the player to roll. If hideResults is set to true, the result of the roll will not be shown and will also not be visible to players in the chat history. GMs will have an indicator of when a roll with hidden results has happened that they can click to see the results of this roll. This is meant to work in conjunction with [dice.sendDiceResult](#calls/dice/senddiceresult) so Symbiotes can "override" the roll result, while retaining the GMs ability to cross check what was rolled and what was reported to be the result, because Symbiotes can report any result they like and as such could be used to cheat rolls.
 
-Returns a rollId used to keep track of this specific roll in the future. Any subsequent roll of these dice will use this rollId, as well as the "rollCleared" event of [dice.rollResults](#dice/rollresults).
+Returns a rollId used to keep track of this specific roll in the future. Any subsequent roll of these dice will use this rollId, as well as the "rollCleared" event of [dice.onRollResults](#subscriptions/dice/onrollresults).
 
-Once the dice have been rolled their result can be read from the `rollResults` event from the [onRollResults](#subscriptions/dice/onrollresults) event source.
+Once the dice have been rolled their result can be read from the `rollResults` event from the [dice.onRollResults](#subscriptions/dice/onrollresults) event source.
 
 <br><br>
 ## initiative
@@ -1152,7 +1152,7 @@ none
 - dataTooLarge
 **Description**
 
-Stores the given string of data in a file in the Symbiote's directory. The text given can be formatted as needed; plain text, JSON, XML, etc. Text size is limited to 5MB. All [localStorage.global](#localstorage/global) access the same file in storage, no matter which campaign is currently active. If campaign specific storage is needed (eg: to have data that is only available in one campaign) see [localStorage.campaign](#localstorage/campaign) Similar to [localStorage.global.getBlob](#localstorage/global/getblob) running several instances of TaleSpire at the same time on the same machine (with the same Symbiote loaded in both of them) can lead to race conditions when storing/reading data from local storage, meaning there is no guarantee for order or atomicity of operations which can lead to inconsistent data being read or unknowingly overwriting changes from the other instance.
+Stores the given string of data in a file in the Symbiote's directory. The text given can be formatted as needed; plain text, JSON, XML, etc. Text size is limited to 5MB. All [localStorage.global](#calls/localstorage/global) calls access the same file in storage, no matter which campaign is currently active. If campaign specific storage is needed (eg: to have data that is only available in one campaign) see [localStorage.campaign](#calls/localstorage/campaign) Similar to [localStorage.global.getBlob](#calls/localstorage/global/getblob) running several instances of TaleSpire at the same time on the same machine (with the same Symbiote loaded in both of them) can lead to race conditions when storing/reading data from local storage, meaning there is no guarantee for order or atomicity of operations which can lead to inconsistent data being read or unknowingly overwriting changes from the other instance.
 Even global data is still scoped with the Symbiote, meaning a Symbiote can only ever read or write its own data and has no access to the data of other Symbiotes.
 
 <br><br>
@@ -1171,7 +1171,7 @@ string
 - readFailed
 **Description**
 
-Retrieves the locally stored global data for this Symbiote. Returns the same string of data as has been set with [localStorage.global.setBlob](#localstorage/global/setblob). If several instances of TaleSpire are running on the same machine race conditions between them can happen. See [localStorage.global.setBlob](#localstorage/global/setblob) for more info on that.
+Retrieves the locally stored global data for this Symbiote. Returns the same string of data as has been set with [localStorage.global.setBlob](#calls/localstorage/global/setblob). If several instances of TaleSpire are running on the same machine race conditions between them can happen. See [localStorage.global.setBlob](#calls/localstorage/global/setblob) for more info on that.
 
 <br><br>
 #### `deleteBlob`
@@ -1189,7 +1189,7 @@ none
 - deleteFailed
 **Description**
 
-Deletes the locally stored global data for this Symbiote. Does not affect campaign scoped data, to delete that, see [localStorage.campaign.deleteBlob](#localstorage/campaign/deleteblob)
+Deletes the locally stored global data for this Symbiote. Does not affect campaign scoped data, to delete that, see [localStorage.campaign.deleteBlob](#calls/localstorage/campaign/deleteblob)
 
 <br><br>
 ### campaign
@@ -1214,7 +1214,7 @@ none
 - dataTooLarge
 **Description**
 
-Stores the given string of data in a file in the Symbiote's directory. The text given can be formatted as needed; plain text, JSON, XML, etc. Text size is limited to 5MB. All [localStorage.campaign](#localstorage/campaign) calls are scoped by the campaign that is currently active, meaning there is a separate set of files per campaign. If global storage is needed (eg: to have some data available in all campaigns) see [localStorage.global](#localstorage/global) Similar to [localStorage.campaign.getBlob](#localstorage/campaign/getblob) running several instances of TaleSpire at the same time on the same machine (with the same Symbiote loaded in both of them) can lead to race conditions when storing/reading data from local storage, meaning there is no guarantee for order or atomicity of operations which can lead to inconsistent data being read or unknowingly overwriting changes from the other instance.
+Stores the given string of data in a file in the Symbiote's directory. The text given can be formatted as needed; plain text, JSON, XML, etc. Text size is limited to 5MB. All [localStorage.campaign](#calls/localstorage/campaign) calls are scoped by the campaign that is currently active, meaning there is a separate set of files per campaign. If global storage is needed (eg: to have some data available in all campaigns) see [localStorage.global](#calls/localstorage/global) Similar to [localStorage.campaign.getBlob](#calls/localstorage/campaign/getblob) running several instances of TaleSpire at the same time on the same machine (with the same Symbiote loaded in both of them) can lead to race conditions when storing/reading data from local storage, meaning there is no guarantee for order or atomicity of operations which can lead to inconsistent data being read or unknowingly overwriting changes from the other instance.
 Campaign data is additionally scoped with the Symbiote, meaning a Symbiote can only ever read or write its own data and has no access to the data of other Symbiotes even if they are both open in the same campaign.
 
 
@@ -1235,7 +1235,7 @@ string
 - notInCampaign
 **Description**
 
-Retrieves the locally stored data attached to the currently active campaign for this Symbiote. Returns the same string of data as has been set with [localStorage.campaign.setBlob](#localstorage/campaign/setblob). If several instances of TaleSpire are running on the same machine race conditions between them can happen. See [localStorage.campaign.setBlob](#localstorage/campaign/setblob) for more info on that.
+Retrieves the locally stored data attached to the currently active campaign for this Symbiote. Returns the same string of data as has been set with [localStorage.campaign.setBlob](#calls/localstorage/campaign/setblob). If several instances of TaleSpire are running on the same machine race conditions between them can happen. See [localStorage.campaign.setBlob](#calls/localstorage/campaign/setblob) for more info on that.
 
 <br><br>
 #### `deleteBlob`
@@ -1254,7 +1254,7 @@ none
 - notInCampaign
 **Description**
 
-Deletes the locally stored data attached to the currently active campaign for this Symbiote. Does not affect global Symbiote data, to delete that, see [localStorage.global.deleteBlob](#localstorage/global/deleteblob)
+Deletes the locally stored data attached to the currently active campaign for this Symbiote. Does not affect global Symbiote data, to delete that, see [localStorage.global.deleteBlob](#calls/localstorage/global/deleteblob)
 
 <br><br>
 ## parties
@@ -1361,7 +1361,7 @@ Array[[playerFragment](#types/playerfragment)]
 
 **Description**
 
-Returns a list of all players who are members of this campaign. This includes players who are not currently connected, as well as banned players. To see their status, use [players.getMoreInfo](#players/getmoreinfo), which shows their permissions, connected clients, etc.
+Returns a list of all players who are members of this campaign. This includes players who are not currently connected, as well as banned players. To see their status, use [players.getMoreInfo](#calls/players/getmoreinfo), which shows their permissions, connected clients, etc.
 
 
 <br><br>
@@ -1377,7 +1377,7 @@ Array[[playerFragment](#types/playerfragment)]
 
 **Description**
 
-Returns a list of all players currently connected to this board.
+Returns a list of all players currently connected to this board. To see their status, use [players.getMoreInfo](#calls/players/getmoreinfo), which shows their permissions, connected clients, etc.
 
 <br><br>
 ### `getMoreInfo`
@@ -1411,7 +1411,7 @@ Array[[rulerFragment](#types/rulerfragment)]
 
 **Description**
 
-Returns all rulers currently active on the board or an empty array if there is none. This does not include AoE markers. For querying just your own rulers, see [rulers.getLocalRulers](#rulers/getlocalrulers).
+Returns all rulers currently active on the board or an empty array if there is none. This does not include AoE markers. For querying just your own rulers, see [rulers.getLocalRuler](#calls/rulers/getlocalruler).
 
 <br><br>
 ### `startRuler`
@@ -1451,7 +1451,7 @@ none
 - rulerNotFound
 **Description**
 
-Returns the ruler set by the own client or rulerNotFound if there is no active one. This does not include AoE markers. For querying all rulers, including ones from other clients, see [rulers.getRulers](#rulers/getrulers).
+Returns the ruler set by the own client or rulerNotFound if there is no active one. This does not include AoE markers. For querying all rulers, including ones from other clients, see [rulers.getRulers](#calls/rulers/getrulers).
 
 <br><br>
 ### `getMoreInfo`
@@ -1505,7 +1505,7 @@ string
 
 **Description**
 
-Takes a JavaScript [Array Buffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) and packs it: First it gets compressed with gzip and then base64 encoded to get the final slab string. `allowOversized` does not need to be specified and defaults to false, which will cause the function to return an error if the slab data is larger than the `maxSlabSize` (which can be queried by [slabs.getMaxSlabSize](#slabs/getmaxslabsize)). This can be deactivated by setting this argument to true, which results in the slab string to be created regardless. TaleSpire will still not accept slabs larger than the limit, but this can be used for example for intermediate representations for other external slab tools to use.
+Takes a JavaScript [Array Buffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) and packs it: First it gets compressed with gzip and then base64 encoded to get the final slab string. `allowOversized` does not need to be specified and defaults to false, which will cause the function to return an error if the slab data is larger than the `maxSlabSize` (which can be queried by [slabs.getMaxSlabSizeInBytes](#calls/slabs/getmaxslabsizeinbytes)). This can be deactivated by setting this argument to true, which results in the slab string to be created regardless. TaleSpire will still not accept slabs larger than the limit, but this can be used for example for intermediate representations for other external slab tools to use.
 
 <br><br>
 ### `getDataSize`
@@ -1522,7 +1522,7 @@ int
 
 **Description**
 
-Returns the data size of the slab string after base64 decoding. This is the size that is checked against the slab size limit. To get the size limit, see [slabs.getMaxSlabSize](#slabs/getmaxslabsize).
+Returns the data size of the slab string after base64 decoding. This is the size that is checked against the slab size limit. To get the size limit, see [slabs.getMaxSlabSizeInBytes](#calls/slabs/getmaxslabsizeinbytes).
 
 <br><br>
 ### `sendSlabToHand`
@@ -1624,7 +1624,7 @@ none
 Sends a notification to the own client's chat/history pane. The notification is clickable to focus/open the Symbiote that has sent it. If the Symbiote has been shut down since sending - either because it's not set to run in background or because it was manually closed by the user - it will be opened and restarted.
 
 The notification has a title and body and can be formatted similar to [chat](#chat) messages with rich text using Unity's [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.2/manual/RichText.html).
-Additionally, you can optionally define extra data that is not rendered, but sent to the Symbiote via the `notificationActivated` event from the [onNotificationEvent](#subscriptions/symbiote/onnotificationevent) event source upon clicking the notification, allowing to pass some meta data about the clicked notification to the Symbiote for example to be able to tell apart clicks on different notifications.
+You can optionally define extra data that is not rendered, but sent to the Symbiote via the `notificationActivated` event from the [onNotificationEvent](#subscriptions/symbiote/onnotificationevent) event source upon clicking the notification, allowing to pass some meta data about the clicked notification to the Symbiote for example to be able to tell apart clicks on different notifications.
 
 The Symbiote needs to have an interop ID defined in its manifest for this to be accessible.
 
@@ -1652,7 +1652,7 @@ none
 - symbioteManifestMissingInteropId
 **Description**
 
-Sends the text specified in `message` to the given `target` via the realtime backend. Target can be either a single client fragment or client ID (not player ID) or one of the following keywords: "board", "gms" which sends to all players on the board, or all GMs respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. To be able to use this function the Symbiote needs to have an interop ID set in the manifest. The message size is limited to 1kB of data. Received sync messages trigger the `syncMessageReceived` event from the [onSyncMessage](#subscriptions/sync/onsyncmessage) event source.
+Sends the text specified in `message` to the given `target` via the realtime backend. Target can be either a single client fragment or client ID (not player ID) or one of the following keywords: "board", "gms" which sends to all players on the board, or all GMs respectively. All GMs specifically sends to all clients that have GM permissions, regardless of whether they currently are or aren't in GM mode. To be able to use this function the Symbiote needs to have an interop ID set in the manifest. The message size is limited to 1kB of data (= 500 characters from a JS string due to UTF-16 encoding). Received sync messages trigger the `syncMessageReceived` event from the [onSyncMessage](#subscriptions/sync/onsyncmessage) event source.
 
 <br><br>
 ### `multiSend`
@@ -1675,7 +1675,7 @@ none
 - symbioteManifestMissingInteropId
 **Description**
 
-Sends messages via the realtime backend to several clients at once. Can either be provided with an array of client fragments or array of client IDs. Useful if you want to target several clients with the same message, if you want to send the same message to all players you can instead use [sync.send](#sync/send) with the target "board". The target keywords available with [sync.send](#sync/send) don't work here. The message size is limited to 1kB of data.
+Sends messages via the realtime backend to several clients at once. Can either be provided with an array of client fragments or array of client IDs. Useful if you want to target several clients with the same message, if you want to send the same message to all players you can instead use [sync.send](#calls/sync/send) with the target "board". The target keywords available with [sync.send](#calls/sync/send) don't work here. The message size is limited to 1kB of data (= 500 characters from a JS string due to UTF-16 encoding). Received sync messages trigger the `syncMessageReceived` event from the [onSyncMessage](#subscriptions/sync/onsyncmessage) event source.
 
 <br><br>
 ### `getClientsConnected`
@@ -1978,7 +1978,7 @@ The `clientDisconnected` event gets triggered whenever a client that has a Symbi
 
 **Description**
 
-The `rollResults` event is triggered whenever any user on the board rolls any dice and a result is received from that. The result contains the rollId (and clientId of the client rolling) which can be checked against the rollId that is returned from [dice.putDiceInTray](#dice/putdiceintray) if you want to filter out rolls the Symbiote created by itself (or the own/a specific other client).
+The `rollResults` event is triggered whenever any user on the board rolls any dice and a result is received from that. The result contains the rollId (and clientId of the client rolling) which can be checked against the rollId that is returned from [dice.putDiceInTray](#calls/dice/putdiceintray) if you want to filter out rolls the Symbiote created by itself (or the own/a specific other client).
 
 The `rollRemoved` event is triggered either when a roll that has previously been put in the tray by your Symbiote is dismissed instead of being rolled or when any dice on the board are deleted. This allows Symbiotes to stop keeping track of certain rollIds when their accompanying dice were either never rolled or have since been deleted.
 
@@ -2028,10 +2028,10 @@ The `contentPackAdded` and `contentPackRemoved` events trigger whenever a conten
 
 **Description**
 
-The `clientJoinedBoard` and `clientLeftBoard` events trigger for a game client connecting to and disconnecting from the same board as the Symbiote is in. A game client does not equal to a player as one player can be connected to the same campaign/board (or different ones) with several clients at once. See [players.onBoardPlayerEvent](#players/onboardplayerevent) if you care about only the player events and not about their individual clients.
+The `clientJoinedBoard` and `clientLeftBoard` events trigger for a game client connecting to and disconnecting from the same board as the Symbiote is in. A game client does not equal to a player as one player can be connected to the same campaign/board (or different ones) with several clients at once. See [players.onBoardPlayerEvent](#subscriptions/players/onboardplayerevent) if you care about only the player events and not about their individual clients.
 The join and leave events also trigger for the own client when switching boards, allowing to detect board switches.
 
-`clientModeChanged` triggers when the client mode is switched from player to GM or vice versa. This specifically refers to the current view mode it is in, not the canGM permission. For that, see [players.getMoreInfo](#players/getmoreinfo).
+`clientModeChanged` triggers when the client mode is switched from player to GM or vice versa. This specifically refers to the current view mode it is in, not the canGM permission. For that, see [players.getMoreInfo](#calls/players/getmoreinfo).
 
 <br><br>
 ## symbiote
@@ -2083,7 +2083,7 @@ The `hasInitialized` event is triggered once the Symbiote API has been successfu
 
 **Description**
 
-The `notificationActivated` event is triggered when the user clicks on a notification that was sent by a Symbiote. The payload of the event consists of the `optionalData` argument specified when [sending](#symbiote/sendnotification) the notification.
+The `notificationActivated` event is triggered when the user clicks on a notification that was sent by a Symbiote. The payload of the event consists of the `optionalData` argument specified when [sending](#calls/symbiote/sendnotification) the notification.
 Only the Symbiote that sent the notification that was clicked on receives this event.
 If the user clicks on the notification while the Symbiote is closed, the Symbiote will be launched and the event will be delivered once initialization has completed.
 
@@ -2119,7 +2119,7 @@ The `playerJoinedCampaign` and `playerLeftCampaign` events are triggered when a 
 
 **Description**
 
-The `playerJoinedBoard` and `playerLeftBoard` events get triggered whenever a player joins or leaves the board that the Symbiote is open in. Because players can have several clients connected at once, the join event is triggered when the *first* client of a player joins and the leave event when the *last* client of a player leaves. The join and leave events also trigger for yourself when switching boards, allowing to detect board switches - however, if several clients from the same player are connected this will not trigger, so using the join and leave events from the [clients.onClientEvent](#clients/onclientevent) event source is preferable instead.
+The `playerJoinedBoard` and `playerLeftBoard` events get triggered whenever a player joins or leaves the board that the Symbiote is open in. Because players can have several clients connected at once, the join event is triggered when the *first* client of a player joins and the leave event when the *last* client of a player leaves. The join and leave events also trigger for yourself when switching boards - however, if several clients from the same player are connected this will not trigger, so using the join and leave events from the [clients.onClientEvent](#subscriptions/clients/onclientevent) event source should be used to detect board switches instead.
 
 <br><br>
 ## initiative
@@ -2149,7 +2149,7 @@ The `initiativeUpdated` event is triggered when in initiative mode and the turn 
 
 **Description**
 
-The `pickingCompleted` event is triggered when a Symbiote picking (initiated by [picking.startPicking](#picking/startpicking)) has been finished by the user. It includes information on what has been picked, as well as the picking ID previously returned by the [picking.startPicking](#picking/startpicking) command.
+The `pickingCompleted` event is triggered when a Symbiote picking (initiated by [picking.startPicking](#calls/picking/startpicking)) has been finished by the user. It includes information on what has been picked, as well as the picking ID previously returned by the [picking.startPicking](#calls/picking/startpicking) command.
 
 The `pickingCanceled` event is triggered when the user cancels the picking operation by dismissing the tool (right click or pressing Escape).
 
@@ -2536,6 +2536,9 @@ One of the following string values:
 }
 </pre>
 
+A `rollResultsOperation` contains the reference to an operator and all its accompanying operands in an array. Available operators are: "+", "-" both of which take two operands. If you want to add more operands than that you can nest `rollResultsOperation` as often as necessary.
+
+
 *Used By*
 
 * type: [rollResultsGroup](#types/rollresultsgroup)
@@ -2819,7 +2822,7 @@ One of the following string values:
 }
 </pre>
 
-"locId" contains the sub-board ID for the thing the position is from. Positions that are on different sub-boards cannot be compared directly, as their coordinate origin may differ.
+`locId` contains the sub-board ID for the thing the position is from. Positions that are on different sub-boards cannot be compared directly, as their coordinate origin may differ.
 
 
 *Used By*
@@ -3567,5 +3570,5 @@ One of the following string values:
 *Used By*
 
 * subscription: [onClientEvent](#onClientEvent)
-<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'none', scrollThreshold:1};</script>
+<div id="back-home"><a href="index.html">Go back to main page</a></div><style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'none', scrollThreshold:1};</script>
 <!-- Markdeep: --><script src="markdeep.min.js?" charset="utf-8"></script>

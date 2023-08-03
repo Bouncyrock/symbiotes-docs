@@ -361,8 +361,11 @@
         We chose this to be able to get Symbiotes into your hands sooner as allowing persisting changes through the API needs careful consideration and planning to make it both safe and nice to use.
     </p>
 
-    <h3 class="question"> Can I make a Symbiote that shows different UI for players and GMs?</h3>
-    <p class="answer">Yes! You can either query <code>TS.players</code> to see whether the player running the Symbiote has GM permission (<code>canGM</code> is set to true), or <code>TS.clients</code> to see if the game client is currently in GM view or player view (regardless of the permission the player has) - whatever you need</p>
+    <h3 class="question">Why does logging in on some websites not work?</h3>
+    <p class="answer">Some websites open popups/new tabs during login, especially when they're using third party authentication like logging in with your Google account. Having this in different tabs is necessary for the login flow to work, however the default behavior of Symbiotes loads all page navigations in the same tab (equivalent to changing the link target from <code>_blank</code> to <code>_self</code>). If you are having issues with login you can set the <code>loadTargetBehavior</code> field in the <a href="#manifest-docs">manifest</a> to "popup" to allow links to be opened in popups instead of in the main tab.</p>
+
+    <h3 class="question">Can I make a Symbiote that shows different UI for players and GMs?</h3>
+    <p class="answer">Yes! You can either query <code>TS.players</code> to see whether the player running the Symbiote has GM permission (<code>canGM</code> is set to true), or <code>TS.clients</code> to see if the game client is currently in GM view or player view (regardless of the permission the player has) and adapt the displayed UI accordingly.</p>
 
     <h3 class="question">Can two Symbiotes talk to each other?</h3>
     <p class="answer">
