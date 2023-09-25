@@ -213,6 +213,8 @@
 <br>
 <a href="#subscriptions/creatures" class="level2">creatures</a>
 <br>
+<a href="#subscriptions/creatures/oncreatureselectionchange" class="level3">onCreatureSelectionChange</a>
+<br>
 <a href="#subscriptions/creatures/oncreaturestatechange" class="level3">onCreatureStateChange</a>
 <br>
 <a href="#subscriptions/dice" class="level2">dice</a>
@@ -361,6 +363,8 @@
 <a href="#types/creatureownerschanged" class="level2">creatureOwnersChanged</a>
 <br>
 <a href="#types/creatureremoved" class="level2">creatureRemoved</a>
+<br>
+<a href="#types/creatureselection" class="level2">creatureSelection</a>
 <br>
 <a href="#types/creaturestat" class="level2">creatureStat</a>
 <br>
@@ -1887,6 +1891,18 @@ Unique creatures can trigger events even when they are not on the same board as 
 The names of the events should be self-explanatory for when they trigger.
 
 <br><br>
+
+### `onCreatureSelectionChange`
+
+**Events**
+
+* [creatureSelection](#types/creatureselection)
+
+**Description**
+
+The `onCreatureSelectionChange` event source provides access to the `creatureSelection` event. It returns a list of creature fragments identifying the creatures currently in the selection. The event is triggeed live as selection changes occur, including with lasso group select tool.
+
+<br><br>
 ## campaigns
 
 ### current
@@ -2164,6 +2180,38 @@ Types can be:
 - "Enums". Since JavaScript does not have a concept of enums like other languages do, they are handled as string types with a set of accepted values.
 
 
+
+## `creatureSelection`
+
+<pre class="json-obj">
+{
+    creatures: Array[<a href="#types/creaturefragment">creatureFragment</a>]
+}
+</pre>
+
+*Used By*
+
+* subscription: [onCreatureSelectionChange](#onCreatureSelectionChange)
+
+## `creatureFragment`
+
+<pre class="json-obj">
+{
+    id: string
+}
+</pre>
+
+*Used By*
+
+* call: [creatures.getCreaturesOwnedByPlayer](#creatures/getCreaturesOwnedByPlayer)
+
+* call: [creatures.getSelectedCreatures](#creatures/getSelectedCreatures)
+
+* call: [creatures.getUniqueCreaturesInThisCampaign](#creatures/getUniqueCreaturesInThisCampaign)
+
+* type: [creatureAdded](#types/creatureadded)
+
+* type: [creatureSelection](#types/creatureselection)
 
 ## `boardAdded`
 
@@ -2840,24 +2888,6 @@ One of the following string values:
 * type: [lineRulerInfo](#types/linerulerinfo)
 
 * type: [sphereRulerInfo](#types/sphererulerinfo)
-
-## `creatureFragment`
-
-<pre class="json-obj">
-{
-    id: string
-}
-</pre>
-
-*Used By*
-
-* call: [creatures.getCreaturesOwnedByPlayer](#creatures/getCreaturesOwnedByPlayer)
-
-* call: [creatures.getSelectedCreatures](#creatures/getSelectedCreatures)
-
-* call: [creatures.getUniqueCreaturesInThisCampaign](#creatures/getUniqueCreaturesInThisCampaign)
-
-* type: [creatureAdded](#types/creatureadded)
 
 ## `creatureInfo`
 
