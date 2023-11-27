@@ -136,7 +136,7 @@
     <p>
         The embedded browser is Chromium-based, so you can target that as your platform if you want to just support your project running as a Symbiote in TaleSpire.<br>
 
-        Any changes you make to files within the Symbiote directory (excluding files/folders starting with a period: '.') will cause the Symbiote to automatically reload. This means you can have the code open in your favorite IDE and and have the Symbiote reload with each saved change.
+        Any changes you make to files within the Symbiote directory (excluding files/folders starting with a period: '.') will cause the Symbiote to automatically reload. This means you can have the code open in your favorite IDE and have the Symbiote reload with each saved change.
     </p>
 
     <h4>Creating a Symbiote</h4>
@@ -216,15 +216,15 @@
             <h4>In-use lifetime</h4>
             <p>
                 If your Symbiote is focused and the Symbiotes panel is closed, your Symbiote will be delivered an event via the <code>onVisibilityEvent</code> event source.<br>
-                If your Symbiote was focused, but then a different Symbiote becomes the focus, the behavior depends on the capabilities of your Symbiote. If the <code>runInBackground</code> capability is specified, then the Symbiote will be informed that it <code>willEnterBackground</code>, and the Symbiote will continue running. If the <code>runInBackground</code> capability is not specified, then the Symbiote is shut down until it becomes focused again. We recommend not using the <code>runInBackground</code> capability whenever possible, as it allows TaleSpire to free up resources for the player. Instead, we prefer saving to Symbiote storage after all notable data changes and reloading them on Symbiote startup.
+                If your Symbiote was focused, but then a different Symbiote becomes the focus, the behavior depends on the capabilities of your Symbiote. If the <code>runInBackground</code> <a href="#manifest-docs">capability</a> is specified, then the Symbiote will be informed that it <code>willEnterBackground</code>, and the Symbiote will continue running. If the <code>runInBackground</code> capability is not specified, then the Symbiote is <a href="#shutdown-symbiote">shut down</a> until it becomes focused again. We recommend <span class="emphasis">not</span> using the <code>runInBackground</code> capability whenever possible, as it allows TaleSpire to free up resources for the player. Instead, we prefer saving to Symbiote storage after all notable data changes and reloading them on Symbiote startup.
             </p>
             <p>
                 Symbiotes survive board switches, but some API calls won't work during the switch. For example, <code>TS.players.getPlayersInThisBoard</code> doesn't make sense if the Symbiote is not in a board. This should only take a short time but should be handled by the Symbiote by listening for client leave/join events for your own client and suppressing API calls.
             </p>
             <p>
-                If dev-mode is enabled, TaleSpire watches the symbiote directory for changes and will live-reload the Symbiote when modified. The folders are watched for file changes to see updates to files and detect new Symbiotes being added (or existing ones removed). Note the exceptions to file watching mentioned in <a href="dev-workflow">Development Workflow</a>.
+                If dev-mode is enabled, TaleSpire watches the symbiote directory for changes and will live-reload the Symbiote when modified. The folders are watched for file changes to see updates to files and detect new Symbiotes being added (or existing ones removed). Note the exceptions to file watching mentioned in <a href="#dev-workflow">Development Workflow</a>.
             </p>
-            <h4>Shutdown Symbiote</h4>
+            <h4 id="shutdown-symbiote">Shutdown Symbiote</h4>
             <p>
                 On shutdown of a Symbiote, we attempt to deliver the <code>willShutdown</code> event from the event source <code>onStateChangeEvent</code>. This can give the Symbiote a short time to do any last-minute cleanup you want to do before the Symbiote is shut down. However, delivery of the shutdown event is made on a "best effort" and is not guaranteed. Therefore don't leave important tasks for this event. We reserve the right to shut down any Symbiote without event/warning for reasons such as performance or stability.
             </p>

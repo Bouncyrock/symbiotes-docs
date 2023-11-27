@@ -1493,6 +1493,8 @@ object
 
 Takes the copied slab string and unpacks it to a binary representation using JavaScript [Array Buffers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer). Extracting their data can be done manually one byte at a time, but using [Data Views](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) can simplify a lot of the process.
 
+See [here](https://github.com/Bouncyrock/DumbSlabStats/blob/master/format.md) for documentation on the slab data format.
+
 <br><br>
 ### `pack`
 
@@ -1510,6 +1512,8 @@ string
 **Description**
 
 Takes a JavaScript [Array Buffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) and packs it: First it gets compressed with gzip and then base64 encoded to get the final slab string. `allowOversized` does not need to be specified and defaults to false, which will cause the function to return an error if the slab data is larger than the `maxSlabSize` (which can be queried by [slabs.getMaxSlabSizeInBytes](#calls/slabs/getmaxslabsizeinbytes)). This can be deactivated by setting this argument to true, which results in the slab string to be created regardless. TaleSpire will still not accept slabs larger than the limit, but this can be used for example for intermediate representations for other external slab tools to use.
+
+See [here](https://github.com/Bouncyrock/DumbSlabStats/blob/master/format.md) for documentation on the slab data format.
 
 <br><br>
 ### `getDataSize`
