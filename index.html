@@ -6,6 +6,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <script src="icons.js"></script>
     <script src="ts_api_index_color_themes.js"></script>
+    <script src="ts_os_path_switcher.js"></script>
 </head>
 
 <body>
@@ -115,15 +116,13 @@
         <summary>Manual Install</summary>
         <div class="collapse-content">
             <p>
-                Symbiotes that aren't uploaded to mod.io can be installed manually. To do this, simply open the Symbiote directory located at <code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code>. Instead of navigating there manually you can click the "Open Symbiotes Directory" button in either the modding page in the game settings or the Symbiote panel itself. Simply add a folder in there for each Symbiote and drop the Symbiote files into that directory directly. Make sure that the manifest.json is in the root of your Symbiote's folder like so: <code>[...]\Symbiotes\my_cool_symbiote\manifest.json</code>. All folder and Symbiote creation/editing is detected live by TaleSpire and will cause an automatic reload on changes meaning TaleSpire does not need to be restarted for any of this.
+                Symbiotes that aren't uploaded to mod.io can be installed manually. To do this, simply open the Symbiote directory located at <span class="os-path-switcher" data-path-mac="~/Library/Application Support/com.bouncyrock.talespire/Symbiotes/" data-path-linux="[...]/compatdata/720620/pfx/drive_c/users/steamuser/AppData/LocalLow/BouncyRock Entertainment/TaleSpire/Symbiotes/"><code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code></span>. Instead of navigating there manually you can click the "Open Symbiotes Directory" button in either the modding page in the game settings or the Symbiote panel itself.
+                Simply add a folder in there for each Symbiote and drop the Symbiote files into that directory directly. Make sure that the manifest.json is in the root of your Symbiote's folder like so: <span class="os-path-switcher" data-path-mac="[...]/Symbiotes/my_cool_symbiote/manifest.json" data-path-linux="[...]/Symbiotes/my_cool_symbiote/manifest.json" data-hide-info-popup="true"><code>[...]\Symbiotes\my_cool_symbiote\manifest.json</code></span>. All folder and Symbiote creation/editing is detected live by TaleSpire and will cause an automatic reload on changes meaning TaleSpire does not need to be restarted for any of this.
             </p>
-            <p>
-                On Linux the Windows folder structure is replicated by Proton (by default) next to the install folder. On the default Steam library folder it is located at <code>~/.steam/steam/steamapps/compatdata/720620/pfx/drive_c/</code> with the rest of the Windows folder structure being in there. If you have installed TaleSpire to another library location the <code>compatdata</code> folder will be in there.
-            </p>
-
             <h4>Mod Downloader vs Manual Install</h4>
             <p>
-                When downloading with the in-game mod downloader, Symbiotes are installed to TaleSpire's app cache: <code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\primary\Mods\Symbiote\</code>, which is different to the manual install location described above. This means there are two entirely separate locations where Symbiotes can be installed to, one handled by TaleSpire itself and one manually by users - this can of course result in the same Symbiote being installed once manually and once through the mod downloader. For this case keep in mind that the log and storage locations are separate for both installs!
+                When downloading with the in-game mod downloader, Symbiotes are installed to TaleSpire's app cache: <span class="os-path-switcher" data-path-mac="~/Library/Application Support/com.bouncyrock.talespire/primary/Mods/Symbiotes/" data-path-linux="[...]/compatdata/720620/pfx/drive_c/users/steamuser/AppData/LocalLow/BouncyRock Entertainment/TaleSpire/primary/Mods/Symbiotes/"><code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\primary\Mods\Symbiotes\</code></span>, which is different to the manual install location described above.
+                This means there are two entirely separate locations where Symbiotes can be installed to, one handled by TaleSpire itself and one manually by users - this can of course result in the same Symbiote being installed once manually and once through the mod downloader. For this case keep in mind that the log and storage locations are separate for both installs and that this will cause conflicts in case both use the same interop ID!
             </p>
         </div>
     </details>
@@ -136,7 +135,7 @@
     <p>
         The embedded browser is Chromium-based, so you can target that as your platform if you want to just support your project running as a Symbiote in TaleSpire.<br>
 
-        Any changes you make to files within the Symbiote directory (excluding files/folders starting with a period: '.') will cause the Symbiote to automatically reload. This means you can have the code open in your favorite IDE and have the Symbiote reload with each saved change.
+        Any changes you make to files within the Symbiote directory (excluding files/folders starting with a period: '.') will cause the Symbiote to automatically reload. This means you can have the code open in your favorite IDE and and have the Symbiote reload with each saved change.
     </p>
 
     <h4>Creating a Symbiote</h4>
@@ -207,7 +206,7 @@
             <h3 id="symbiote-lifetime">Symbiote lifetime</h3>
             <h4>Symbiote Detection</h4>
             <p>
-                TaleSpire scans the top-level directories under <code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code> looking for directories containing a manifest.json file. The manifest is then read, and the Symbiote is validated. The Symbiote is then available in the symbiotes panel. If the validation fails, then the entry in the panel will have a little warning marker indicating that fact. TaleSpire continues watching the Symbiotes directory for newly added or removed Symbiotes.
+                TaleSpire scans the top-level directories under <span class="os-path-switcher" data-path-mac="~/Library/Application Support/com.bouncyrock.talespire/Symbiotes/" data-path-linux="[...]/compatdata/720620/pfx/drive_c/users/steamuser/AppData/LocalLow/BouncyRock Entertainment/TaleSpire/Symbiotes/"><code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code></span> looking for directories containing a manifest.json file. The manifest is then read, and the Symbiote is validated. The Symbiote is then available in the symbiotes panel. If the validation fails, then the entry in the panel will have a little warning marker indicating that fact. TaleSpire continues watching the Symbiotes directory for newly added or removed Symbiotes.
             </p>
             <h4 id="starting-symbiote">Starting Symbiote</h4>
             <p>
@@ -216,15 +215,15 @@
             <h4>In-use lifetime</h4>
             <p>
                 If your Symbiote is focused and the Symbiotes panel is closed, your Symbiote will be delivered an event via the <code>onVisibilityEvent</code> event source.<br>
-                If your Symbiote was focused, but then a different Symbiote becomes the focus, the behavior depends on the capabilities of your Symbiote. If the <code>runInBackground</code> <a href="#manifest-docs">capability</a> is specified, then the Symbiote will be informed that it <code>willEnterBackground</code>, and the Symbiote will continue running. If the <code>runInBackground</code> capability is not specified, then the Symbiote is <a href="#shutdown-symbiote">shut down</a> until it becomes focused again. We recommend <span class="emphasis">not</span> using the <code>runInBackground</code> capability whenever possible, as it allows TaleSpire to free up resources for the player. Instead, we prefer saving to Symbiote storage after all notable data changes and reloading them on Symbiote startup.
+                If your Symbiote was focused, but then a different Symbiote becomes the focus, the behavior depends on the capabilities of your Symbiote. If the <code>runInBackground</code> capability is specified, then the Symbiote will be informed that it <code>willEnterBackground</code>, and the Symbiote will continue running. If the <code>runInBackground</code> capability is not specified, then the Symbiote is shut down until it becomes focused again. We recommend not using the <code>runInBackground</code> capability whenever possible, as it allows TaleSpire to free up resources for the player. Instead, we prefer saving to Symbiote storage after all notable data changes and reloading them on Symbiote startup.
             </p>
             <p>
                 Symbiotes survive board switches, but some API calls won't work during the switch. For example, <code>TS.players.getPlayersInThisBoard</code> doesn't make sense if the Symbiote is not in a board. This should only take a short time but should be handled by the Symbiote by listening for client leave/join events for your own client and suppressing API calls.
             </p>
             <p>
-                If dev-mode is enabled, TaleSpire watches the symbiote directory for changes and will live-reload the Symbiote when modified. The folders are watched for file changes to see updates to files and detect new Symbiotes being added (or existing ones removed). Note the exceptions to file watching mentioned in <a href="#dev-workflow">Development Workflow</a>.
+                If dev-mode is enabled, TaleSpire watches the symbiote directory for changes and will live-reload the Symbiote when modified. The folders are watched for file changes to see updates to files and detect new Symbiotes being added (or existing ones removed). Note the exceptions to file watching mentioned in <a href="dev-workflow">Development Workflow</a>.
             </p>
-            <h4 id="shutdown-symbiote">Shutdown Symbiote</h4>
+            <h4>Shutdown Symbiote</h4>
             <p>
                 On shutdown of a Symbiote, we attempt to deliver the <code>willShutdown</code> event from the event source <code>onStateChangeEvent</code>. This can give the Symbiote a short time to do any last-minute cleanup you want to do before the Symbiote is shut down. However, delivery of the shutdown event is made on a "best effort" and is not guaranteed. Therefore don't leave important tasks for this event. We reserve the right to shut down any Symbiote without event/warning for reasons such as performance or stability.
             </p>
