@@ -89,6 +89,11 @@
     <p>
         If you are not a developer or just want a simple introduction into what Symbiotes are and how to use them, visit <a href="user_docs.html">this page</a> or watch this <a href="https://www.youtube.com/watch?v=znOcQKJFFpU">video guide</a>. If you are a developer, read on.
     </p>
+    <div id="os-selector-help">
+        <p>
+            Some parts of the documentation contain operating system specific information like file paths. Select the operating system you plan on developing on from the following selector to show the relevant documentation.
+        </p>
+    </div>
     <p>
         To understand how web view based Symbiotes work and create your own, check out the examples provided on our <a href="https://github.com/Bouncyrock/symbiotes-examples">GitHub repository</a>.
         The very first step is to activate the feature in the settings: <img src="enable_symbiotes.png"></img><br> If you just want to use other people's Symbiotes you're now done and can <a href="#installing">install</a> the ones you want to use.
@@ -116,12 +121,12 @@
         <summary>Manual Install</summary>
         <div class="collapse-content">
             <p>
-                Symbiotes that aren't uploaded to mod.io can be installed manually. To do this, simply open the Symbiote directory located at <span class="os-path-switcher" data-path-mac="~/Library/Application Support/com.bouncyrock.talespire/Symbiotes/" data-path-linux="[...]/compatdata/720620/pfx/drive_c/users/steamuser/AppData/LocalLow/BouncyRock Entertainment/TaleSpire/Symbiotes/"><code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code></span>. Instead of navigating there manually you can click the "Open Symbiotes Directory" button in either the modding page in the game settings or the Symbiote panel itself.
-                Simply add a folder in there for each Symbiote and drop the Symbiote files into that directory directly. Make sure that the manifest.json is in the root of your Symbiote's folder like so: <span class="os-path-switcher" data-path-mac="[...]/Symbiotes/my_cool_symbiote/manifest.json" data-path-linux="[...]/Symbiotes/my_cool_symbiote/manifest.json" data-hide-info-popup="true"><code>[...]\Symbiotes\my_cool_symbiote\manifest.json</code></span>. All folder and Symbiote creation/editing is detected live by TaleSpire and will cause an automatic reload on changes meaning TaleSpire does not need to be restarted for any of this.
+                Symbiotes that aren't uploaded to mod.io can be installed manually. To do this, simply open the Symbiote directory located at <span class="os-path-display" data-path-mac="~/Library/Application Support/com.bouncyrock.talespire/Symbiotes/" data-path-linux="[...]/compatdata/720620/pfx/drive_c/users/steamuser/AppData/LocalLow/BouncyRock Entertainment/TaleSpire/Symbiotes/"><code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code></span>. Instead of navigating there manually you can click the "Open Symbiotes Directory" button in either the modding page in the game settings or the Symbiote panel itself.
+                Simply add a folder in there for each Symbiote and drop the Symbiote files into that directory directly. Make sure that the manifest.json is in the root of your Symbiote's folder like so: <span class="os-path-display" data-path-mac="[...]/Symbiotes/my_cool_symbiote/manifest.json" data-path-linux="[...]/Symbiotes/my_cool_symbiote/manifest.json" data-hide-info-popup="true"><code>[...]\Symbiotes\my_cool_symbiote\manifest.json</code></span>. All folder and Symbiote creation/editing is detected live by TaleSpire and will cause an automatic reload on changes meaning TaleSpire does not need to be restarted for any of this.
             </p>
             <h4>Mod Downloader vs Manual Install</h4>
             <p>
-                When downloading with the in-game mod downloader, Symbiotes are installed to TaleSpire's app cache: <span class="os-path-switcher" data-path-mac="~/Library/Application Support/com.bouncyrock.talespire/primary/Mods/Symbiotes/" data-path-linux="[...]/compatdata/720620/pfx/drive_c/users/steamuser/AppData/LocalLow/BouncyRock Entertainment/TaleSpire/primary/Mods/Symbiotes/"><code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\primary\Mods\Symbiotes\</code></span>, which is different to the manual install location described above.
+                When downloading with the in-game mod downloader, Symbiotes are installed to TaleSpire's app cache: <span class="os-path-display" data-path-mac="~/Library/Application Support/com.bouncyrock.talespire/primary/Mods/Symbiotes/" data-path-linux="[...]/compatdata/720620/pfx/drive_c/users/steamuser/AppData/LocalLow/BouncyRock Entertainment/TaleSpire/primary/Mods/Symbiotes/"><code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\primary\Mods\Symbiotes\</code></span>, which is different to the manual install location described above.
                 This means there are two entirely separate locations where Symbiotes can be installed to, one handled by TaleSpire itself and one manually by users - this can of course result in the same Symbiote being installed once manually and once through the mod downloader. For this case keep in mind that the log and storage locations are separate for both installs and that this will cause conflicts in case both use the same interop ID!
             </p>
         </div>
@@ -206,7 +211,7 @@
             <h3 id="symbiote-lifetime">Symbiote lifetime</h3>
             <h4>Symbiote Detection</h4>
             <p>
-                TaleSpire scans the top-level directories under <span class="os-path-switcher" data-path-mac="~/Library/Application Support/com.bouncyrock.talespire/Symbiotes/" data-path-linux="[...]/compatdata/720620/pfx/drive_c/users/steamuser/AppData/LocalLow/BouncyRock Entertainment/TaleSpire/Symbiotes/"><code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code></span> looking for directories containing a manifest.json file. The manifest is then read, and the Symbiote is validated. The Symbiote is then available in the symbiotes panel. If the validation fails, then the entry in the panel will have a little warning marker indicating that fact. TaleSpire continues watching the Symbiotes directory for newly added or removed Symbiotes.
+                TaleSpire scans the top-level directories under <span class="os-path-display" data-path-mac="~/Library/Application Support/com.bouncyrock.talespire/Symbiotes/" data-path-linux="[...]/compatdata/720620/pfx/drive_c/users/steamuser/AppData/LocalLow/BouncyRock Entertainment/TaleSpire/Symbiotes/"><code>%AppData%\..\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\</code></span> looking for directories containing a manifest.json file. The manifest is then read, and the Symbiote is validated. The Symbiote is then available in the symbiotes panel. If the validation fails, then the entry in the panel will have a little warning marker indicating that fact. TaleSpire continues watching the Symbiotes directory for newly added or removed Symbiotes.
             </p>
             <h4 id="starting-symbiote">Starting Symbiote</h4>
             <p>

@@ -297,13 +297,6 @@ a.deprecated::after {
     border-color: transparent transparent transparent var(--ts-background-tertiary);
 }
 
-#theme-selector {
-    position: sticky;
-    right: 0em;
-    top: 1em;
-    /*transform: translateY(-100%);*/
-}
-
 select {
     flex-grow: 1;
     background-color: var(--ts-background-secondary);
@@ -403,16 +396,33 @@ img {
     max-height: 80vh;
 }
 
+.pinned-item {
+    position: fixed;
+    left: 2.9em;
+    top: 1em;
+    z-index: 1;
+}
+
+#theme-selector {
+    position: sticky;
+    left: 0;
+    top: 3em;
+}
+
 .os-icon {
     height: 1em;
 }
 
-.os-path-switcher > select {
+#os-selector {
+    position: sticky;
+}
+
+.os-display {
     background-color: var(--ts-background-tertiary);
     border: none;
-    padding: 3px 0 3px 0;
-    transform: translateY(1px);
-    margin: 0 0.5em 0 0.5em;
+    border-radius: 4px;
+    padding: 3px 4px 5px 4px;
+    margin: 0 0 0 0.5em;
     font-family: 'font-os';
 }
 
