@@ -398,7 +398,7 @@ img {
 
 .pinned-item {
     position: fixed;
-    left: 2.9em;
+    left: 0;
     top: 1em;
     z-index: 1;
 }
@@ -406,7 +406,7 @@ img {
 #theme-selector {
     position: sticky;
     left: 0;
-    top: 3em;
+    top: 3.5em;
 }
 
 .os-icon {
@@ -415,6 +415,7 @@ img {
 
 #os-selector {
     position: sticky;
+    transform: translateX(1.05em);
 }
 
 .os-display {
