@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "name": "Symbiotes Documentation",
   "summary": "A symbiote to view symbiote documentation",
-  "version": "0.0.1",
+  "version": "0.1.9",
   "entryPoint": "/index.html",
   "api": {
     "version": "0.1",

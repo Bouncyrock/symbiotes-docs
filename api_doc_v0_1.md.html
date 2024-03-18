@@ -2207,11 +2207,11 @@ Types can be:
 
 *Used By*
 
-* call: [creatures.getCreaturesOwnedByPlayer](#creatures/getCreaturesOwnedByPlayer)
+* call: [creatures.getCreaturesOwnedByPlayer](#calls/creatures/getcreaturesownedbyplayer)
 
-* call: [creatures.getSelectedCreatures](#creatures/getSelectedCreatures)
+* call: [creatures.getSelectedCreatures](#calls/creatures/getselectedcreatures)
 
-* call: [creatures.getUniqueCreaturesInThisCampaign](#creatures/getUniqueCreaturesInThisCampaign)
+* call: [creatures.getUniqueCreaturesInThisCampaign](#calls/creatures/getuniquecreaturesinthiscampaign)
 
 * type: [creatureAdded](#types/creatureadded)
 
@@ -2240,9 +2240,9 @@ Types can be:
 
 *Used By*
 
-* call: [boards.getBoardsInThisCampaign](#boards/getBoardsInThisCampaign)
+* call: [boards.getBoardsInThisCampaign](#calls/boards/getboardsinthiscampaign)
 
-* call: [boards.whereAmI](#boards/whereAmI)
+* call: [boards.whereAmI](#calls/boards/whereami)
 
 * type: [boardAdded](#types/boardadded)
 
@@ -2283,7 +2283,7 @@ Types can be:
 
 *Used By*
 
-* call: [boards.getMoreInfo](#boards/getMoreInfo)
+* call: [boards.getMoreInfo](#calls/boards/getmoreinfo)
 
 * type: [boardInfoChanged](#types/boardinfochanged)
 
@@ -2310,11 +2310,11 @@ Types can be:
 
 *Used By*
 
-* call: [players.getPlayersInThisBoard](#players/getPlayersInThisBoard)
+* call: [players.getPlayersInThisBoard](#calls/players/getplayersinthisboard)
 
-* call: [players.getPlayersInThisCampaign](#players/getPlayersInThisCampaign)
+* call: [players.getPlayersInThisCampaign](#calls/players/getplayersinthiscampaign)
 
-* call: [players.whoAmI](#players/whoAmI)
+* call: [players.whoAmI](#calls/players/whoami)
 
 * type: [clientFragment](#types/clientfragment)
 
@@ -2404,7 +2404,7 @@ Types can be:
 
 *Used By*
 
-* call: [campaigns.whereAmI](#campaigns/whereAmI)
+* call: [campaigns.whereAmI](#calls/campaigns/whereami)
 
 ## `campaignInfo`
 
@@ -2419,7 +2419,7 @@ Types can be:
 
 *Used By*
 
-* call: [campaigns.getMoreInfoAboutCurrentCampaign](#campaigns/getMoreInfoAboutCurrentCampaign)
+* call: [campaigns.getMoreInfoAboutCurrentCampaign](#calls/campaigns/getmoreinfoaboutcurrentcampaign)
 
 * type: [campaignInfoChanged](#types/campaigninfochanged)
 
@@ -2446,11 +2446,11 @@ Types can be:
 
 *Used By*
 
-* call: [clients.getClientsInThisBoard](#clients/getClientsInThisBoard)
+* call: [clients.getClientsInThisBoard](#calls/clients/getclientsinthisboard)
 
-* call: [clients.whoAmI](#clients/whoAmI)
+* call: [clients.whoAmI](#calls/clients/whoami)
 
-* call: [sync.getClientsConnected](#sync/getClientsConnected)
+* call: [sync.getClientsConnected](#calls/sync/getclientsconnected)
 
 * type: [clientConnected](#types/clientconnected)
 
@@ -2476,7 +2476,7 @@ Types can be:
 
 *Used By*
 
-* call: [clients.getMoreInfo](#clients/getMoreInfo)
+* call: [clients.getMoreInfo](#calls/clients/getmoreinfo)
 
 ## `clientMode`
 
@@ -2504,7 +2504,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [players.getMoreInfo](#players/getMoreInfo)
+* call: [players.getMoreInfo](#calls/players/getmoreinfo)
 
 ## `syncMessageReceived`
 
@@ -2542,9 +2542,9 @@ One of the following string values:
 
 *Used By*
 
-* call: [dice.makeRollDescriptors](#dice/makeRollDescriptors)
+* call: [dice.makeRollDescriptors](#calls/dice/makerolldescriptors)
 
-* call: [dice.putDiceInTray](#dice/putDiceInTray)
+* call: [dice.putDiceInTray](#calls/dice/putdiceintray)
 
 ## `rollResults`
 
@@ -2573,9 +2573,9 @@ One of the following string values:
 
 *Used By*
 
-* call: [dice.evaluateDiceResultsGroup](#dice/evaluateDiceResultsGroup)
+* call: [dice.evaluateDiceResultsGroup](#calls/dice/evaluatediceresultsgroup)
 
-* call: [dice.sendDiceResult](#dice/sendDiceResult)
+* call: [dice.sendDiceResult](#calls/dice/senddiceresult)
 
 * type: [rollResults](#types/rollresults)
 
@@ -2604,7 +2604,7 @@ A `rollResultsOperation` contains the reference to an operator and all its accom
 }
 </pre>
 
-"kind" describes which kind of dice was rolled. Can be the name of any of the dice available to TaleSpire, the built-in dice are: "d4", "d6", "d8", "d10", "d12", "d20", "d100".
+`kind` describes which kind of dice was rolled. Can be the name of any of the dice available to TaleSpire, the built-in dice are: "d4", "d6", "d8", "d10", "d12", "d20", "d100".
 
 
 *Used By*
@@ -2695,7 +2695,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [contentPacks.getContentPacks](#contentPacks/getContentPacks)
+* call: [contentPacks.getContentPacks](#calls/contentpacks/getcontentpacks)
 
 ## `contentPackInfo`
 
@@ -2713,9 +2713,9 @@ One of the following string values:
 
 *Used By*
 
-* call: [contentPacks.findBoardObjectInPacks](#contentPacks/findBoardObjectInPacks)
+* call: [contentPacks.findBoardObjectInPacks](#calls/contentpacks/findboardobjectinpacks)
 
-* call: [contentPacks.getMoreInfo](#contentPacks/getMoreInfo)
+* call: [contentPacks.getMoreInfo](#calls/contentpacks/getmoreinfo)
 
 * type: [boardObjectFindResult](#types/boardobjectfindresult)
 
@@ -2917,11 +2917,15 @@ One of the following string values:
 }
 </pre>
 
+`id` describes the unique identifier for each mini *instance* on a board. It is unique, even if the same creature model is placed down.
+To get the asset/model ID for querying data like the thumbnail, check [<code>morphs</code>](#types/morph) at index `activeMorphIndex`
+
+
 *Used By*
 
-* call: [creatures.createBlueprint](#creatures/createBlueprint)
+* call: [creatures.createBlueprint](#calls/creatures/createblueprint)
 
-* call: [creatures.getMoreInfo](#creatures/getMoreInfo)
+* call: [creatures.getMoreInfo](#calls/creatures/getmoreinfo)
 
 ## `eulerRotation`
 
@@ -3191,7 +3195,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [initiative.getQueue](#initiative/getQueue)
+* call: [initiative.getQueue](#calls/initiative/getqueue)
 
 * type: [initiativeUpdated](#types/initiativeupdated)
 
@@ -3228,7 +3232,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [parties.getParties](#parties/getParties)
+* call: [parties.getParties](#calls/parties/getparties)
 
 ## `clientJoinedBoard`
 
@@ -3280,9 +3284,9 @@ One of the following string values:
 
 *Used By*
 
-* call: [bookmarks.getBookmarksInThisBoard](#bookmarks/getBookmarksInThisBoard)
+* call: [bookmarks.getBookmarksInThisBoard](#calls/bookmarks/getbookmarksinthisboard)
 
-* call: [bookmarks.getBookmarksInThisCampaign](#bookmarks/getBookmarksInThisCampaign)
+* call: [bookmarks.getBookmarksInThisCampaign](#calls/bookmarks/getbookmarksinthiscampaign)
 
 ## `distanceUnit`
 
@@ -3295,7 +3299,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [units.getDistanceUnitsForThisCampaign](#units/getDistanceUnitsForThisCampaign)
+* call: [units.getDistanceUnitsForThisCampaign](#calls/units/getdistanceunitsforthiscampaign)
 
 * type: [distanceUnitsChanged](#types/distanceunitschanged)
 
@@ -3311,7 +3315,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [rulers.getMoreInfo](#rulers/getMoreInfo)
+* call: [rulers.getMoreInfo](#calls/rulers/getmoreinfo)
 
 * type: [rulerResult](#types/rulerresult)
 
@@ -3328,7 +3332,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [rulers.getMoreInfo](#rulers/getMoreInfo)
+* call: [rulers.getMoreInfo](#calls/rulers/getmoreinfo)
 
 * type: [rulerResult](#types/rulerresult)
 
@@ -3346,7 +3350,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [rulers.getMoreInfo](#rulers/getMoreInfo)
+* call: [rulers.getMoreInfo](#calls/rulers/getmoreinfo)
 
 * type: [rulerResult](#types/rulerresult)
 
@@ -3421,7 +3425,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [rulers.startRuler](#rulers/startRuler)
+* call: [rulers.startRuler](#calls/rulers/startruler)
 
 ## `rulerFragment`
 
@@ -3434,9 +3438,9 @@ One of the following string values:
 
 *Used By*
 
-* call: [rulers.getLocalRuler](#rulers/getLocalRuler)
+* call: [rulers.getLocalRuler](#calls/rulers/getlocalruler)
 
-* call: [rulers.getRulers](#rulers/getRulers)
+* call: [rulers.getRulers](#calls/rulers/getrulers)
 
 ## `rulerAdded`
 
@@ -3528,7 +3532,7 @@ One of the following string values:
 
 *Used By*
 
-* call: [contentPacks.findBoardObjectInPacks](#contentPacks/findBoardObjectInPacks)
+* call: [contentPacks.findBoardObjectInPacks](#calls/contentpacks/findboardobjectinpacks)
 
 ## `boardObjectKind`
 
